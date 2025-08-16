@@ -3,12 +3,14 @@ package hospital.model.datos;
 import hospital.model.entidades.Usuario;
 import hospital.model.entidades.Medico;
 import hospital.model.entidades.Farmaceuta;
+import hospital.model.entidades.Administrador;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
     private final MedicoDAO medicoDAO = new MedicoDAO();
     private final FarmaceutaDAO farmaceutaDAO = new FarmaceutaDAO();
+    private final AdministradorDAO administradorDAO = new AdministradorDAO();
 
     // ==== LOGIN ====
     public Usuario login(String id, String clave) {
@@ -20,11 +22,11 @@ public class UsuarioDAO {
         if (u != null && u.getClave().equals(clave)) {
             return u;
         }
-        // 3. Si implementas Administrador
-        // u = administradorDAO.buscarPorId(id);
-        // if (u != null && u.getClave().equals(clave)) {
-        //     return u;
-        // }
+
+        u = administradorDAO.buscarPorId(id);
+        if (u != null && u.getClave().equals(clave)) {
+            return u;
+        }
 
         return null;
     }
@@ -44,13 +46,13 @@ public class UsuarioDAO {
             return true;
         }
 
-        // 3. Administrador (si lo implementas)
-        // Administrador a = administradorDAO.buscarPorId(id);
-        // if (a != null && a.getClave().equals(claveActual)) {
-        //     a.setClave(nuevaClave);
-        //     administradorDAO.modificar(a);
-        //     return true;
-        // }
+
+        Administrador a = administradorDAO.buscarPorId(id);
+        if (a != null && a.getClave().equals(claveActual)) {
+            a.setClave(nuevaClave);
+            administradorDAO.modificar(a);
+            return true;
+        }
 
         return false;
     }
@@ -58,7 +60,7 @@ public class UsuarioDAO {
     public boolean existeUsuario(String id) {
         if (medicoDAO.buscarPorId(id) != null) return true;
         if (farmaceutaDAO.buscarPorId(id) != null) return true;
-        // if (administradorDAO.buscarPorId(id) != null) return true;
+         if (administradorDAO.buscarPorId(id) != null) return true;
         return false;
     }
 
@@ -67,7 +69,7 @@ public class UsuarioDAO {
         List<Usuario> usuarios = new ArrayList<>();
         usuarios.addAll(medicoDAO.listar());
         usuarios.addAll(farmaceutaDAO.listar());
-        // usuarios.addAll(administradorDAO.listar());
+        usuarios.addAll(administradorDAO.listar());
         return usuarios;
     }
 }

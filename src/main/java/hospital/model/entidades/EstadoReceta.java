@@ -1,4 +1,9 @@
 package hospital.model.entidades;
 
-public class EstadoReceta {
+public enum EstadoReceta {
+    CONFECCIONADA,
+    EN_PROCESO,
+    LISTA,
+    ENTREGADA,
+    CANCELADA
 }
