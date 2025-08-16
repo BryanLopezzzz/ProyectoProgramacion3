@@ -30,9 +30,12 @@ public class MedicoDAO {
     }
 
     public void agregar(Medico m) {
+        if (buscarPorId(m.getId()) != null) {
+            throw new IllegalArgumentException("Ya existe un médico con el ID: " + m.getId());
+        }
+
         // Regla del enunciado: clave inicial = id
         m.setClave(m.getId());
-
         medicos.add(m);
         guardar();
     }

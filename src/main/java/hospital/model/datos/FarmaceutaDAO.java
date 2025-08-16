@@ -29,6 +29,9 @@ public class FarmaceutaDAO {
     }
 
     public void agregar(Farmaceuta f) {
+        if (buscarPorId(f.getId()) != null) {
+            throw new IllegalArgumentException("Ya existe un farmaceuta con el ID: " + f.getId());
+        }
         // Regla del enunciado: clave inicial = id
         f.setClave(f.getId());
 
