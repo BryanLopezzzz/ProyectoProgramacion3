@@ -16,6 +16,7 @@ import java.util.List;
 public class MedicoDAO {
 
     private static final String FILE_PATH = "data/medicos.xml"; // ruta del archivo XML
+    private final ArchivoManager<Medico> fileManager = new ArchivoManager<>(Medico.class);
     private List<Medico> medicos;
 
     public MedicoDAO() {
@@ -29,6 +30,9 @@ public class MedicoDAO {
     }
 
     public void agregar(Medico m) {
+        // Regla del enunciado: clave inicial = id
+        m.setClave(m.getId());
+
         medicos.add(m);
         guardar();
     }
@@ -65,86 +69,21 @@ public class MedicoDAO {
         return resultados;
     }
 
-    // ==== Persistencia XML usando DOM ====
+    // ==== Persistencia con FileManager ====
 
     private void guardar() {
         try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.newDocument();
-
-            Element root = doc.createElement("medicos");
-            doc.appendChild(root);
-
-            for (Medico m : medicos) {
-                Element medicoElem = doc.createElement("medico");
-
-                Element id = doc.createElement("id");
-                id.appendChild(doc.createTextNode(m.getId()));
-                medicoElem.appendChild(id);
-
-                Element nombre = doc.createElement("nombre");
-                nombre.appendChild(doc.createTextNode(m.getNombre()));
-                medicoElem.appendChild(nombre);
-
-                Element especialidad = doc.createElement("especialidad");
-                especialidad.appendChild(doc.createTextNode(m.getEspecialidad()));
-                medicoElem.appendChild(especialidad);
-
-                root.appendChild(medicoElem);
-            }
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            DOMSource source = new DOMSource(doc);
-
-            File file = new File(FILE_PATH);
-            file.getParentFile().mkdirs(); // crea carpeta si no existe
-            StreamResult result = new StreamResult(file);
-            transformer.transform(source, result);
-
-        } catch (ParserConfigurationException | TransformerException e) {
+            fileManager.saveList(medicos, FILE_PATH);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private List<Medico> cargar() {
-        List<Medico> lista = new ArrayList<>();
         try {
-            File file = new File(FILE_PATH);
-            if (!file.exists()) {
-                return lista;
-            }
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(file);
-
-            NodeList nodos = doc.getElementsByTagName("medico");
-            for (int i = 0; i < nodos.getLength(); i++) {
-                Node nodo = nodos.item(i);
-                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
-                    Element elem = (Element) nodo;
-                    Medico m = new Medico();
-                    m.setId(getTagValue("id", elem));
-                    m.setNombre(getTagValue("nombre", elem));
-                    m.setEspecialidad(getTagValue("especialidad", elem));
-                    lista.add(m);
-                }
-            }
-
+            return fileManager.loadList(FILE_PATH);
         } catch (Exception e) {
-            e.printStackTrace();
+            return new ArrayList<>();
         }
-        return lista;
-    }
-
-    private String getTagValue(String tag, Element elem) {
-        NodeList nl = elem.getElementsByTagName(tag);
-        if (nl != null && nl.getLength() > 0) {
-            return nl.item(0).getTextContent();
-        }
-        return "";
     }
 }
