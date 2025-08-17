@@ -14,6 +14,11 @@ public class FarmaceutaDAO extends GenericDAO<Farmaceuta> {
     }
 
     @Override
+    protected String getNombre(Farmaceuta f) {
+        return f.getNombre();
+    }
+
+    @Override
     public void agregar(Farmaceuta f) {
         // Regla: clave inicial = id
         f.setClave(f.getId());

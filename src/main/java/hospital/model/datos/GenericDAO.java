@@ -50,6 +50,16 @@ public abstract class GenericDAO<T> {
                 .findFirst()
                 .orElse(null);
     }
+    // ==== Búsqueda por nombre genérica ====
+    public List<T> buscarPorNombre(String nombre) {
+        List<T> resultados = new ArrayList<>();
+        for (T e : elementos) {
+            if (getNombre(e).toLowerCase().contains(nombre.toLowerCase())) {
+                resultados.add(e);
+            }
+        }
+        return resultados;
+    }
 
     // ==== persistencia ====
     private void guardar() {
@@ -68,6 +78,8 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    // metodo abstracto para obtener el ID de cualquier entidad
+    // metodo abstracto para obtener el ID/codigo de cualquier entidad
     protected abstract String getId(T obj);
+    // metodo abstracto para obtener el nombre/descrpcion de cualquier entidad
+    protected abstract String getNombre(T obj);
 }

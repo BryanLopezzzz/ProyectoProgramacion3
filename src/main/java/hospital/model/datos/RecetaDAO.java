@@ -12,4 +12,13 @@ public class RecetaDAO extends GenericDAO<Receta> {
     protected String getId(Receta r) {
         return r.getId();
     }
+
+    @Override
+    protected String getNombre(Receta r) {
+        // Se supone que este metodo nunca se usa pero es solo para que funione GenericDAO
+        if (r.getPaciente() != null) {
+            return r.getPaciente().getNombre();
+        }
+        return "";
+    }
 }

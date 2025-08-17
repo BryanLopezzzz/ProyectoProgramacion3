@@ -15,17 +15,13 @@ public class MedicamentoDAO extends GenericDAO<Medicamento> {
         return m.getCodigo();
     }
 
+    @Override
+    protected String getNombre(Medicamento m) {
+        return m.getNombre();
+    }
+
     public Medicamento buscarPorCodigo(String codigo) {
         return buscarPorId(codigo); // reutiliza el genérico
     }
 
-    public List<Medicamento> buscarPorNombre(String nombre) {
-        List<Medicamento> resultados = new ArrayList<>();
-        for (Medicamento m : elementos) {
-            if (m.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
-                resultados.add(m);
-            }
-        }
-        return resultados;
-    }
 }
