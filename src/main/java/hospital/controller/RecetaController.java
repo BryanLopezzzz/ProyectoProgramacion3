@@ -70,13 +70,13 @@ public class RecetaController {
         }
 
         // ========================
-        // CONSULTAS (Todos)
-        // ========================
-        public Receta buscarReceta(String id) {
-            return recetaDAO.buscarPorId(id);
-        }
-
-        public java.util.List<Receta> listarRecetas() {
-            return recetaDAO.listar();
-        }
+//        // POR EL MOMENTO NO ES NECESARIO PORQUE LO HACE EL HISTORICO DE RECETAS
+//        // ========================
+//        public Receta buscarReceta(String id) {
+//            return recetaDAO.buscarPorId(id);
+//        }
+//
+//        public java.util.List<Receta> listarRecetas() {
+//            return recetaDAO.listar();
+//        }
 }
