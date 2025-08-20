@@ -1,39 +1,40 @@
 package hospital.controller;
 
-import hospital.model.datos.GenericDAO;
 import hospital.model.entidades.Administrador;
+import hospital.model.service.GenericService;
+
 import java.util.List;
 
 public abstract class ControllerGeneric<T> {
-    protected final GenericDAO<T> dao;
+    protected final GenericService<T> service;
 
-    public ControllerGeneric(GenericDAO<T> dao) {
-        this.dao = dao;
+    public ControllerGeneric(GenericService<T> service) {
+        this.service = service;
     }
 
     public void agregar(Administrador admin, T entidad) throws Exception {
         validarAdmin(admin);
-        dao.agregar(entidad);
+        service.agregar(entidad);
     }
 
     public void modificar(Administrador admin, T entidad) throws Exception {
         validarAdmin(admin);
-        dao.modificar(entidad);
+        service.modificar(entidad);
     }
 
     public void eliminar(Administrador admin, String id) throws Exception {
         validarAdmin(admin);
-        dao.eliminar(id);
+        service.eliminar(id);
     }
 
     public T buscarPorId(Administrador admin, String id) throws Exception {
         validarAdmin(admin);
-        return dao.buscarPorId(id);
+        return service.buscarPorId(id);
     }
 
     public List<T> listar(Administrador admin) throws Exception {
         validarAdmin(admin);
-        return dao.listar();
+        return service.listar();
     }
 
     protected void validarAdmin(Administrador admin) throws Exception {

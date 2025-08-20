@@ -1,82 +1,52 @@
 package hospital.controller;
 
-import hospital.model.datos.*;
 import hospital.model.entidades.*;
-import java.time.LocalDate;
+import hospital.model.service.RecetaService;
+import java.util.List;
 
 public class RecetaController {
-        private final RecetaDAO recetaDAO;
-        private final PacienteDAO pacienteDAO;
-        private final MedicamentoDAO medicamentoDAO;
 
-        public RecetaController() {
-            this.recetaDAO = new RecetaDAO();
-            this.pacienteDAO = new PacienteDAO();
-            this.medicamentoDAO = new MedicamentoDAO();
+    private final RecetaService recetaService;
+
+    public RecetaController() {
+        this.recetaService = new RecetaService();
+    }
+
+    // ========================
+    // PRESCRIPCIÓN (Médicos)
+    // ========================
+    public Receta crearReceta(Medico medico, String pacienteId, String recetaId) throws Exception {
+        if (medico == null) {
+            throw new Exception("Solo los médicos pueden prescribir recetas.");
         }
+        return recetaService.crearReceta(medico, pacienteId, recetaId);
+    }
 
-        // ========================
-        // PRESCRIPCIÓN (Médicos)
-        // ========================
-        public Receta crearReceta(Medico medico, String pacienteId, String recetaId) throws Exception {
-            if (medico == null) {
-                throw new Exception("Solo los médicos pueden prescribir recetas.");
-            }
-
-            Paciente paciente = pacienteDAO.buscarPorId(pacienteId);
-            if (paciente == null) {
-                throw new Exception("Paciente no encontrado.");
-            }
-
-            Receta receta = new Receta(recetaId, paciente, medico, LocalDate.now());
-            receta.setEstado(EstadoReceta.CONFECCIONADA);
-            recetaDAO.agregar(receta);
-            return receta;
+    public void agregarMedicamento(Medico medico, String recetaId, String medicamentoId, int cantidad, String indicaciones) throws Exception {
+        if (medico == null) {
+            throw new Exception("Solo los médicos pueden agregar medicamentos a la receta.");
         }
+        recetaService.agregarMedicamento(recetaId, medicamentoId, cantidad, indicaciones);
+    }
 
-        public void agregarMedicamento(Receta receta, String medicamentoId, int cantidad, String indicaciones) throws Exception {
-            Medicamento med = medicamentoDAO.buscarPorCodigo(medicamentoId);
-            if (med == null) {
-                throw new Exception("Medicamento no encontrado.");
-            }
-
-            DetalleReceta detalle = new DetalleReceta(med, cantidad, indicaciones);
-            receta.agregarDetalle(detalle);
-            recetaDAO.modificar(receta);
+    // ========================
+    // DESPACHO (Farmaceutas)
+    // ========================
+    public void actualizarEstado(Farmaceuta farmaceuta, String recetaId, EstadoReceta nuevoEstado) throws Exception {
+        if (farmaceuta == null) {
+            throw new Exception("Solo los farmaceutas pueden despachar recetas.");
         }
+        recetaService.actualizarEstado(farmaceuta, recetaId, nuevoEstado);
+    }
 
-        // ========================
-        // DESPACHO (Farmaceutas)
-        // ========================
-        public void actualizarEstado(Farmaceuta farmaceuta, String recetaId, EstadoReceta nuevoEstado) throws Exception {
-            if (farmaceuta == null) {
-                throw new Exception("Solo los farmaceutas pueden despachar recetas.");
-            }
+    // ========================
+    // Consultas generales
+    // ========================
+    public Receta buscarReceta(String id) throws Exception {
+        return recetaService.buscarPorId(id);
+    }
 
-            Receta receta = recetaDAO.buscarPorId(recetaId);
-            if (receta == null) {
-                throw new Exception("Receta no encontrada.");
-            }
-
-            EstadoReceta estadoAnterior = receta.getEstado();
-            receta.cambiarEstado(nuevoEstado);
-
-            // si el estado no cambió, significa que fue inválido
-            if (receta.getEstado() == estadoAnterior) {
-                throw new Exception("Transición de estado inválida: " + estadoAnterior + " → " + nuevoEstado);
-            }
-
-            recetaDAO.modificar(receta);
-        }
-
-        // ========================
-//        // POR EL MOMENTO NO ES NECESARIO PORQUE LO HACE EL HISTORICO DE RECETAS
-//        // ========================
-//        public Receta buscarReceta(String id) {
-//            return recetaDAO.buscarPorId(id);
-//        }
-//
-//        public java.util.List<Receta> listarRecetas() {
-//            return recetaDAO.listar();
-//        }
+    public List<Receta> listarRecetas() {
+        return recetaService.listarRecetas();
+    }
 }

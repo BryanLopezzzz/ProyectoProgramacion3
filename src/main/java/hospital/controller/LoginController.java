@@ -3,28 +3,29 @@ package hospital.controller;
 import hospital.model.datos.UsuarioDAO;
 import hospital.model.entidades.Usuario;
 
+import hospital.model.entidades.Usuario;
+import hospital.model.service.AuthService;
+
 public class LoginController {
-    private final UsuarioDAO usuarioDAO;
+    private final AuthService authService;
 
     public LoginController() {
-        this.usuarioDAO = new UsuarioDAO();
+        this.authService = new AuthService();
     }
 
-    // ========================
-    // LOGIN
-    // ========================
     public Usuario login(String id, String clave) throws Exception {
-        Usuario u = usuarioDAO.login(id, clave);
-        if (u == null) {
-            throw new Exception("Usuario o clave incorrecta.");
-        }
-        return u;
+        return authService.login(id, clave);
     }
 
-    // ========================
-    // VALIDACIÓN USUARIO
-    // ========================
-    public boolean existeUsuario(String id) {
-        return usuarioDAO.existeUsuario(id);
+    public void logout() {
+        authService.cerrarSesion();
+    }
+
+    public Usuario getUsuarioActual() {
+        return authService.getUsuarioActual();
+    }
+
+    public boolean isLoggedIn() {
+        return authService.estaAutenticado();
     }
 }

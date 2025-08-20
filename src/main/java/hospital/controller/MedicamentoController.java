@@ -5,20 +5,28 @@ import hospital.model.entidades.Medicamento;
 import hospital.model.entidades.Administrador;
 import java.util.List;
 
+import hospital.model.entidades.Administrador;
+import hospital.model.entidades.Medicamento;
+import hospital.model.service.MedicamentoService;
+
+import java.util.List;
+
 public class MedicamentoController extends ControllerGeneric<Medicamento> {
+
+    private final MedicamentoService medicamentoService;
+
     public MedicamentoController() {
-        super(new MedicamentoDAO());
+        super(new MedicamentoService());
+        this.medicamentoService = (MedicamentoService) super.service;
     }
 
-    // Búsqueda por código
     public Medicamento buscarPorCodigo(Administrador admin, String codigo) throws Exception {
         validarAdmin(admin);
-        return ((MedicamentoDAO) dao).buscarPorCodigo(codigo);
+        return medicamentoService.buscarPorCodigo(codigo);
     }
 
-    // Búsqueda por nombre (ya lo hereda del genérico, pero si quieres alias explícito):
     public List<Medicamento> buscarPorNombre(Administrador admin, String nombre) throws Exception {
         validarAdmin(admin);
-        return dao.buscarPorNombre(nombre);
+        return medicamentoService.buscarPorNombre(nombre);
     }
 }
