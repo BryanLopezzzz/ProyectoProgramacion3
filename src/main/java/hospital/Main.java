@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/login-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/cambio_clave_view.fxml"));
         Scene scene = new Scene(loader.load());
         primaryStage.setTitle("Login Hospital");
         primaryStage.setScene(scene);
