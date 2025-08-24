@@ -16,19 +16,19 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="410.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.LoginView">
+<AnchorPane prefHeight="355.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.LoginView">
    <children>
-      <ImageView fitHeight="436.0" fitWidth="646.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="410.0" fitWidth="646.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/descarga.jpeg" />
+            <Image url="@../../images/Bienvenido.jpg" />
          </image>
       </ImageView>
-      <SplitPane id="SLP_Login" fx:id="SLP_Login" dividerPositions="0.488833746898263" layoutY="6.0" prefHeight="404.0" prefWidth="646.0" style="-fx-background-color: transparent;">
+      <SplitPane id="SLP_Login" fx:id="SLP_Login" dividerPositions="0.4733250620347394" layoutY="6.0" prefHeight="357.0" prefWidth="646.0" style="-fx-background-color: transparent;">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="330.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="394.0" prefWidth="327.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="302.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="394.0" prefWidth="339.0">
                <children>
-                  <Label id="LBL_LoginTitulo" fx:id="LBL_LoginTitulo" layoutX="54.0" layoutY="7.0" prefHeight="54.0" prefWidth="251.0" text=" INICIO HOSPITAL" textFill="#2d70b7" textOverrun="CLIP">
+                  <Label id="LBL_LoginTitulo" fx:id="LBL_LoginTitulo" layoutX="55.0" layoutY="14.0" prefHeight="54.0" prefWidth="251.0" text=" INICIO HOSPITAL" textFill="#2d70b7" textOverrun="CLIP">
                      <font>
                         <Font name="Sans Serif Collection" size="22.0" />
                      </font>
@@ -76,12 +76,12 @@
                         </HBox>
                      </children>
                   </GridPane>
-                  <Button id="BTN_Login" fx:id="BTN_Login" layoutX="55.0" layoutY="351.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #2d70b7;" text="Iniciar sesión" textFill="#fafaff">
+                  <Button id="BTN_Login" fx:id="BTN_Login" layoutX="55.0" layoutY="302.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #2d70b7;" text="Iniciar sesión" textFill="#fafaff">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="BTN_Salir" fx:id="BTN_Salir" layoutX="250.0" layoutY="351.0" mnemonicParsing="false" onAction="#salir" style="-fx-background-color: #6gd681;" text="Salir" textFill="#1515a4">
+                  <Button id="BTN_Salir" fx:id="BTN_Salir" layoutX="246.0" layoutY="302.0" mnemonicParsing="false" onAction="#salir" style="-fx-background-color: #6gd681;" text="Salir" textFill="#1515a4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
