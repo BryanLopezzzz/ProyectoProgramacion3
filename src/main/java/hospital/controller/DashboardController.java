@@ -1,7 +1,7 @@
 package hospital.controller;
 
 import hospital.model.entidades.*;
-import hospital.model.service.DashboardService;
+import hospital.logica.service.DashboardService;
 import java.time.YearMonth;
 import java.util.Map;
 

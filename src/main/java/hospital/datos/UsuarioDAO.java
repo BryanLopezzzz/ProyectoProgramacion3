@@ -1,4 +1,4 @@
-package hospital.model.datos;
+package hospital.datos;
 
 import hospital.model.entidades.Usuario;
 import hospital.model.entidades.Medico;

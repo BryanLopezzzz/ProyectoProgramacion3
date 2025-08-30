@@ -1,4 +1,4 @@
-package hospital.model.service;
+package hospital.logica.service;
 
 import java.util.List;
 

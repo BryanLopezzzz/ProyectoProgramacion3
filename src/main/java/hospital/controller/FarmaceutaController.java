@@ -1,9 +1,7 @@
 package hospital.controller;
 
 import hospital.model.entidades.Farmaceuta;
-import hospital.model.entidades.Administrador;
-import hospital.model.service.FarmaceutaService;
-import java.util.List;
+import hospital.logica.service.FarmaceutaService;
 
 public class FarmaceutaController extends ControllerGeneric<Farmaceuta> {
 
