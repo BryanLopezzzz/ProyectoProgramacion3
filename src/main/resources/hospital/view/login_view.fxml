@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="413.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.login_view">
+   <children>
+      <ImageView fitHeight="440.0" fitWidth="871.0" layoutY="-9.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../images/Bienvenido (1).jpg" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="561.0" layoutY="143.0" prefHeight="136.0" prefWidth="296.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.8" minWidth="10.0" prefWidth="187.1999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.6" minWidth="10.0" prefWidth="108.8000244140625" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="64.00001220703125" minHeight="0.0" prefHeight="24.799999999999997" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="96.4" minHeight="10.0" prefHeight="47.40001831054688" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="109.4" minHeight="10.0" prefHeight="28.199981689453125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.00003662109376" minHeight="0.0" prefHeight="48.80002441406249" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label id="LBL_Usuario" fx:id="LBL_Usuario" alignment="TOP_CENTER" prefHeight="22.0" prefWidth="142.0" text="          Usuario:" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </Label>
+            <TextField id="TXT_Usuario" fx:id="TXT_Usuario" prefHeight="30.0" prefWidth="182.0" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <Label id="LBL_Clave" fx:id="LBL_Clave" alignment="BASELINE_LEFT" prefHeight="22.0" prefWidth="158.0" text="            Contraseña:" textAlignment="RIGHT" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="286.0" GridPane.rowIndex="3">
+               <children>
+                  <StackPane prefHeight="30.0" prefWidth="134.0">
+                     <children>
+                        <TextField id="TXT_ClaveVisible" fx:id="TXT_ClaveVisible" prefHeight="26.0" prefWidth="131.0" visible="false" />
+                        <PasswordField id="PWF_Clave" fx:id="PWF_Clave" prefHeight="32.0" prefWidth="134.0">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </PasswordField>
+                     </children>
+                  </StackPane>
+                  <Button id="BTN_VisibilidadClave" fx:id="BTN_VisibilidadClave" mnemonicParsing="false" onAction="#toggleVisibilidadClave" prefHeight="31.0" prefWidth="52.0" text="👁" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="24.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../images/usuarioo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../images/clavee.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Button id="BTN_Login" fx:id="BTN_Login" layoutX="561.0" layoutY="333.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #2b4c71;" text="Iniciar sesión" textFill="#fafaff">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button id="BTN_Salir" fx:id="BTN_Salir" layoutX="682.0" layoutY="333.0" mnemonicParsing="false" onAction="#salir" prefHeight="30.0" prefWidth="54.0" style="-fx-background-color: #e3e5e8;" text="Salir" textFill="#1515a4">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
