@@ -1,8 +1,8 @@
-package hospital.model.service;
+package hospital.logica.service;
 
-import hospital.model.datos.MedicamentoDAO;
-import hospital.model.datos.PacienteDAO;
-import hospital.model.datos.RecetaDAO;
+import hospital.datos.MedicamentoDAO;
+import hospital.datos.PacienteDAO;
+import hospital.datos.RecetaDAO;
 import hospital.model.entidades.*;
 import java.time.LocalDate;
 import java.util.List;

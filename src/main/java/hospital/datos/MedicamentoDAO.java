@@ -1,8 +1,7 @@
-package hospital.model.datos;
+package hospital.datos;
 
 import hospital.model.entidades.Medicamento;
-import java.util.ArrayList;
-import java.util.List;
+
 //falta la restricción de que solo el administrador pueda usar esta funcionalidad. Eso se maneja en la capa de controlador/interfaz.
 public class MedicamentoDAO extends GenericDAO<Medicamento> {
 

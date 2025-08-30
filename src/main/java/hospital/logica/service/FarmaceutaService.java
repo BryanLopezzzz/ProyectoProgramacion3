@@ -1,6 +1,6 @@
-package hospital.model.service;
+package hospital.logica.service;
 
-import hospital.model.datos.FarmaceutaDAO;
+import hospital.datos.FarmaceutaDAO;
 import hospital.model.entidades.Farmaceuta;
 import java.util.List;
 

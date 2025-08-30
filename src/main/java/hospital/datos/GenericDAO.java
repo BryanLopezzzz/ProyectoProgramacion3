@@ -1,4 +1,4 @@
-package hospital.model.datos;
+package hospital.datos;
 
 import java.util.ArrayList;
 import java.util.List;

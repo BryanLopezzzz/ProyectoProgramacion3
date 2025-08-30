@@ -1,4 +1,4 @@
-package hospital.model.datos;
+package hospital.datos;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.beans.*;
-import java.io.*;
 import java.time.LocalDate;
 
 public class ArchivoManager<T> {

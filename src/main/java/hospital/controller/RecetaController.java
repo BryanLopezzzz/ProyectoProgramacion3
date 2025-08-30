@@ -1,7 +1,7 @@
 package hospital.controller;
 
 import hospital.model.entidades.*;
-import hospital.model.service.RecetaService;
+import hospital.logica.service.RecetaService;
 import java.util.List;
 
 public class RecetaController {

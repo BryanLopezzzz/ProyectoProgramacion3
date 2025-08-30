@@ -1,6 +1,6 @@
-package hospital.model.service;
+package hospital.logica.service;
 
-import hospital.model.datos.UsuarioDAO;
+import hospital.datos.UsuarioDAO;
 import hospital.model.entidades.Usuario;
 
 public class AuthService {
