@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="413.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.login_view">
+<AnchorPane prefHeight="413.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.LoginView">
    <children>
       <ImageView fitHeight="440.0" fitWidth="871.0" layoutY="-9.0" pickOnBounds="true" smooth="false">
          <image>
