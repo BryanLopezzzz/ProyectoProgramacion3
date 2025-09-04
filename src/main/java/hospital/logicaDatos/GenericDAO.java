@@ -50,6 +50,7 @@ public abstract class GenericDAO<T> {
                 .findFirst()
                 .orElse(null);
     }
+
     // ==== Búsqueda por nombre genérica ====
     public List<T> buscarPorNombre(String nombre) {
         List<T> resultados = new ArrayList<>();

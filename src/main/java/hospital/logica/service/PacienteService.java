@@ -31,6 +31,8 @@ public class PacienteService extends GenericServiceImpl<Paciente> {
         return pacienteDAO.buscarPorNombre(nombre);
     }
 
+    public Paciente buscarPorId(String id){ return pacienteDAO.buscarPorId(id); }
+
     private void validarPaciente(Paciente p) throws Exception {
         if (p == null) throw new Exception("El paciente no puede ser nulo.");
         if (p.getId() == null || p.getId().isBlank()) throw new Exception("El ID es obligatorio.");

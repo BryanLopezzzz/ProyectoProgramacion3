@@ -30,6 +30,7 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
     @Override
     public T buscarPorId(String id) throws Exception {
         return dao.buscarPorId(id);
+
     }
 
     @Override
