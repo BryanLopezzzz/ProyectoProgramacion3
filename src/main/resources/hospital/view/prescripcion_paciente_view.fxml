@@ -11,23 +11,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.PrescripcionView">
    <children>
       <Pane layoutX="72.0" layoutY="90.0" prefHeight="264.0" prefWidth="465.0">
          <children>
-            <ImageView fitHeight="282.0" fitWidth="470.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="301.0" fitWidth="501.0" layoutX="-2.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/BuscarPaciente.png" />
                </image>
             </ImageView>
-            <Label layoutX="9.0" layoutY="10.0" text="Buscar por ID:" textFill="WHITE">
+            <Label layoutX="14.0" layoutY="-21.0" text="Buscar por ID:" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="12.0" />
                </font>
             </Label>
-            <TextField id="txtIdentificacion" layoutX="93.0" layoutY="6.0" onAction="#txtIdentificacion" prefHeight="24.0" prefWidth="137.0" />
-            <TableView layoutX="7.0" layoutY="50.0" prefHeight="163.0" prefWidth="449.0">
+            <TextField id="txtIdentificacion" layoutX="98.0" layoutY="-25.0" onAction="#txtIdentificacion" prefHeight="24.0" prefWidth="137.0" />
+            <TableView layoutX="28.0" layoutY="36.0" prefHeight="171.0" prefWidth="438.0">
               <columns>
                 <TableColumn id="colID" fx:id="colID" prefWidth="75.0" text="ID" />
                 <TableColumn id="colNombre" fx:id="colNombre" prefWidth="182.13336181640625" text="Nombre" />
@@ -35,8 +34,11 @@
                   <TableColumn id="colFecha" fx:id="colFecha" prefWidth="112.00003051757812" text="Fecha Nacimiento" />
               </columns>
             </TableView>
-            <Button id="btnSeleccionar" fx:id="btnSeleccionar" layoutX="312.0" layoutY="229.0" mnemonicParsing="false" text="Seleccionar" />
-            <Button id="btnCancelar" fx:id="btnCancelar" layoutX="394.0" layoutY="229.0" mnemonicParsing="false" text="Cancelar" />
+            <Button id="btnSeleccionar" fx:id="btnSeleccionar" layoutX="320.0" layoutY="213.0" mnemonicParsing="false" text="Seleccionar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button id="btnCancelar" fx:id="btnCancelar" layoutX="402.0" layoutY="213.0" mnemonicParsing="false" text="Cancelar" />
          </children>
       </Pane>
    </children>

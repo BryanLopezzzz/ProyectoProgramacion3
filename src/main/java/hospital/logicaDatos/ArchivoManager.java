@@ -1,4 +1,4 @@
-package hospital.datos;
+package hospital.logicaDatos;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

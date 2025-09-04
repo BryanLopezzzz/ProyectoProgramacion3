@@ -1,6 +1,6 @@
 package hospital.logica.service;
 
-import hospital.datos.RecetaDAO;
+import hospital.logicaDatos.RecetaDAO;
 import hospital.model.entidades.*;
 import java.util.List;
 import java.util.stream.Collectors;

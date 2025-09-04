@@ -1,4 +1,4 @@
-package hospital.datos;
+package hospital.logicaDatos;
 
 import hospital.model.entidades.Medico;
 import java.util.List;

@@ -1,4 +1,4 @@
-package hospital.datos;
+package hospital.logicaDatos;
 
 import java.util.ArrayList;
 import java.util.List;

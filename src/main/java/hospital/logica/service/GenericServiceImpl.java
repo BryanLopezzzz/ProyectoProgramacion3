@@ -1,6 +1,6 @@
 package hospital.logica.service;
 
-import hospital.datos.GenericDAO;
+import hospital.logicaDatos.GenericDAO;
 
 import java.util.List;
 

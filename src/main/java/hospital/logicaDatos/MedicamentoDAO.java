@@ -1,4 +1,4 @@
-package hospital.datos;
+package hospital.logicaDatos;
 
 import hospital.model.entidades.Medicamento;
 
