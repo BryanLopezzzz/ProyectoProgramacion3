@@ -1,7 +1,6 @@
 package hospital.controller;
 
-import hospital.model.entidades.Administrador;
-import hospital.logica.service.GenericService;
+import hospital.model.Administrador;
 
 import java.util.List;
 

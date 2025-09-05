@@ -1,7 +1,7 @@
 package hospital.view;
 
 import hospital.controller.LoginController;
-import hospital.model.entidades.Usuario;
+import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

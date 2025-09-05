@@ -1,10 +1,10 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
-import hospital.model.entidades.Receta;
+import hospital.model.Receta;
 
-public class RecetaDAO extends GenericDAO<Receta> {
+public class RecetaDatos extends GenericDatos<Receta> {
 
-    public RecetaDAO() {
+    public RecetaDatos() {
         super(Receta.class, "data/recetas.xml");
     }
 

@@ -1,10 +1,8 @@
 package hospital.controller;
 
-import hospital.model.entidades.Medicamento;
-import hospital.model.entidades.Administrador;
+import hospital.model.Medicamento;
+import hospital.model.Administrador;
 import java.util.List;
-
-import hospital.logica.service.MedicamentoService;
 
 public class MedicamentoController extends ControllerGeneric<Medicamento> {
 

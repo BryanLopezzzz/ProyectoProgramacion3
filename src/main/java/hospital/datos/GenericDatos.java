@@ -1,14 +1,14 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenericDAO<T> {
+public abstract class GenericDatos<T> {
     private final ArchivoManager<T> fileManager;
     private final String filePath;
     protected List<T> elementos;
 
-    public GenericDAO(Class<T> type, String filePath) {
+    public GenericDatos(Class<T> type, String filePath) {
         this.fileManager = new ArchivoManager<>(type);
         this.filePath = filePath;
         this.elementos = cargar();

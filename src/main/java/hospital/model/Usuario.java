@@ -1,4 +1,4 @@
-package hospital.model.entidades;
+package hospital.model;
 
     public abstract class Usuario {
         private String id;

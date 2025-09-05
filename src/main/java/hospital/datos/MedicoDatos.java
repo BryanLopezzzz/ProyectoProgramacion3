@@ -1,12 +1,12 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
-import hospital.model.entidades.Medico;
+import hospital.model.Medico;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MedicoDAO extends GenericDAO<Medico> {
+public class MedicoDatos extends GenericDatos<Medico> {
 
-    public MedicoDAO() {
+    public MedicoDatos() {
         super(Medico.class, "data/medicos.xml");
     }
 

@@ -1,7 +1,5 @@
 package hospital.controller;
 
-import hospital.logica.service.AuthService;
-
 public class CambioClaveController {
     private final AuthService authService;
 

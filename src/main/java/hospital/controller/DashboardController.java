@@ -1,7 +1,8 @@
 package hospital.controller;
 
-import hospital.model.entidades.*;
-import hospital.logica.service.DashboardService;
+import hospital.model.EstadoReceta;
+import hospital.model.Usuario;
+
 import java.time.YearMonth;
 import java.util.Map;
 

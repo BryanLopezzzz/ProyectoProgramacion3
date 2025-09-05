@@ -1,16 +1,16 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
-import hospital.model.entidades.Usuario;
-import hospital.model.entidades.Medico;
-import hospital.model.entidades.Farmaceuta;
-import hospital.model.entidades.Administrador;
+import hospital.model.Usuario;
+import hospital.model.Medico;
+import hospital.model.Farmaceuta;
+import hospital.model.Administrador;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO {
-    private final MedicoDAO medicoDAO = new MedicoDAO();
-    private final FarmaceutaDAO farmaceutaDAO = new FarmaceutaDAO();
-    private final AdministradorDAO administradorDAO = new AdministradorDAO();
+public class UsuarioDatos {
+    private final MedicoDatos medicoDAO = new MedicoDatos();
+    private final FarmaceutaDatos farmaceutaDAO = new FarmaceutaDatos();
+    private final AdministradorDatos administradorDAO = new AdministradorDatos();
 
     // ==== LOGIN ====
     public Usuario login(String id, String clave) {

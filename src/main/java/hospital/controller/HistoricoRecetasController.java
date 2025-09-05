@@ -1,7 +1,9 @@
 package hospital.controller;
 
-import hospital.model.entidades.*;
-import hospital.logica.service.HistoricoRecetasService;
+import hospital.model.EstadoReceta;
+import hospital.model.Receta;
+import hospital.model.Usuario;
+
 import java.util.List;
 
 public class HistoricoRecetasController {

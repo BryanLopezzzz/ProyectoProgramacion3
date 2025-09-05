@@ -1,15 +1,15 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
-import hospital.model.entidades.Administrador;
+import hospital.model.Administrador;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministradorDAO {
+public class AdministradorDatos {
     private static final String FILE_PATH = "data/administradores.xml";
     private final ArchivoManager<Administrador> fileManager = new ArchivoManager<>(Administrador.class);
     private List<Administrador> administradores;
 
-    public AdministradorDAO() {
+    public AdministradorDatos() {
         this.administradores = cargar();
     }
 

@@ -1,11 +1,11 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
-import hospital.model.entidades.Medicamento;
+import hospital.model.Medicamento;
 
 //falta la restricción de que solo el administrador pueda usar esta funcionalidad. Eso se maneja en la capa de controlador/interfaz.
-public class MedicamentoDAO extends GenericDAO<Medicamento> {
+public class MedicamentoDatos extends GenericDatos<Medicamento> {
 
-    public MedicamentoDAO() {
+    public MedicamentoDatos() {
         super(Medicamento.class, "data/medicamentos.xml");
     }
 

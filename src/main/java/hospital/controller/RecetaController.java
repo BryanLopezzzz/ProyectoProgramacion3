@@ -1,7 +1,10 @@
 package hospital.controller;
 
-import hospital.model.entidades.*;
-import hospital.logica.service.RecetaService;
+import hospital.model.EstadoReceta;
+import hospital.model.Farmaceuta;
+import hospital.model.Medico;
+import hospital.model.Receta;
+
 import java.util.List;
 
 public class RecetaController {

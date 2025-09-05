@@ -1,10 +1,10 @@
-package hospital.logicaDatos;
+package hospital.datos;
 
-import hospital.model.entidades.Farmaceuta;
+import hospital.model.Farmaceuta;
 
-public class FarmaceutaDAO extends GenericDAO<Farmaceuta> {
+public class FarmaceutaDatos extends GenericDatos<Farmaceuta> {
 
-    public FarmaceutaDAO() {
+    public FarmaceutaDatos() {
         super(Farmaceuta.class, "data/farmaceutas.xml");
     }
 

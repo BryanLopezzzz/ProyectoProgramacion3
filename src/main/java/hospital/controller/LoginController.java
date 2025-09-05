@@ -1,8 +1,6 @@
 package hospital.controller;
 
-import hospital.model.entidades.Usuario;
-
-import hospital.logica.service.AuthService;
+import hospital.model.Usuario;
 
 public class LoginController {
     private final AuthService authService;

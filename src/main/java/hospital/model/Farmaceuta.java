@@ -1,4 +1,4 @@
-package hospital.model.entidades;
+package hospital.model;
 
 public class Farmaceuta extends Usuario {
 
