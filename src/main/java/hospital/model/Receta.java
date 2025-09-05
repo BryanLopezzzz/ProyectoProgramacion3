@@ -8,22 +8,26 @@ public class Receta {
     private String id;                // consecutivo único
     private Paciente paciente;        // paciente asociado
     private Medico medico;            // médico que la emite
-    private LocalDate fecha;          // fecha de emisión
+    private LocalDate fecha;
+    private LocalDate fechaRetiro;
     private EstadoReceta estado;
     private List<DetalleReceta> detalles; // medicamentos prescritos
 
     public Receta() {
         this.detalles = new ArrayList<>();
         this.estado = EstadoReceta.CONFECCIONADA;
+        this.fecha = LocalDate.now();
+        this.fechaRetiro = this.fecha;
     }
 
     public Receta(String id, Paciente paciente, Medico medico, LocalDate fecha) {
         this.id = id;
         this.paciente = paciente;
         this.medico = medico;
-        this.fecha = fecha;
-            this.estado = EstadoReceta.CONFECCIONADA;
+        this.fecha = (fecha != null ? fecha : LocalDate.now());
+        this.estado = EstadoReceta.CONFECCIONADA;
         this.detalles = new ArrayList<>();
+        this.fechaRetiro = this.fecha;
     }
 
     public String getId() {
@@ -69,10 +73,16 @@ public class Receta {
         detalles.add(detalle);
     }
 
+    public LocalDate getFechaRetiro() {
+        return fechaRetiro;
+    }
+    public void setFechaRetiro(LocalDate fechaRetiro) {
+        this.fechaRetiro = fechaRetiro;
+    }
     @Override
     public String toString() {
-        return "Receta " + id + " - " + paciente.getNombre() +
-                " (" + estado + ")";
+        return "Receta " + id + " - " + (paciente != null ? paciente.getNombre() : "Paciente?")
+                + " (" + estado + ") - Retiro: " + (fechaRetiro != null ? fechaRetiro : "¿?");
     }
 
     /////////////////////////////////////////////////

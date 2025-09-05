@@ -1,26 +1,73 @@
 package hospital.datos;
 
 import hospital.model.Medicamento;
+import hospital.logica.mapper.MedicamentoMapper;
+import hospital.datos.conector.MedicamentoConector;
+import jakarta.xml.bind.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Objects;
 
-//falta la restricción de que solo el administrador pueda usar esta funcionalidad. Eso se maneja en la capa de controlador/interfaz.
-public class MedicamentoDatos extends GenericDatos<Medicamento> {
+public class MedicamentoDatos {
 
-    public MedicamentoDatos() {
-        super(Medicamento.class, "data/medicamentos.xml");
+    private final Path path;
+    private final JAXBContext context;
+    private MedicamentoConector cache;
+
+    public MedicamentoDatos(String filePath) {
+        try {
+            this.path = Path.of(Objects.requireNonNull(filePath));
+            this.context = JAXBContext.newInstance(MedicamentoConector.class, Medicamento.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
-    @Override
-    protected String getId(Medicamento m) {
-        return m.getCodigo();
+    public synchronized MedicamentoConector load() {
+        try {
+            if (cache != null) return cache;
+
+            if (Files.notExists(path)) {
+                cache = new MedicamentoConector();
+                save(cache);
+                return cache;
+            }
+
+            Unmarshaller u = context.createUnmarshaller();
+            cache = (MedicamentoConector) u.unmarshal(path.toFile());
+
+            if (cache.getMedicamentos() == null) {
+                cache.setMedicamentos(new java.util.ArrayList<>());
+            }
+            return cache;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
-    @Override
-    protected String getNombre(Medicamento m) {
-        return m.getNombre();
+    public synchronized void save(MedicamentoConector data) throws JAXBException {
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+        File out = path.toFile();
+        File parent = out.getParentFile();
+        if (parent != null) parent.mkdirs();
+
+        m.marshal(data, out);
     }
 
+    public Path getPath() {
+        return path;
+    }
+
+    // Búsqueda rápida por código
     public Medicamento buscarPorCodigo(String codigo) {
-        return buscarPorId(codigo); // reutiliza el genérico
+        return load().getMedicamentos().stream()
+                .map(MedicamentoMapper::fromXML)   // convertir a Medicamento
+                .filter(m -> m.getCodigo().equalsIgnoreCase(codigo))
+                .findFirst()
+                .orElse(null);                     // ahora devuelve un Medicamento
     }
-
 }

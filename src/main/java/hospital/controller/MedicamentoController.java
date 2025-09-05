@@ -2,24 +2,41 @@ package hospital.controller;
 
 import hospital.model.Medicamento;
 import hospital.model.Administrador;
+import hospital.logica.MedicamentoLogica;
+
 import java.util.List;
 
-public class MedicamentoController extends ControllerGeneric<Medicamento> {
+public class MedicamentoController {
 
-    private final MedicamentoService medicamentoService;
+    private final MedicamentoLogica medicamentoLogica;
 
     public MedicamentoController() {
-        super(new MedicamentoService());
-        this.medicamentoService = (MedicamentoService) super.service;
+        this.medicamentoLogica = new MedicamentoLogica();
+    }
+
+    public void agregar(Administrador admin, Medicamento medicamento) throws Exception {
+        validarAdmin(admin);
+        medicamentoLogica.agregar(medicamento);
+    }
+
+    public List<Medicamento> listar(Administrador admin) throws Exception {
+        validarAdmin(admin);
+        return medicamentoLogica.listar();
     }
 
     public Medicamento buscarPorCodigo(Administrador admin, String codigo) throws Exception {
         validarAdmin(admin);
-        return medicamentoService.buscarPorCodigo(codigo);
+        return medicamentoLogica.buscarPorCodigo(codigo);
     }
 
     public List<Medicamento> buscarPorNombre(Administrador admin, String nombre) throws Exception {
         validarAdmin(admin);
-        return medicamentoService.buscarPorNombre(nombre);
+        return medicamentoLogica.buscarPorNombre(nombre);
+    }
+
+    private void validarAdmin(Administrador admin) throws Exception {
+        if (admin == null) {
+            throw new Exception("Solo los administradores pueden ejecutar esta acción.");
+        }
     }
 }

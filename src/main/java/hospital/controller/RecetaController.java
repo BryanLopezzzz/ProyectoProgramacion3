@@ -7,49 +7,52 @@ import hospital.model.Receta;
 
 import java.util.List;
 
-public class RecetaController {
+import hospital.model.EstadoReceta;
+import hospital.model.Farmaceuta;
+import hospital.model.Medico;
+import hospital.model.Receta;
+import hospital.logica.RecetaLogica;
 
-    private final RecetaService recetaService;
+import java.util.List;
+
+public class RecetaController {
+    private final RecetaLogica recetaLogica;
 
     public RecetaController() {
-        this.recetaService = new RecetaService();
+        this.recetaLogica = new RecetaLogica();
     }
 
-    // ========================
-    // PRESCRIPCIÓN (Médicos)
-    // ========================
-    public Receta crearReceta(Medico medico, String pacienteId, String recetaId) throws Exception {
-        if (medico == null) {
-            throw new Exception("Solo los médicos pueden prescribir recetas.");
-        }
-        return recetaService.crearReceta(medico, pacienteId, recetaId);
+    // MÉDICOS
+    public Receta crearReceta(Medico medico, Receta receta) throws Exception {
+        validarMedico(medico);
+        return recetaLogica.crearReceta(receta);
     }
 
-    public void agregarMedicamento(Medico medico, String recetaId, String medicamentoId, int cantidad, String indicaciones) throws Exception {
-        if (medico == null) {
-            throw new Exception("Solo los médicos pueden agregar medicamentos a la receta.");
-        }
-        recetaService.agregarMedicamento(recetaId, medicamentoId, cantidad, indicaciones);
+    public void agregarDetalle(Medico medico, String recetaId, String medicamentoId, int cantidad, String indicaciones,int diasTratamiento) throws Exception {
+        validarMedico(medico);
+        recetaLogica.agregarDetalle(recetaId, medicamentoId, cantidad, indicaciones,diasTratamiento);
     }
 
-    // ========================
-    // DESPACHO (Farmaceutas)
-    // ========================
+    // FARMACEUTAS
     public void actualizarEstado(Farmaceuta farmaceuta, String recetaId, EstadoReceta nuevoEstado) throws Exception {
-        if (farmaceuta == null) {
-            throw new Exception("Solo los farmaceutas pueden despachar recetas.");
-        }
-        recetaService.actualizarEstado(farmaceuta, recetaId, nuevoEstado);
+        validarFarmaceuta(farmaceuta);
+        recetaLogica.actualizarEstado(recetaId, nuevoEstado);
     }
 
-    // ========================
-    // Consultas generales
-    // ========================
+    // CONSULTAS
     public Receta buscarReceta(String id) throws Exception {
-        return recetaService.buscarPorId(id);
+        return recetaLogica.buscarPorId(id);
     }
 
     public List<Receta> listarRecetas() {
-        return recetaService.listarRecetas();
+        return recetaLogica.listar();
+    }
+
+    private void validarMedico(Medico medico) throws Exception {
+        if (medico == null) throw new Exception("Solo los médicos pueden ejecutar esta acción.");
+    }
+
+    private void validarFarmaceuta(Farmaceuta farmaceuta) throws Exception {
+        if (farmaceuta == null) throw new Exception("Solo los farmaceutas pueden ejecutar esta acción.");
     }
 }

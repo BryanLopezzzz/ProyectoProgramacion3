@@ -3,33 +3,50 @@ package hospital.controller;
 import hospital.model.EstadoReceta;
 import hospital.model.Receta;
 import hospital.model.Usuario;
-
+import hospital.logica.RecetaLogica;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HistoricoRecetasController {
-    private final HistoricoRecetasService historicoService;
+    private final RecetaLogica recetaLogica;
 
     public HistoricoRecetasController() {
-        this.historicoService = new HistoricoRecetasService();
+        this.recetaLogica = new RecetaLogica();
     }
 
-    public List<Receta> listarRecetas(Usuario usuario) throws Exception {
-        return historicoService.listarRecetas(usuario);
+    // Lista todas las recetas (sin modificar nada)
+    public List<Receta> listarRecetas(Usuario usuario) {
+        // en este caso cualquier usuario puede ver el histórico
+        return recetaLogica.listar();
     }
 
-    public Receta buscarPorId(Usuario usuario, String recetaId) throws Exception {
-        return historicoService.buscarPorId(usuario, recetaId);
+    // Buscar receta por ID
+    public Receta buscarPorId(Usuario usuario, String recetaId) {
+        return recetaLogica.buscarPorId(recetaId);
     }
 
-    public List<Receta> buscarPorPaciente(Usuario usuario, String criterio) throws Exception {
-        return historicoService.buscarPorPaciente(usuario, criterio);
+    // Buscar recetas por paciente (filtrando sobre la lista general)
+    public List<Receta> buscarPorPaciente(Usuario usuario, String criterio) {
+        return recetaLogica.listar().stream()
+                .filter(r -> r.getPaciente() != null
+                        && (r.getPaciente().getId().equalsIgnoreCase(criterio)
+                        || r.getPaciente().getNombre().toLowerCase().contains(criterio.toLowerCase())))
+                .collect(Collectors.toList());
     }
 
-    public List<Receta> buscarPorMedico(Usuario usuario, String criterio) throws Exception {
-        return historicoService.buscarPorMedico(usuario, criterio);
+    // Buscar recetas por médico
+    public List<Receta> buscarPorMedico(Usuario usuario, String criterio) {
+        return recetaLogica.listar().stream()
+                .filter(r -> r.getMedico() != null
+                        && (r.getMedico().getId().equalsIgnoreCase(criterio)
+                        || r.getMedico().getNombre().toLowerCase().contains(criterio.toLowerCase())))
+                .collect(Collectors.toList());
     }
 
-    public List<Receta> buscarPorEstado(Usuario usuario, EstadoReceta estado) throws Exception {
-        return historicoService.buscarPorEstado(usuario, estado);
+    // Buscar recetas por estado
+    public List<Receta> buscarPorEstado(Usuario usuario, EstadoReceta estado) {
+        return recetaLogica.listar().stream()
+                .filter(r -> r.getEstado() == estado)
+                .collect(Collectors.toList());
     }
 }
