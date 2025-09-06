@@ -3,6 +3,7 @@ package hospital.logica.mapper;
 import hospital.datos.entidades.RecetaEntidad;
 import hospital.logica.PacienteLogica;
 import hospital.model.*;
+import hospital.logica.MedicoLogica;
 
 import java.util.stream.Collectors;
 
