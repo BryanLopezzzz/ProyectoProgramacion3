@@ -9,6 +9,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
+import hospital.datos.entidades.FarmaceutaEntidad;
 
 public class FarmaceutaDatos {
     private final Path path;

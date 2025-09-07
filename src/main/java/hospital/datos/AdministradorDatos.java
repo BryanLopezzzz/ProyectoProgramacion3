@@ -1,68 +1,64 @@
 package hospital.datos;
 
-import hospital.model.Administrador;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import hospital.datos.conector.AdministradorConector;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
+import hospital.datos.entidades.AdministradorEntidad;
 
 public class AdministradorDatos {
-    private static final String FILE_PATH = "data/administradores.xml";
-    private final ArchivoManager<Administrador> fileManager = new ArchivoManager<>(Administrador.class);
-    private List<Administrador> administradores;
+    private final Path path;
+    private final JAXBContext context;
+    private AdministradorConector cache;
 
-    public AdministradorDatos() {
-        this.administradores = cargar();
-    }
-
-    // ==== CRUD ====
-    public List<Administrador> listar() {
-        return new ArrayList<>(administradores);
-    }
-
-    public void agregar(Administrador a) {
-        if (buscarPorId(a.getId()) != null) {
-            throw new IllegalArgumentException("Ya existe un administrador con el ID: " + a.getId());
+    public AdministradorDatos(String filePath) {
+        try {
+            this.path = Path.of(Objects.requireNonNull(filePath));
+            this.context = JAXBContext.newInstance(AdministradorConector.class, AdministradorEntidad.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Error inicializando AdministradorDatos: " + e.getMessage(), e);
         }
-        a.setClave(a.getId()); // regla: clave inicial = id
-        administradores.add(a);
-        guardar();
     }
 
-    public void modificar(Administrador adminActualizado) {
-        for (int i = 0; i < administradores.size(); i++) {
-            if (administradores.get(i).getId().equals(adminActualizado.getId())) {
-                administradores.set(i, adminActualizado);
-                guardar();
-                return;
+    public synchronized AdministradorConector load() {
+        try {
+            if (cache != null) return cache;
+
+            if (Files.notExists(path)) {
+                cache = new AdministradorConector();
+                save(cache);
+                return cache;
             }
-        }
-    }
 
-    public void eliminar(String id) {
-        administradores.removeIf(a -> a.getId().equals(id));
-        guardar();
-    }
+            Unmarshaller u = context.createUnmarshaller();
+            cache = (AdministradorConector) u.unmarshal(path.toFile());
 
-    public Administrador buscarPorId(String id) {
-        return administradores.stream()
-                .filter(a -> a.getId().equalsIgnoreCase(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    // ==== Persistencia ====
-    private void guardar() {
-        try {
-            fileManager.saveList(administradores, FILE_PATH);
+            if (cache.getAdministradores() == null) {
+                cache.setAdministradores(new ArrayList<>());
+            }
+            return cache;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error cargando administradores: " + e.getMessage(), e);
         }
     }
 
-    private List<Administrador> cargar() {
-        try {
-            return fileManager.loadList(FILE_PATH);
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
+    public synchronized void save(AdministradorConector data) throws JAXBException {
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+        File out = path.toFile();
+        File parent = out.getParentFile();
+        if (parent != null) parent.mkdirs();
+
+        m.marshal(data, out);
     }
+
+    public Path getPath() { return path; }
 }

@@ -1,27 +1,44 @@
 package hospital.controller;
 
 import hospital.model.Usuario;
+import hospital.logica.UsuarioManager;
 
 public class LoginController {
-    private final AuthService authService;
+    private final UsuarioManager usuarioManager;
+    private Usuario usuarioActual; // almacena el usuario logueado en sesión
 
     public LoginController() {
-        this.authService = new AuthService();
+        this.usuarioManager = new UsuarioManager();
     }
 
+    // ==== LOGIN ====
     public Usuario login(String id, String clave) throws Exception {
-        return authService.login(id, clave);
+        Usuario u = usuarioManager.login(id, clave);
+        this.usuarioActual = u;
+        return u;
     }
 
+    // ==== LOGOUT ====
     public void logout() {
-        authService.cerrarSesion();
+        this.usuarioActual = null;
     }
 
+    // ==== CAMBIO DE CLAVE ====
+    public void cambiarClave(String actual, String nueva) throws Exception {
+        if (usuarioActual == null) {
+            throw new Exception("No hay un usuario autenticado.");
+        }
+        usuarioManager.cambiarClave(usuarioActual.getId(), actual, nueva);
+        // actualizar el objeto en memoria
+        usuarioActual.setClave(nueva);
+    }
+
+    // ==== Estado de sesión ====
     public Usuario getUsuarioActual() {
-        return authService.getUsuarioActual();
+        return usuarioActual;
     }
 
     public boolean isLoggedIn() {
-        return authService.estaAutenticado();
+        return usuarioActual != null;
     }
 }
