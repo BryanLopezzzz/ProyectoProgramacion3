@@ -40,12 +40,12 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/user.png" />
+                  <Image url="@../../icons/user.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="tableMedicos" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@styles/table.css">
+      <TableView fx:id="tableMedicos" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
          <columns>
             <TableColumn fx:id="idMedicos" prefWidth="185.33334350585938" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Medicamento" />
             <TableColumn fx:id="especialidadMedicos1" minWidth="0.0" prefWidth="186.6666259765625" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Indicaciones" />
@@ -58,7 +58,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/plus.png" />
+                  <Image url="@../../icons/plus.png" />
                </image>
             </ImageView>
          </graphic>
@@ -67,7 +67,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/trash-2.png" />
+                  <Image url="@../../icons/trash-2.png" />
                </image>
             </ImageView>
          </graphic>
@@ -76,7 +76,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 4;">
                <image>
-                  <Image url="@icons/pencil.png" />
+                  <Image url="@../../icons/pencil.png" />
                </image>
             </ImageView>
          </graphic>
@@ -85,12 +85,12 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/undo-2.png" />
+                  <Image url="@../../icons/undo-2.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <DatePicker layoutX="485.0" layoutY="195.0" prefHeight="37.0" prefWidth="307.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@styles/datePicker.css" />
+      <DatePicker layoutX="485.0" layoutY="195.0" prefHeight="37.0" prefWidth="307.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@../../styles/datePicker.css" />
       <Line endX="89.33331298828125" layoutX="521.0" layoutY="196.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
       <Label layoutX="502.0" layoutY="181.0" text="Fecha de retiro" textFill="#9a9a9a">
          <font>

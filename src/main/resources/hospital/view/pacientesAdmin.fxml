@@ -36,7 +36,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TableView fx:id="tableMedicos" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@styles/table.css">
+      <TableView fx:id="tableMedicos" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
          <columns>
             <TableColumn fx:id="idMedicos" prefWidth="127.66665649414062" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="ID" />
             <TableColumn fx:id="nombreMedicos" prefWidth="257.3333435058594" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Nombre" />
@@ -48,7 +48,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/plus.png" />
+                  <Image url="@../../icons/plus.png" />
                </image>
             </ImageView>
          </graphic>
@@ -57,7 +57,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/trash-2.png" />
+                  <Image url="@../../icons/trash-2.png" />
                </image>
             </ImageView>
          </graphic>
@@ -66,7 +66,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 4;">
                <image>
-                  <Image url="@icons/pencil.png" />
+                  <Image url="@../../icons/pencil.png" />
                </image>
             </ImageView>
          </graphic>
@@ -75,7 +75,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/undo-2.png" />
+                  <Image url="@../../icons/undo-2.png" />
                </image>
             </ImageView>
          </graphic>
@@ -89,7 +89,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/search.png" />
+                  <Image url="@../../icons/search.png" />
                </image>
             </ImageView>
          </graphic>
