@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="colNombreMedico" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField id="txtBuscar" layoutX="282.0" layoutY="134.0" prefHeight="37.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+      <TextField id="txtBuscar" fx:id="txtBuscar" layoutX="282.0" layoutY="134.0" prefHeight="37.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>

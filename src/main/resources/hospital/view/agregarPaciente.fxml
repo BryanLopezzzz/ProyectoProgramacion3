@@ -39,7 +39,7 @@
                   <Font name="Segoe UI Bold" size="22.0" />
                </font>
             </Button>
-            <TextField layoutX="106.0" layoutY="116.0" prefHeight="37.0" prefWidth="194.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+            <TextField id="txtIdentificacion" fx:id="txtIdentificacion" layoutX="106.0" layoutY="116.0" prefHeight="37.0" prefWidth="194.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font></TextField>
@@ -49,7 +49,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField layoutX="346.0" layoutY="116.0" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+            <TextField id="txtNombre" fx:id="txtNombre" layoutX="346.0" layoutY="116.0" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font></TextField>
@@ -65,7 +65,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <DatePicker layoutX="107.0" layoutY="187.0" prefHeight="37.0" prefWidth="258.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@styles/datePicker.css" />
+            <DatePicker id="dtpFechaNac" fx:id="dtpFechaNac" layoutX="107.0" layoutY="187.0" prefHeight="37.0" prefWidth="258.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@styles/datePicker.css" />
             <Line endX="138.33334350585938" layoutX="143.0" layoutY="188.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
             <Label layoutX="124.0" layoutY="173.0" text="Fecha de naciemiento" textFill="#9a9a9a">
                <font>

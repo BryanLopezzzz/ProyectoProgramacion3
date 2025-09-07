@@ -15,12 +15,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField disable="true" layoutX="485.0" layoutY="126.0" prefHeight="37.0" prefWidth="307.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+      <TextField id="txtFechaConfeccion" fx:id="txtFechaConfeccion" disable="true" layoutX="485.0" layoutY="126.0" prefHeight="37.0" prefWidth="307.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="90.0" layoutY="126.0" prefHeight="37.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+      <TextField id="txtBuscarPaciente" fx:id="txtBuscarPaciente" layoutX="90.0" layoutY="126.0" prefHeight="37.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
@@ -36,7 +36,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="385.0" layoutY="127.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Paciente">
+      <Button id="btnBuscarPaciente" fx:id="btnBuscarPaciente" contentDisplay="GRAPHIC_ONLY" layoutX="385.0" layoutY="127.0" mnemonicParsing="false" onAction="#BuscarPaciente" prefHeight="35.0" prefWidth="41.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Paciente">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -45,16 +45,16 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="tableMedicos" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
+      <TableView id="tblRecetas" fx:id="tblRecetas" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn fx:id="idMedicos" prefWidth="185.33334350585938" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Medicamento" />
-            <TableColumn fx:id="especialidadMedicos1" minWidth="0.0" prefWidth="186.6666259765625" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Indicaciones" />
-            <TableColumn fx:id="nombreMedicos" minWidth="0.0" prefWidth="111.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Presentación" />
-            <TableColumn fx:id="especialidadMedicos" minWidth="0.0" prefWidth="111.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Cantidad" />
-            <TableColumn fx:id="especialidadMedicos2" minWidth="0.0" prefWidth="114.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Duración" />
+            <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="185.33334350585938" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Medicamento" />
+            <TableColumn id="colIndicaciones" fx:id="colIndicaciones" minWidth="0.0" prefWidth="186.6666259765625" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Indicaciones" />
+            <TableColumn id="colPresentacion" fx:id="colPresentacion" minWidth="0.0" prefWidth="111.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Presentación" />
+            <TableColumn id="conCantidad" fx:id="conCantidad" minWidth="0.0" prefWidth="111.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Cantidad" />
+            <TableColumn id="colDuracion" fx:id="colDuracion" minWidth="0.0" prefWidth="114.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Duración" />
          </columns>
       </TableView>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="246.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Agregar">
+      <Button id="btnAgregarReceta" fx:id="btnAgregarReceta" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="246.0" mnemonicParsing="false" onAction="#AgregarReceta" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Agregar">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -63,7 +63,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="144.0" layoutY="246.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Eliminar">
+      <Button id="btnEliminarReceta" fx:id="btnEliminarReceta" contentDisplay="GRAPHIC_ONLY" layoutX="144.0" layoutY="246.0" mnemonicParsing="false" onAction="#EliminarReceta" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Eliminar">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -72,7 +72,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="197.0" layoutY="246.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Editar">
+      <Button id="btnEditarReceta" fx:id="btnEditarReceta" contentDisplay="GRAPHIC_ONLY" layoutX="197.0" layoutY="246.0" mnemonicParsing="false" onAction="#EditarReceta" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Editar">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 4;">
                <image>
@@ -81,7 +81,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="44.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Volver">
+      <Button id="btnSalir" fx:id="btnSalir" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="44.0" mnemonicParsing="false" onAction="#Salir" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Volver">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -90,7 +90,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <DatePicker layoutX="485.0" layoutY="195.0" prefHeight="37.0" prefWidth="307.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@../../styles/datePicker.css" />
+      <DatePicker id="dtpFechaRetiro" fx:id="dtpFechaRetiro" layoutX="485.0" layoutY="195.0" prefHeight="37.0" prefWidth="307.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@../../styles/datePicker.css" />
       <Line endX="89.33331298828125" layoutX="521.0" layoutY="196.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
       <Label layoutX="502.0" layoutY="181.0" text="Fecha de retiro" textFill="#9a9a9a">
          <font>
@@ -103,7 +103,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button contentDisplay="CENTER" layoutX="279.0" layoutY="501.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="354.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Preescribir" textFill="WHITE">
+      <Button id="btnPreescribir" fx:id="btnPreescribir" contentDisplay="CENTER" layoutX="279.0" layoutY="501.0" mnemonicParsing="false" onAction="#Preescribir" prefHeight="46.0" prefWidth="354.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Preescribir" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="22.0" />
          </font>
