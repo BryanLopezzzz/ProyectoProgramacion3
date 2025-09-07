@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="colNombreMedico" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="282.0" layoutY="134.0" prefHeight="37.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+      <TextField id="txtBuscar" layoutX="282.0" layoutY="134.0" prefHeight="37.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
@@ -40,12 +40,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="CENTER" layoutX="282.0" layoutY="496.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="337.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Seleccionar" textFill="WHITE">
+      <Button id="btnSeleccionar" fx:id="btnSeleccionar" contentDisplay="CENTER" layoutX="282.0" layoutY="496.0" mnemonicParsing="false" onAction="#Seleccionar" prefHeight="46.0" prefWidth="337.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Seleccionar" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="22.0" />
          </font>
       </Button>
-      <ComboBox layoutX="394.0" layoutY="183.0" prefHeight="27.0" prefWidth="94.0" promptText="Código" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4; -fx-cursor: hand;" visibleRowCount="2" />
+      <ComboBox id="btnFiltro" fx:id="btnFiltro" layoutX="394.0" layoutY="183.0" onAction="#Filtrar" prefHeight="27.0" prefWidth="94.0" promptText="Código" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4; -fx-cursor: hand;" visibleRowCount="2" />
       <Text fill="#9a9a9a" layoutX="316.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar por:">
          <font>
             <Font name="Segoe UI" size="14.0" />
@@ -53,9 +53,9 @@
       </Text>
       <TableView fx:id="tableMedicos" layoutX="95.0" layoutY="249.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@styles/table.css">
          <columns>
-            <TableColumn fx:id="idMedicos" prefWidth="135.6666717529297" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Código" />
-            <TableColumn fx:id="nombreMedicos" prefWidth="336.3333282470703" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Nombre" />
-            <TableColumn fx:id="nombreMedicos1" prefWidth="233.66668701171875" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Presentación" />
+            <TableColumn id="colCodigo" fx:id="colCodigo" prefWidth="135.6666717529297" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Código" />
+            <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="336.3333282470703" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Nombre" />
+            <TableColumn id="colPresentacion" fx:id="colPresentacion" prefWidth="233.66668701171875" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Presentación" />
          </columns>
       </TableView>
    </children>

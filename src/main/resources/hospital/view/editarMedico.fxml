@@ -28,12 +28,12 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button contentDisplay="CENTER" layoutX="202.0" layoutY="250.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="354.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Guardar" textFill="WHITE">
+            <Button id="btnGuardar" fx:id="btnGuardar" contentDisplay="CENTER" layoutX="202.0" layoutY="250.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="46.0" prefWidth="354.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Guardar" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="22.0" />
                </font>
             </Button>
-            <TextField layoutX="92.0" layoutY="114.0" prefHeight="37.0" prefWidth="203.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+            <TextField id="txtIdentificacion" fx:id="txtIdentificacion" layoutX="92.0" layoutY="114.0" prefHeight="37.0" prefWidth="203.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font></TextField>
@@ -43,7 +43,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField layoutX="332.0" layoutY="114.0" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+            <TextField id="txtNombre" fx:id="txtNombre" layoutX="332.0" layoutY="114.0" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font></TextField>
@@ -53,7 +53,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField layoutX="92.0" layoutY="176.0" prefHeight="37.0" prefWidth="571.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+            <TextField id="txtEspecialidad" fx:id="txtEspecialidad" layoutX="92.0" layoutY="176.0" prefHeight="37.0" prefWidth="571.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font></TextField>
