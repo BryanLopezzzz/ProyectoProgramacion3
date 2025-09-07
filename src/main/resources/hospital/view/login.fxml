@@ -16,7 +16,7 @@
    <children>
       <ImageView fitHeight="581.0" fitWidth="875.0" layoutX="74.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@imgs/fondo-login.jpg" />
+            <Image url="@../../images/fondo-login.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="213.0" layoutY="91.0" prefHeight="398.0" prefWidth="445.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.3, 0, 3); -fx-background-radius: 4;">
@@ -55,7 +55,7 @@
                <graphic>
                   <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/eye.png" />
+                        <Image url="@../../icons/eye.png" />
                      </image>
                   </ImageView>
                </graphic>

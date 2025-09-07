@@ -19,7 +19,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/undo-2.png" />
+                        <Image url="@../../icons/undo-2.png" />
                      </image>
                   </ImageView>
                </graphic>
