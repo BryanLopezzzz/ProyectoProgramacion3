@@ -1,10 +1,10 @@
 /* Encabezado del TableView */
-#tableMedicos .column-header-background {
+.table .column-header-background {
     -fx-pref-height: 36px; /* altura de la fila de encabezados */
 }
 
 /* Texto en los encabezados */
-#tableMedicos .column-header .label {
+.table .column-header .label {
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-alignment: center;

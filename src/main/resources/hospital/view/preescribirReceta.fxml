@@ -45,7 +45,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView id="tblRecetas" fx:id="tblRecetas" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
+      <TableView id="tblRecetas" fx:id="tblRecetas" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
             <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="185.33334350585938" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Medicamento" />
             <TableColumn id="colIndicaciones" fx:id="colIndicaciones" minWidth="0.0" prefWidth="186.6666259765625" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Indicaciones" />
