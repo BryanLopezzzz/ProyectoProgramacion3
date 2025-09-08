@@ -37,7 +37,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TableView id="tblMedicos" fx:id="tblMedicos" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
+      <TableView id="tblMedicos" fx:id="tblMedicos" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
             <TableColumn id="colCodigo" fx:id="colCodigo" prefWidth="135.6666717529297" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Código" />
             <TableColumn id="colNombre" fx:id="colNombre" prefWidth="336.3333282470703" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Nombre" />

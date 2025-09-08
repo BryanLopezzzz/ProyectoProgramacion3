@@ -36,7 +36,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TableView fx:id="tblPacientes" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" stylesheets="@../../styles/table.css">
+      <TableView fx:id="tblPacientes" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
             <TableColumn id="colIdentificacionPaciente" fx:id="colIdentificacionPaciente" prefWidth="127.66665649414062" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="ID" />
             <TableColumn id="colNombrePaciente" fx:id="colNombrePaciente" prefWidth="257.3333435058594" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Nombre" />
