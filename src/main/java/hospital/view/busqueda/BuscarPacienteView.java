@@ -78,7 +78,7 @@ public class BuscarPacienteView {
                 filtrados.add(p);
             } else if (criterio.equals("ID") && p.getId().contains(texto)) {
                 filtrados.add(p);
-            }
+            }//
         }
 
         tableMedicos.setItems(filtrados);
