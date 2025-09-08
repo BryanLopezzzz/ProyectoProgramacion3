@@ -37,7 +37,7 @@ public class BuscarMedicamentoView {
     private final MedicamentoController controller = new MedicamentoController();
     private Administrador admin;  // se inyecta desde fuera (ej: login)
 
-    // Método para inyectar el admin desde otra vista/controlador
+    // Metodo para inyectar el admin desde otra vista/controlador
     public void setAdministrador(Administrador admin) {
         this.admin = admin;
     }

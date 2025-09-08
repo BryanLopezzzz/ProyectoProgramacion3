@@ -1,8 +1,10 @@
 package hospital.view.busqueda;
 
 import hospital.controller.PacienteController;
+import hospital.logica.PacienteLogica;
 import hospital.model.Administrador;
 import hospital.model.Paciente;
+import hospital.model.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +15,7 @@ import javafx.stage.Stage;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BuscarPacienteView {
+public class BuscarPacientePreescripcionView {
 
     @FXML private TextField txtBuscar;
     @FXML private ComboBox<String> btnFiltro;
@@ -25,10 +27,12 @@ public class BuscarPacienteView {
     @FXML private Button btnVolver;
     @FXML private Button btnSeleccionar;
 
+
     private ObservableList<Paciente> listaPacientes = FXCollections.observableArrayList();
     private Paciente pacienteSeleccionado;
     private final PacienteController pacienteController = new PacienteController();
     private Administrador admin;
+    private Usuario usuario;
 
     @FXML
     public void initialize() {
@@ -51,14 +55,28 @@ public class BuscarPacienteView {
         btnFiltro.setValue("Nombre");
     }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        cargarPacientes();
+    }
+
     public void setAdmin(Administrador admin) {
-        this.admin = admin;
+        this.usuario = admin; // Ahora usa la variable usuario
         cargarPacientes();
     }
 
     private void cargarPacientes() {
         try {
-            List<Paciente> pacientes = pacienteController.listar(admin);
+            List<Paciente> pacientes;
+
+            // Si es administrador, usar la validación del controlador
+            if (usuario instanceof Administrador) {
+                pacientes = pacienteController.listar((Administrador) usuario);
+            } else {
+                // Para médicos y otros usuarios, acceder directamente a la lógica
+                pacientes = new PacienteLogica().listar();
+            }
+
             listaPacientes.setAll(pacientes);
             tableMedicos.setItems(listaPacientes);
         } catch (Exception e) {
@@ -78,7 +96,7 @@ public class BuscarPacienteView {
                 filtrados.add(p);
             } else if (criterio.equals("ID") && p.getId().contains(texto)) {
                 filtrados.add(p);
-            }//
+            }////
         }
 
         tableMedicos.setItems(filtrados);
