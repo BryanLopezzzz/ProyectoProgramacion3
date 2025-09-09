@@ -10,32 +10,32 @@ import javafx.stage.Stage;
 
 public class LoginView {
     @FXML
-    private TextField TXT_Usuario;
+    private TextField txtUsuario;
     @FXML
-    private PasswordField PWF_Clave;
+    private PasswordField txtClave;
     @FXML
-    private TextField TXT_ClaveVisible;
+    private TextField txtClaveVisible;
     @FXML
-    private Button BTN_VisibilidadClave;
+    private Button btnVerClave;
     @FXML
-    private Button BTN_Login;
+    private javafx.scene.image.ImageView imgVerClave;
     @FXML
-    private Button BTN_Salir;
+    private Button btnEntrar;
 
     private final LoginController loginController = new LoginController();
     private boolean claveVisible = false;
 
     @FXML
     private void login() {
-        String id = TXT_Usuario.getText();
-        String clave = claveVisible ? TXT_ClaveVisible.getText() : PWF_Clave.getText();
+        String id = txtUsuario.getText();
+        String clave = claveVisible ? txtClaveVisible.getText() : txtClave.getText();
 
         try {
             Usuario u = loginController.login(id, clave);
-            System.out.println("Bienvenido " + u.getNombre());
+            // System.out.println("Bienvenido " + u.getNombre());
 
             // cargar la vista principal(esto puede cambiar si el menu correcto no es ese)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/Menu_Admin_View.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
             Scene scene = new Scene(loader.load());
 
             Stage stage = new Stage();
@@ -44,7 +44,7 @@ public class LoginView {
             stage.show();
 
             // cerrar la ventana de login
-            Stage loginStage = (Stage) BTN_Login.getScene().getWindow();
+            Stage loginStage = (Stage) btnEntrar.getScene().getWindow();
             loginStage.close();
 
         } catch (Exception e) {
@@ -53,22 +53,21 @@ public class LoginView {
             alert.showAndWait();
         }
     }
-    @FXML
-    private void salir() {
-        System.exit(0);
-    }
+
     @FXML
     private void toggleVisibilidadClave() {
         claveVisible = !claveVisible;
 
         if (claveVisible) {
-            TXT_ClaveVisible.setText(PWF_Clave.getText());
-            TXT_ClaveVisible.setVisible(true);
-            PWF_Clave.setVisible(false);
+            txtClaveVisible.setText(txtClave.getText());
+            txtClaveVisible.setVisible(true);
+            txtClave.setVisible(false);
+            imgVerClave.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream("/icons/eye-off.png")));
         } else {
-            PWF_Clave.setText(TXT_ClaveVisible.getText());
-            PWF_Clave.setVisible(true);
-            TXT_ClaveVisible.setVisible(false);
+            txtClave.setText(txtClaveVisible.getText());
+            txtClave.setVisible(true);
+            txtClaveVisible.setVisible(false);
+            imgVerClave.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream("/icons/eye.png")));
         }
     }
 }
