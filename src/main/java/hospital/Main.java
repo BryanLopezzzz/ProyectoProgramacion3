@@ -4,11 +4,30 @@ import hospital.logica.AdministradorLogica;
 import hospital.model.Administrador;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/medicamentosAdmin.fxml"));
+            Scene scene = new Scene(loader.load());
+            primaryStage.setTitle("Buscar Medicamentos");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    }
+    /*
     public void start(Stage primaryStage) throws Exception {
         // admin quemado por el momento
         // Usuario: admin Clave: admin
@@ -29,6 +48,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-}
+    }*/
+
+
+
 

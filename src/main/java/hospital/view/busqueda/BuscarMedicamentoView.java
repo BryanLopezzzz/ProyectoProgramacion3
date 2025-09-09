@@ -25,41 +25,18 @@ import java.util.ResourceBundle;
 
 public class BuscarMedicamentoView implements Initializable {
 
-    @FXML
-    private TextField txtBuscar;
-
-    @FXML
-    private ComboBox<String> btnFiltro;
-
-    @FXML
-    private TableView<Medicamento> tblMedicos;
-
-    @FXML
-    private TableColumn<Medicamento, String> colCodigo;
-
-    @FXML
-    private TableColumn<Medicamento, String> colNombre;
-
-    @FXML
-    private TableColumn<Medicamento, String> colPresentacion;
-
-    @FXML
-    private Button btnBuscar;
-
-    @FXML
-    private Button btnAgregarMedicamento; // Corregido: sin la 'r' extra
-
-    @FXML
-    private Button btnEliminar;
-
-    @FXML
-    private Button btnEditarMedicamento;
-
-    @FXML
-    private Button btnVolver;
-
-    @FXML
-    private Button btnReporte;
+    @FXML private TextField txtBuscar;
+    @FXML private ComboBox<String> btnFiltro;
+    @FXML private TableView<Medicamento> tblMedicos;
+    @FXML private TableColumn<Medicamento, String> colCodigo;
+    @FXML private TableColumn<Medicamento, String> colNombre;
+    @FXML private TableColumn<Medicamento, String> colPresentacion;
+    @FXML private Button btnBuscar;
+    @FXML private Button btnAgregarMedicamento;
+    @FXML private Button btnEliminar;
+    @FXML private Button btnEditarMedicamento;
+    @FXML private Button btnVolver;
+    @FXML private Button btnReporte;
 
     private final MedicamentoController medicamentoController;
     private final Administrador administrador;
@@ -133,9 +110,9 @@ public class BuscarMedicamentoView implements Initializable {
     }
 
     @FXML
-    private void AgregarMedicamento() { // Método renombrado para seguir convención
+    private void AgregarMedicamento() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/ui/AgregarMedicamentoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/AgregarMedicamento.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -143,12 +120,9 @@ public class BuscarMedicamentoView implements Initializable {
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
-
             stage.showAndWait();
 
-            // Recargar la tabla después de cerrar la ventana
             cargarMedicamentos();
-
         } catch (Exception e) {
             mostrarError("Error al abrir ventana agregar medicamento: " + e.getMessage());
         }
@@ -180,7 +154,6 @@ public class BuscarMedicamentoView implements Initializable {
 
     @FXML
     private void EditarMedicamento() {
-        // 1. Validar selección
         Medicamento seleccionado = tblMedicos.getSelectionModel().getSelectedItem();
         if (seleccionado == null) {
             mostrarError("Debe seleccionar un medicamento para editar.");
@@ -188,15 +161,12 @@ public class BuscarMedicamentoView implements Initializable {
         }
 
         try {
-            // 2. Cargar FXML de EditarMedicamentoView
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hospital.view/EditarMedicamentoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/EditarMedicamentoView.fxml"));
             Parent root = loader.load();
 
-            // 3. Obtener el controlador y pasar datos
             EditarMedicamentoView editarController = loader.getController();
             editarController.setMedicamento(seleccionado);
 
-            // 4. Crear y mostrar ventana modal
             Stage stage = new Stage();
             stage.setTitle("Editar Medicamento");
             stage.setScene(new Scene(root));
@@ -204,7 +174,6 @@ public class BuscarMedicamentoView implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
 
-            // 5. Recargar datos después de editar
             cargarMedicamentos();
         } catch (Exception e) {
             mostrarError("Error al abrir ventana editar medicamento: " + e.getMessage());
@@ -212,13 +181,13 @@ public class BuscarMedicamentoView implements Initializable {
     }
 
     @FXML
-    private void Volver() { // Método renombrado para seguir convención
+    private void Volver() {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    private void GenerarReporte() { // Nombre exacto como está en el FXML
+    private void GenerarReporte() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte de Medicamentos");
         fileChooser.getExtensionFilters().add(
