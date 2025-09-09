@@ -3,15 +3,27 @@ package hospital.view.busqueda;
 import hospital.controller.MedicamentoController;
 import hospital.model.Administrador;
 import hospital.model.Medicamento;
+import hospital.view.EditarMedicamentoView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class BuscarMedicamentoView {
+public class BuscarMedicamentoView implements Initializable {
 
     @FXML
     private TextField txtBuscar;
@@ -20,107 +32,210 @@ public class BuscarMedicamentoView {
     private ComboBox<String> btnFiltro;
 
     @FXML
-    private TableView<Medicamento> tblMedicamento;
-
-    @FXML
-    private Button btnVolver;
+    private TableView<Medicamento> tblMedicos;
 
     @FXML
     private TableColumn<Medicamento, String> colCodigo;
 
     @FXML
-    private TableColumn<Medicamento, String> colNombreMedicamento;
+    private TableColumn<Medicamento, String> colNombre;
 
     @FXML
     private TableColumn<Medicamento, String> colPresentacion;
 
-    private final MedicamentoController controller = new MedicamentoController();
-    private Administrador admin;  // se inyecta desde fuera (ej: login)
-
-    // Metodo para inyectar el admin desde otra vista/controlador
-    public void setAdministrador(Administrador admin) {
-        this.admin = admin;
-    }
+    @FXML
+    private Button btnBuscar;
 
     @FXML
-    public void initialize() {
-        // Inicializar columnas de la tabla
-        colCodigo.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getCodigo()));
-        colNombreMedicamento.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombre()));
-        colPresentacion.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getPresentacion()));
+    private Button btnAgregarMedicamento; // Corregido: sin la 'r' extra
 
-        // Inicializar opciones del filtro
-        btnFiltro.getItems().addAll("Código", "Nombre");
-        btnFiltro.getSelectionModel().select("Código");
+    @FXML
+    private Button btnEliminar;
 
-        // Cargar medicamentos iniciales
+    @FXML
+    private Button btnEditarMedicamento;
+
+    @FXML
+    private Button btnVolver;
+
+    @FXML
+    private Button btnReporte;
+
+    private final MedicamentoController medicamentoController;
+    private final Administrador administrador;
+    private ObservableList<Medicamento> medicamentos;
+
+    public BuscarMedicamentoView() {
+        this.medicamentoController = new MedicamentoController();
+        this.administrador = new Administrador();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        configurarTabla();
+        configurarFiltro();
         cargarMedicamentos();
+    }
+
+    private void configurarTabla() {
+        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        colPresentacion.setCellValueFactory(new PropertyValueFactory<>("presentacion"));
+
+        medicamentos = FXCollections.observableArrayList();
+        tblMedicos.setItems(medicamentos);
+    }
+
+    private void configurarFiltro() {
+        btnFiltro.getItems().addAll("ID", "Nombre");
+        btnFiltro.setValue("ID");
     }
 
     private void cargarMedicamentos() {
         try {
-            if (admin == null) {
-                mostrarError("Debe iniciar sesión como administrador.");
-                return;
-            }
-            List<Medicamento> lista = controller.listar(admin);
-            ObservableList<Medicamento> data = FXCollections.observableArrayList(lista);
-            tblMedicamento.setItems(data);
+            List<Medicamento> lista = medicamentoController.listar(administrador);
+            medicamentos.clear();
+            medicamentos.addAll(lista);
         } catch (Exception e) {
-            mostrarError(e.getMessage());
+            mostrarError("Error al cargar medicamentos: " + e.getMessage());
         }
     }
 
     @FXML
-    private void Filtrar() {
-        String criterio = txtBuscar.getText().trim();
-        String filtro = btnFiltro.getValue();
+    private void Buscar() {
+        String textoBusqueda = txtBuscar.getText();
+        if (textoBusqueda == null || textoBusqueda.trim().isEmpty()) {
+            cargarMedicamentos();
+            return;
+        }
 
         try {
-            if (admin == null) {
-                mostrarError("Debe iniciar sesión como administrador.");
-                return;
-            }
+            String filtro = btnFiltro.getValue();
+            List<Medicamento> resultados;
 
-            if (criterio.isEmpty()) {
-                cargarMedicamentos();
-                return;
-            }
-
-            if ("Código".equals(filtro)) {
-                Medicamento m = controller.buscarPorCodigo(admin, criterio);
-                if (m != null) {
-                    tblMedicamento.setItems(FXCollections.observableArrayList(m));
+            if ("ID".equals(filtro)) {
+                Medicamento medicamento = medicamentoController.buscarPorCodigo(administrador, textoBusqueda.trim());
+                if (medicamento != null) {
+                    resultados = List.of(medicamento);
                 } else {
-                    tblMedicamento.setItems(FXCollections.emptyObservableList());
+                    resultados = List.of();
                 }
-            } else if ("Nombre".equals(filtro)) {
-                List<Medicamento> lista = controller.buscarPorNombre(admin, criterio);
-                tblMedicamento.setItems(FXCollections.observableArrayList(lista));
+            } else {
+                resultados = medicamentoController.buscarPorNombre(administrador, textoBusqueda.trim());
             }
+
+            medicamentos.clear();
+            medicamentos.addAll(resultados);
+
         } catch (Exception e) {
-            mostrarError(e.getMessage());
+            mostrarError("Error al buscar medicamentos: " + e.getMessage());
         }
     }
 
     @FXML
-    private void Seleccionar() {
-        Medicamento seleccionado = tblMedicamento.getSelectionModel().getSelectedItem();
-        if (seleccionado != null) {
-            System.out.println("Medicamento seleccionado: " + seleccionado.getNombre());
-            // Aquí podrías cerrar ventana o enviar el medicamento a otra vista/controlador
-        } else {
-            mostrarError("Debe seleccionar un medicamento de la tabla.");
+    private void AgregarMedicamento() { // Método renombrado para seguir convención
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/ui/AgregarMedicamentoView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Agregar Medicamento");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            stage.showAndWait();
+
+            // Recargar la tabla después de cerrar la ventana
+            cargarMedicamentos();
+
+        } catch (Exception e) {
+            mostrarError("Error al abrir ventana agregar medicamento: " + e.getMessage());
         }
     }
 
     @FXML
-    private void Volver() {
+    private void EliminarMedicamento() {
+        Medicamento seleccionado = tblMedicos.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            mostrarError("Debe seleccionar un medicamento para eliminar.");
+            return;
+        }
+
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText(null);
+        confirmacion.setContentText("¿Está seguro de eliminar el medicamento: " + seleccionado.getNombre() + "?");
+
+        Optional<ButtonType> resultado = confirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            try {
+                medicamentoController.borrar(administrador, seleccionado.getCodigo());
+                cargarMedicamentos();
+            } catch (Exception e) {
+                mostrarError("Error al eliminar medicamento: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void EditarMedicamento() {
+        // 1. Validar selección
+        Medicamento seleccionado = tblMedicos.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            mostrarError("Debe seleccionar un medicamento para editar.");
+            return;
+        }
+
+        try {
+            // 2. Cargar FXML de EditarMedicamentoView
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hospital.view/EditarMedicamentoView.fxml"));
+            Parent root = loader.load();
+
+            // 3. Obtener el controlador y pasar datos
+            EditarMedicamentoView editarController = loader.getController();
+            editarController.setMedicamento(seleccionado);
+
+            // 4. Crear y mostrar ventana modal
+            Stage stage = new Stage();
+            stage.setTitle("Editar Medicamento");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            // 5. Recargar datos después de editar
+            cargarMedicamentos();
+        } catch (Exception e) {
+            mostrarError("Error al abrir ventana editar medicamento: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void Volver() { // Método renombrado para seguir convención
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void GenerarReporte() { // Nombre exacto como está en el FXML
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar Reporte de Medicamentos");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Archivos XML", "*.xml")
+        );
+        fileChooser.setInitialFileName("reporte_medicamentos.xml");
+
+        Stage stage = (Stage) btnReporte.getScene().getWindow();
+        File archivo = fileChooser.showSaveDialog(stage);
+
+        if (archivo != null) {
+            try {
+                medicamentoController.generarReporte(administrador, archivo.getAbsolutePath());
+            } catch (Exception e) {
+                mostrarError("Error al generar reporte: " + e.getMessage());
+            }
+        }
     }
 
     private void mostrarError(String mensaje) {
