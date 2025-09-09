@@ -54,7 +54,7 @@
             <Image url="@../../icons/instaVerde.png" />
          </image>
       </ImageView>
-      <Text fill="#75c594" layoutX="641.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="bryanlopezzz">
+      <Text fill="#75c594" layoutX="641.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="bryanlopez_779">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
