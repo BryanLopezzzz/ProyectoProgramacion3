@@ -53,7 +53,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Button>
-            <Button id="btnMedicamentos" fx:id="btnMedicamentos" layoutX="69.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Medicamentos" textFill="WHITE">
+            <Button id="btnMedicamentos" fx:id="btnMedicamentos" layoutX="69.0" layoutY="230.0" mnemonicParsing="false" onAction="#irAMedicamentos" prefHeight="30.0" prefWidth="115.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Medicamentos" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>

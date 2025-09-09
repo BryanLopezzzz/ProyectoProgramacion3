@@ -22,8 +22,25 @@ public class DashboardController {
     @FXML
     private Button btnMedicos;
 
+    @FXML
+    private Button btnMedicamentos;
+
     public DashboardController() {
         this.recetaLogica = new RecetaLogica();
+    }
+
+    @FXML
+    public void irAMedicamentos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/medicamentosAdmin.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Medicamentos");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
