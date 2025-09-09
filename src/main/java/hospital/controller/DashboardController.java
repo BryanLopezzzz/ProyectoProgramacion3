@@ -5,16 +5,39 @@ import hospital.model.EstadoReceta;
 import hospital.model.Receta;
 import hospital.model.DetalleReceta;
 import hospital.model.Usuario;
+import java.io.IOException;
 import java.time.YearMonth;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class DashboardController {
     private final RecetaLogica recetaLogica;
 
+    @FXML
+    private Button btnMedicos;
+
     public DashboardController() {
         this.recetaLogica = new RecetaLogica();
+    }
+
+    @FXML
+    public void irAMedicos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/medicosAdmin.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Médicos");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
    //Cuenta cuántas unidades de un medicamento se prescribieron por mes
