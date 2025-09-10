@@ -47,10 +47,36 @@ public class DashboardView {
 
     @FXML
     public void irAMedicos() {
-        // Aquí cargas otra vista o escena
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Ir a gestión de médicos");
-        alert.showAndWait();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/medicosAdmin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnFarmaceutas.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Administración de Médicos");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de médicos: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
+
+    @FXML
+    public void irAFarmaceutas() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/farmaceutasAdmin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnFarmaceutas.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Administración de Farmaceutas");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de farmaceutas: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     public void irAMedicamentos() {
         try {
@@ -67,21 +93,7 @@ public class DashboardView {
         }
     }
 
-    @FXML
-    public void irAFarmaceutas() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/farmaceutasAdmin.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) btnFarmaceutas.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Administración de Farmaceutas");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de farmaceutas.");
-            alert.showAndWait();
-        }
-    }
+
 
     @FXML
     public void irAAcercaDe() {
