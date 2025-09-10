@@ -46,6 +46,55 @@ public class DashboardView {
     private Usuario usuario;
 
     @FXML
+    public void initialize() {
+        mostrarGraficoLineas();
+        mostrarGraficoPastel();
+    }
+
+    private void mostrarGraficoLineas() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Medicamentos por mes");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Medicamentos");
+
+        try {
+            var datos = dashboardController.contarMedicamentosPorMes(
+                    usuario,
+                    "A001",
+                    YearMonth.now().minusMonths(5),
+                    YearMonth.now()
+            );
+            datos.forEach((mes, cantidad) -> series.getData().add(new XYChart.Data<>(mes, cantidad)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        lineChart.getData().add(series);
+        paneLineChart.getChildren().clear();
+        paneLineChart.getChildren().add(lineChart);
+    }
+
+    private void mostrarGraficoPastel() {
+        PieChart pieChart = new PieChart();
+        pieChart.setTitle("Recetas por estado");
+
+        try {
+            var datos = dashboardController.contarRecetasPorEstado(usuario);
+            datos.forEach((estado, cantidad) ->
+                    pieChart.getData().add(new PieChart.Data(estado, cantidad))
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        panePieChart.getChildren().clear();
+        panePieChart.getChildren().add(pieChart);
+    }
+
+    @FXML
     public void irAMedicos() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/medicosAdmin.fxml"));
@@ -110,28 +159,6 @@ public class DashboardView {
     }
 
     @FXML
-    public void irAAcercaDe() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/acercaDe1.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) btnAcercaDe.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Acerca de");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Acerca de.");
-            alert.showAndWait();
-        }
-    }
-
-    @FXML
-    public void initialize() {
-        mostrarGraficoLineas();
-        mostrarGraficoPastel();
-    }
-
-    @FXML
     public void irAPreescribirReceta() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/prescribirReceta.fxml"));
@@ -147,46 +174,35 @@ public class DashboardView {
         }
     }
 
-    private void mostrarGraficoLineas() {
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("Medicamentos por mes");
-
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Medicamentos");
-
+    @FXML
+    public void irADespacho() {
         try {
-            var datos = dashboardController.contarMedicamentosPorMes(
-                    usuario,
-                    "A001",
-                    YearMonth.now().minusMonths(5),
-                    YearMonth.now()
-            );
-            datos.forEach((mes, cantidad) -> series.getData().add(new XYChart.Data<>(mes, cantidad)));
-        } catch (Exception e) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/despachoFarmaceuta.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnDespachoReceta.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Despacho de recetas");
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Despacho.");
+            alert.showAndWait();
         }
-
-        lineChart.getData().add(series);
-        paneLineChart.getChildren().clear();
-        paneLineChart.getChildren().add(lineChart);
     }
 
-    private void mostrarGraficoPastel() {
-        PieChart pieChart = new PieChart();
-        pieChart.setTitle("Recetas por estado");
-
+    @FXML
+    public void irAAcercaDe() {
         try {
-            var datos = dashboardController.contarRecetasPorEstado(usuario);
-            datos.forEach((estado, cantidad) ->
-                    pieChart.getData().add(new PieChart.Data(estado, cantidad))
-            );
-        } catch (Exception e) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/acercaDe1.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnAcercaDe.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Acerca de");
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Acerca de.");
+            alert.showAndWait();
         }
-
-        panePieChart.getChildren().clear();
-        panePieChart.getChildren().add(pieChart);
     }
 }

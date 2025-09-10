@@ -63,7 +63,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Button>
-            <Button id="btnDespachoRecetas" fx:id="btnDespachoRecetas" layoutX="67.0" layoutY="382.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="157.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Despacho de recetas" textFill="WHITE">
+            <Button id="btnDespachoRecetas" fx:id="btnDespachoReceta" layoutX="67.0" layoutY="382.0" mnemonicParsing="false" onAction="#irADespacho" prefHeight="30.0" prefWidth="157.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Despacho de recetas" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
