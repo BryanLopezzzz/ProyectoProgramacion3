@@ -1,8 +1,6 @@
 package hospital.view;
 
 import hospital.controller.DashboardController;
-// import hospital.model.Usuario;
-import hospital.controller.LoginController;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +43,9 @@ public class DashboardView {
 
     @FXML
     private Button btnAcercaDe;
+
+    @FXML
+    private Button btnCambiarClave;
 
     @FXML
     private Button btnLogout;
@@ -244,6 +245,26 @@ public class DashboardView {
         } catch (IOException e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Acerca de.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void irACambiarClave() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/cambiarContraseña.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            CambioClaveView cambioClaveView = fxmlLoader.getController();
+            cambioClaveView.setUsuario(usuario);
+
+            Stage stage = (Stage) btnCambiarClave.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Cambiar Contraseña");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de cambio de contraseña.");
             alert.showAndWait();
         }
     }
