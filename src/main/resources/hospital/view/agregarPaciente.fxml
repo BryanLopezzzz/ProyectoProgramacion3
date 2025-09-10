@@ -12,11 +12,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.registro.RegistroPacienteView">
    <children>
       <Pane layoutX="64.0" layoutY="98.0" prefHeight="360.0" prefWidth="749.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <children>
-            <TextField layoutX="411.0" layoutY="188.0" prefHeight="37.0" prefWidth="266.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
+            <TextField id="txtTelefono" fx:id="txtTelefono" layoutX="411.0" layoutY="188.0" prefHeight="37.0" prefWidth="266.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -34,7 +34,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button contentDisplay="CENTER" layoutX="209.0" layoutY="265.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="354.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Guardar" textFill="WHITE">
+            <Button id="btnGuardar" fx:id="btnGuardar" contentDisplay="CENTER" layoutX="209.0" layoutY="265.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="46.0" prefWidth="354.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Guardar" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="22.0" />
                </font>

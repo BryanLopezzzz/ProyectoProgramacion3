@@ -1,6 +1,7 @@
 package hospital.controller;
 
 import hospital.model.Administrador;
+import hospital.model.Medicamento;
 import hospital.model.Paciente;
 import hospital.logica.PacienteLogica;
 
@@ -41,5 +42,22 @@ public class PacienteController {
         if (admin == null) {
             throw new Exception("Solo los administradores pueden ejecutar esta acción.");
         }
+    }
+
+    public void generarReporte(Administrador admin, String rutaReporte) throws Exception {
+        validarAdmin(admin);
+        pacienteLogica.generarReporte(rutaReporte);
+    }
+
+    public boolean eliminar(Administrador admin, String codigo) throws Exception {
+        validarAdmin(admin);
+        pacienteLogica.eliminar(codigo);
+
+        return pacienteLogica.eliminar(codigo) ? true : false;
+    }
+
+    public void modificar(Administrador admin, Paciente medicamento) throws Exception {
+        validarAdmin(admin);
+        pacienteLogica.actualizar(medicamento);
     }
 }

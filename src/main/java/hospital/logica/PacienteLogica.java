@@ -1,13 +1,21 @@
 package hospital.logica;
 
 import hospital.datos.PacienteDatos;
+import hospital.datos.conector.MedicamentoConector;
 import hospital.datos.conector.PacienteConector;
 import hospital.datos.conector.RecetaConector;
+import hospital.datos.entidades.MedicamentoEntidad;
+import hospital.datos.entidades.PacienteEntidad;
+import hospital.logica.mapper.MedicamentoMapper;
 import hospital.logica.mapper.PacienteMapper;
 import hospital.logica.mapper.RecetaMapper;
+import hospital.model.Medicamento;
 import hospital.model.Paciente;
 import hospital.model.Receta;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,5 +85,29 @@ public class PacienteLogica {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void generarReporte(String rutaReporte) {
+        try {
+            // Obtener todos los pacietnes
+            List<Paciente> lista = listar();
+
+            // Mapearlos a entidades XML
+            PacienteConector conector = new PacienteConector();
+            for (Paciente m : lista) {
+                conector.getPacientes().add(PacienteMapper.toXML(m));
+            }
+
+            JAXBContext context = JAXBContext.newInstance(MedicamentoConector.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+            marshaller.marshal(conector, new File(rutaReporte));
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al generar reporte: " + e.getMessage(), e);
+        }
+    }
+
 
 }
