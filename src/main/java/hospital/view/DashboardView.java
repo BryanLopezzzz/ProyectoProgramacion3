@@ -1,6 +1,7 @@
 package hospital.view;
 
 import hospital.controller.DashboardController;
+import hospital.logica.UsuarioManager;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,10 +70,11 @@ public class DashboardView {
 
     @FXML
     public void initialize() {
-        System.out.println("initialize called. lblUsuario: " + (lblUsuario != null ? "not null" : "null"));
+        this.usuario = UsuarioManager.getUsuarioActual();
+        setUsuario(this.usuario);
+
         if (usuario != null && lblUsuario != null) {
-            lblUsuario.setText(usuario.getNombre() + " / " + usuario.getId());
-            System.out.println("lblUsuario text set in initialize to: " + lblUsuario.getText());
+            lblUsuario.setText(usuario.getNombre());
         }
         mostrarGraficoLineas();
         mostrarGraficoPastel();
@@ -120,6 +122,23 @@ public class DashboardView {
         panePieChart.getChildren().clear();
         panePieChart.getChildren().add(pieChart);
     }
+    @FXML
+    public void logout() {
+        UsuarioManager.logout();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnLogout.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de login: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
 
     @FXML
     public void irAMedicos() {

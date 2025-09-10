@@ -15,6 +15,21 @@ public class UsuarioManager {
     private final MedicoLogica medicoLogica = new MedicoLogica();
     private final FarmaceutaLogica farmaceutaLogica = new FarmaceutaLogica();
     private final AdministradorLogica administradorLogica = new AdministradorLogica();
+    private static Usuario usuarioActual;
+
+
+    public static Usuario getUsuarioActual() {
+        return usuarioActual;
+    }
+
+    public static void setUsuarioActual(Usuario usuario) {
+        usuarioActual = usuario;
+    }
+
+    public static void logout() {
+        usuarioActual = null;
+    }
+
 
     // ==== LOGIN ====
     public Usuario login(String id, String clave) throws Exception {

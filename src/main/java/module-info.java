@@ -18,6 +18,7 @@ module ProyectoProgramacion3 {
 
     exports hospital;
     exports hospital.controller;
+    exports hospital.model;
     exports hospital.view;
     exports hospital.view.busqueda;
 }
