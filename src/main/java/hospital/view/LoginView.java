@@ -30,6 +30,16 @@ public class LoginView {
         String id = txtUsuario.getText();
         String clave = claveVisible ? txtClaveVisible.getText() : txtClave.getText();
 
+        if (id == null || id.trim().isEmpty()) {
+            Alerta.error("Error","El ID de usuario es obligatorio.");
+            return;
+        }
+
+        if (clave == null || clave.trim().isEmpty()) {
+            Alerta.error("Error","El clave es obligatorio.");
+            return;
+        }
+
         try {
             Usuario u = loginController.login(id, clave);
 
@@ -40,6 +50,7 @@ public class LoginView {
             // mandar el usuario al dashboard
             DashboardView dashboardView = loader.getController();
             dashboardView.setUsuario(u);
+            dashboardView.setLoginController(loginController);
 
             Stage stage = new Stage();
             stage.setTitle("Menú Principal");

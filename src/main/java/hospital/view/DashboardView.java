@@ -1,6 +1,7 @@
 package hospital.view;
 
 import hospital.controller.DashboardController;
+import hospital.controller.LoginController;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,7 @@ public class DashboardView {
 
     private final DashboardController dashboardController = new DashboardController();
     private Usuario usuario;
+    private LoginController loginController;
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
@@ -65,6 +67,13 @@ public class DashboardView {
         if (lblUsuario != null && usuario != null) {
             lblUsuario.setText(usuario.getNombre());
         }
+    }
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
+    public LoginController getLoginController() {
+        return loginController;
     }
 
     @FXML
@@ -132,8 +141,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de médicos: " + e.getMessage());
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de médicos");
         }
     }
 
@@ -148,8 +156,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de farmaceutas: " + e.getMessage());
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de farmaceutas");
         }
     }
 
@@ -164,8 +171,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de pacientes.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de pacientes");
         }
     }
 
@@ -180,8 +186,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de medicamentos.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de medicamentos");
         }
     }
 
@@ -196,8 +201,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de prescribir receta.");
-            alert.showAndWait();
+           Alerta.error("Error", "Error al cargar la vista de prescribir receta.");
         }
     }
 
@@ -212,8 +216,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Despacho.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de Despacho.");
         }
     }
 
@@ -228,8 +231,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de historial de recetas.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de historial de recetas.");
         }
     }
 
@@ -244,8 +246,7 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Acerca de.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de Acerca de.");
         }
     }
 
@@ -257,6 +258,7 @@ public class DashboardView {
 
             CambioClaveView cambioClaveView = fxmlLoader.getController();
             cambioClaveView.setUsuario(usuario);
+            cambioClaveView.setLoginController(loginController);
 
             Stage stage = (Stage) btnCambiarClave.getScene().getWindow();
             stage.setScene(scene);
@@ -264,8 +266,24 @@ public class DashboardView {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de cambio de contraseña.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar la vista de cambio de contraseña.");
+        }
+    }
+    @FXML
+    public void logout(){
+        if (loginController != null) {
+            loginController.logout();
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/login.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnLogout.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Login - Sistema Hospital");
+            stage.show();
+        } catch (IOException e) {
+           Alerta.error("Error","Error al regresar al login");
         }
     }
 }
