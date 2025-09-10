@@ -37,24 +37,23 @@ public class RecetaMapper {
 
         // Resolver paciente
         if (entity.getPacienteId() != null && pacienteLogica != null) {
-            List<Paciente> pacientes = pacienteLogica.buscarPorId(entity.getPacienteId());
-            Paciente p = pacientes.isEmpty() ? null : pacientes.get(0);
-            if (p == null && strict) {
+            Paciente pacientes = pacienteLogica.buscarPorId(entity.getPacienteId());
+
+            if (pacientes == null && strict) {
                 throw new RuntimeException("Paciente no encontrado: " + entity.getPacienteId());
             }
-            receta.setPaciente(p);
+            receta.setPaciente(pacientes);
         } else {
             receta.setPaciente(null);
         }
 
         // Resolver médico
         if (entity.getMedicoId() != null && medicoLogica != null) {
-            List<Medico> medicos = medicoLogica.buscarPorId(entity.getMedicoId());
-            Medico m = medicos.isEmpty() ? null : medicos.get(0);
-            if (m == null && strict) {
+            Medico medicos = medicoLogica.buscarPorId(entity.getMedicoId());;
+            if (medicos == null && strict) {
                 throw new RuntimeException("Médico no encontrado: " + entity.getMedicoId());
             }
-            receta.setMedico(m);
+            receta.setMedico(medicos);
         } else {
             receta.setMedico(null);
         }
