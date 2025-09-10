@@ -18,7 +18,7 @@
                   <Image url="@../../icons/userVerde.png" />
                </image>
             </ImageView>
-            <Label layoutX="122.0" layoutY="47.0" text="Usuario / ID" textFill="WHITE">
+            <Label id="lblUsuario" fx:id="lblUsuario" layoutX="110.0" layoutY="47.0" text="Nombre" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>

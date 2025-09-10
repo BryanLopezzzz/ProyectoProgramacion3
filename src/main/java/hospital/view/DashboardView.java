@@ -20,33 +20,59 @@ import java.time.YearMonth;
 
 public class DashboardView {
     @FXML
+    private Label lblUsuario;
+
+    @FXML
     private Button btnMedicos;
+
     @FXML
     private Button btnFarmaceutas;
+
     @FXML
     private Button btnPacientes;
+
     @FXML
     private Button btnMedicamentos;
+
     @FXML
     private Button btnPrescribirReceta;
+
     @FXML
     private Button btnDespachoReceta;
+
     @FXML
     private Button btnHistoricoReceta;
+
     @FXML
     private Button btnAcercaDe;
+
     @FXML
     private Button btnLogout;
+
     @FXML
     private Pane paneLineChart;
+
     @FXML
     private Pane panePieChart;
 
     private final DashboardController dashboardController = new DashboardController();
     private Usuario usuario;
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+
+        if (lblUsuario != null && usuario != null) {
+            lblUsuario.setText(usuario.getNombre());
+        }
+    }
+
     @FXML
     public void initialize() {
+        System.out.println("initialize called. lblUsuario: " + (lblUsuario != null ? "not null" : "null"));
+        if (usuario != null && lblUsuario != null) {
+            lblUsuario.setText(usuario.getNombre() + " / " + usuario.getId());
+            System.out.println("lblUsuario text set in initialize to: " + lblUsuario.getText());
+        }
         mostrarGraficoLineas();
         mostrarGraficoPastel();
     }

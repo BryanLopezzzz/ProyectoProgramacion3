@@ -17,7 +17,7 @@ public class Main extends Application {
         if (adminLogica.buscarPorId("admin") == null) {
             Administrador superAdmin = new Administrador();
             superAdmin.setId("admin");
-            superAdmin.setNombre("Super Usuario");
+            superAdmin.setNombre("Federico Lover");
             adminLogica.agregar(superAdmin);
         }
 

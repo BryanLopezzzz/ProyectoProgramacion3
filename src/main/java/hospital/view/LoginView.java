@@ -32,11 +32,14 @@ public class LoginView {
 
         try {
             Usuario u = loginController.login(id, clave);
-            // System.out.println("Bienvenido " + u.getNombre());
 
             // cargar la vista principal(esto puede cambiar si el menu correcto no es ese)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
             Scene scene = new Scene(loader.load());
+
+            // mandar el usuario al dashboard
+            DashboardView dashboardView = loader.getController();
+            dashboardView.setUsuario(u);
 
             Stage stage = new Stage();
             stage.setTitle("Menú Principal");
