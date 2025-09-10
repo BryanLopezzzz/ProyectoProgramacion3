@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MedicamentosData>
+    <Medicamentos>
+        <Medicamento>
+            <codigo>123</codigo>
+            <nombre>Acetaminofen</nombre>
+            <presentacion>500mg</presentacion>
+        </Medicamento>
+    </Medicamentos>
+</MedicamentosData>

@@ -39,4 +39,21 @@ public class MedicamentoController {
             throw new Exception("Solo los administradores pueden ejecutar esta acción.");
         }
     }
+
+    public void modificar(Administrador admin, Medicamento medicamento) throws Exception {
+        validarAdmin(admin);
+        medicamentoLogica.modificar(medicamento);
+    }
+
+    public void borrar(Administrador admin, String codigo) throws Exception {
+        validarAdmin(admin);
+        medicamentoLogica.borrar(codigo);
+    }
+
+    public void generarReporte(Administrador admin, String rutaReporte) throws Exception {
+        validarAdmin(admin);
+        medicamentoLogica.generarReporte(rutaReporte);
+    }
+
+
 }
