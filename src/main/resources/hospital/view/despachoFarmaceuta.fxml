@@ -39,7 +39,7 @@
             <TableColumn id="colEstado" fx:id="colEstado" minWidth="0.0" prefWidth="117.33331298828125" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Estado" />
          </columns>
       </TableView>
-      <Button id="btnVerDetalle" fx:id="btnVerDetalle" contentDisplay="GRAPHIC_ONLY" layoutX="90.0" layoutY="276.0" mnemonicParsing="false" onAction="#VerDetalle" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Editar">
+      <Button id="btnVerDetalle" fx:id="btnVerDetalle" contentDisplay="GRAPHIC_ONLY" layoutX="90.0" layoutY="276.0" mnemonicParsing="false" onAction="#VerDetalle" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Ver">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 4;">
                <image>
@@ -71,5 +71,17 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
+      <Button id="btnCambiarEstado" fx:id="btnCambiarEstado" layoutX="153.0" layoutY="276.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Cambiar estado" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 4;">
+               <image>
+                  <Image url="@../../icons/receipt-text.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Segoe UI Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
