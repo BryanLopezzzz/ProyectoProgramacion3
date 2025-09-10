@@ -1,14 +1,21 @@
 package hospital.logica;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import hospital.datos.MedicoDatos;
+import hospital.datos.conector.MedicamentoConector;
+import hospital.datos.conector.PacienteConector;
+import hospital.logica.mapper.PacienteMapper;
 import hospital.model.Medico;
 import hospital.datos.conector.MedicoConector;
 import hospital.logica.mapper.MedicoMapper;
 import hospital.datos.entidades.MedicoEntidad;
+import hospital.model.Paciente;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 
 public class MedicoLogica {
     private final MedicoDatos datos;
@@ -124,5 +131,26 @@ public class MedicoLogica {
                 .filter(m -> m.getNombre() != null && m.getNombre().toLowerCase().contains(q))
                 .map(MedicoMapper::fromXML)
                 .collect(Collectors.toList());
+    }
+
+    public void generarReporte(String rutaReporte) {
+        try {
+            List<Medico> lista = listar();
+
+            MedicoConector conector = new MedicoConector();
+            for (Medico m : lista) {
+                conector.getMedicos().add(MedicoMapper.toXML(m));
+            }
+
+            JAXBContext context = JAXBContext.newInstance(MedicamentoConector.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+            marshaller.marshal(conector, new File(rutaReporte));
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al generar reporte: " + e.getMessage(), e);
+        }
     }
 }
