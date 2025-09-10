@@ -47,7 +47,7 @@ public class MedicamentoController {
 
     public void borrar(Administrador admin, String codigo) throws Exception {
         validarAdmin(admin);
-        medicamentoLogica.borrar(codigo);
+        medicamentoLogica.eliminar(codigo);
     }
 
     public void generarReporte(Administrador admin, String rutaReporte) throws Exception {
