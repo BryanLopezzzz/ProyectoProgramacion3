@@ -99,7 +99,20 @@ public class BuscarPacienteView {
 
     @FXML
     public void AgregarPaciente(ActionEvent event) {
-        // Aquí abrirías otra ventana (formulario para agregar paciente)
+        try {
+            // Usar la ventana de editar pero sin cargar datos
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/agregarPaciente.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Stage stage = (Stage) btnAgregarPaciente.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Agregar Paciente");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarError("Error al abrir la ventana de agregar paciente: " + e.getMessage());
+        }
     }
 
     @FXML
