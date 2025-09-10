@@ -182,8 +182,18 @@ public class BuscarMedicamentoView implements Initializable {
 
     @FXML
     private void Volver() {
-        Stage stage = (Stage) btnVolver.getScene().getWindow();
-        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) btnVolver.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Dashboard");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar el dashboard.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

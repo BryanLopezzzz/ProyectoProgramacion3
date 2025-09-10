@@ -53,8 +53,52 @@ public class DashboardView {
     }
     @FXML
     public void irAMedicamentos() {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("medicamentosAdmin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnMedicamentos.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Administración de Medicamentos");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de medicamentos.");
+            alert.showAndWait();
+        }
     }
+
+    @FXML
+    public void irAFarmaceutas() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/farmaceutasAdmin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnFarmaceutas.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Administración de Farmaceutas");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de farmaceutas.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void irAAcercaDe() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/acercaDe1.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnAcercaDe.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Acerca de");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Acerca de.");
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     public void initialize() {
         mostrarGraficoLineas();

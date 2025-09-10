@@ -43,7 +43,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Button>
-            <Button id="btnFarmaceutas" fx:id="btnFarmaceutas" layoutX="70.0" layoutY="168.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="99.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Farmaceutas" textFill="WHITE">
+            <Button id="btnFarmaceutas" fx:id="btnFarmaceutas" layoutX="70.0" layoutY="168.0" mnemonicParsing="false" onAction="#irAFarmaceutas" prefHeight="30.0" prefWidth="99.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Farmaceutas" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -68,7 +68,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Button>
-            <Button id="btnAcercaDe" fx:id="btnAcercaDe" layoutX="38.0" layoutY="506.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Acerca de" textFill="#75c594">
+            <Button id="btnAcercaDe" fx:id="btnAcercaDe" layoutX="38.0" layoutY="506.0" mnemonicParsing="false" onAction="#irAAcercaDe" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Acerca de" textFill="#75c594">
                <font>
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
