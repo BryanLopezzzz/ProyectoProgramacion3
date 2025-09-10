@@ -48,7 +48,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Button>
-            <Button id="btnPacientes" fx:id="btnPacientes" layoutX="69.0" layoutY="199.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Pacientes" textFill="WHITE">
+            <Button id="btnPacientes" fx:id="btnPacientes" layoutX="69.0" layoutY="199.0" mnemonicParsing="false" onAction="#irAPacientes" prefHeight="30.0" prefWidth="82.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Pacientes" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>

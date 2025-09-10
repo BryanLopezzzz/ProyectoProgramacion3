@@ -1,6 +1,5 @@
 package hospital.view;
 
-import hospital.controller.MedicoController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,44 +8,63 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class MedicosAdminView {
+public class PacientesAdminView {
     @FXML
     private TextField txtBuscar;
+
     @FXML
-    private TableView tblMedicos;
+    private ComboBox<String> btnFiltro;
+
     @FXML
-    private TableColumn colIdentificacion;
+    private TableView tblPacientes;
+
     @FXML
-    private TableColumn colNombre;
+    private TableColumn colIdentificacionPaciente;
+
     @FXML
-    private TableColumn colEspecialidad;
+    private TableColumn colNombrePaciente;
+
     @FXML
-    private Button btnAgregarMedico;
+    private TableColumn colTelefonoPaciente;
+
     @FXML
-    private Button btnEliminarMedico;
+    private TableColumn colFechaNac;
+
     @FXML
-    private Button btnEditarMedico;
+    private Button btnAgregarPaciente;
+
+    @FXML
+    private Button btnEliminarPaciente;
+
+    @FXML
+    private Button btnEditarPaciente;
+
     @FXML
     private Button btnVolver;
+
     @FXML
     private Button btnReporte;
+
     @FXML
     private Button btnBuscar;
-    @FXML
-    private ComboBox<String> cmbFiltrar;
 
     @FXML
-    public void AgregarMedico(ActionEvent event) {
+    public void Filtrar(ActionEvent event) {
 
     }
 
     @FXML
-    public void EliminarMedico(ActionEvent event) {
+    public void AgregarPaciente(ActionEvent event) {
 
     }
 
     @FXML
-    public void EditarMedico(ActionEvent event) {
+    public void EliminarPaciente(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void EditarPaciente(ActionEvent event) {
 
     }
 
@@ -56,12 +74,7 @@ public class MedicosAdminView {
     }
 
     @FXML
-    public void Buscar(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void Filtrar(ActionEvent event) {
+    public void BuscarPaciente(ActionEvent event) {
 
     }
 

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.PacientesAdminView">
    <children>
       <TextField id="txtBuscar" fx:id="txtBuscar" layoutX="89.0" layoutY="141.0" prefHeight="37.0" prefWidth="704.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
@@ -80,7 +80,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="CENTER" layoutX="622.0" layoutY="275.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="171.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Generar reporte" textFill="WHITE">
+      <Button id="btnReporte" fx:id="btnReporte" contentDisplay="CENTER" layoutX="622.0" layoutY="275.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="171.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Generar reporte" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>

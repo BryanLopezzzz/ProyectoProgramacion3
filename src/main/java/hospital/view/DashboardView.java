@@ -50,7 +50,7 @@ public class DashboardView {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/medicosAdmin.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) btnFarmaceutas.getScene().getWindow();
+            Stage stage = (Stage) btnMedicos.getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Administración de Médicos");
             stage.show();
@@ -78,6 +78,22 @@ public class DashboardView {
     }
 
     @FXML
+    public void irAPacientes() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pacientesAdmin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnPacientes.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Administración de Pacientes");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de pacientes.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
     public void irAMedicamentos() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("medicamentosAdmin.fxml"));
@@ -92,8 +108,6 @@ public class DashboardView {
             alert.showAndWait();
         }
     }
-
-
 
     @FXML
     public void irAAcercaDe() {
