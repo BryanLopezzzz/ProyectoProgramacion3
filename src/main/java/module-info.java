@@ -8,6 +8,8 @@ module ProyectoProgramacion3 {
     opens hospital.view to javafx.fxml;
     opens hospital.view.busqueda to javafx.fxml;
     opens hospital.controller to javafx.fxml;
+    opens hospital.view.registro to javafx.fxml;
+
 
     // JAXB
     opens hospital.datos.conector to jakarta.xml.bind;
