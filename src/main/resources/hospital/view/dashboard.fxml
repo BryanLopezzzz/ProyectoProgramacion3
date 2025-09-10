@@ -73,7 +73,7 @@
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
             </Button>
-            <Button id="btnHistoricoRecetas" fx:id="btnHistoricoRecetas" layoutX="37.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Histórico de recetas" textFill="#75c594">
+            <Button id="btnHistoricoRecetas" fx:id="btnHistoricoRecetas" layoutX="37.0" layoutY="434.0" mnemonicParsing="false" onAction="#irAHistoricoRecetas" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Histórico de recetas" textFill="#75c594">
                <font>
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>

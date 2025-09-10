@@ -41,7 +41,7 @@ public class DashboardView {
     private Button btnDespachoReceta;
 
     @FXML
-    private Button btnHistoricoReceta;
+    private Button btnHistoricoRecetas;
 
     @FXML
     private Button btnAcercaDe;
@@ -212,6 +212,22 @@ public class DashboardView {
         } catch (IOException e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de Despacho.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void irAHistoricoRecetas() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/historicoRecetas.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnHistoricoRecetas.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Historial de Recetas");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de historial de recetas.");
             alert.showAndWait();
         }
     }
