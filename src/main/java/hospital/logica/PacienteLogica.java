@@ -2,8 +2,11 @@ package hospital.logica;
 
 import hospital.datos.PacienteDatos;
 import hospital.datos.conector.PacienteConector;
+import hospital.datos.conector.RecetaConector;
 import hospital.logica.mapper.PacienteMapper;
+import hospital.logica.mapper.RecetaMapper;
 import hospital.model.Paciente;
+import hospital.model.Receta;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,14 +33,6 @@ public class PacienteLogica {
                 .collect(Collectors.toList());
     }
 
-    public Paciente buscarPorId(String id) {
-        return datos.load().getPacientes().stream()
-                .filter(p -> p.getId().equalsIgnoreCase(id))
-                .map(PacienteMapper::fromXML)
-                .findFirst()
-                .orElse(null);
-    }
-
     private void validarPaciente(Paciente p) throws Exception {
         if (p == null) throw new Exception("El paciente no puede ser nulo.");
         if (p.getId() == null || p.getId().isBlank()) throw new Exception("El ID es obligatorio.");
@@ -49,4 +44,38 @@ public class PacienteLogica {
             throw new Exception("El teléfono es obligatorio.");
         }
     }
+    //Clase
+    public Paciente actualizar(Paciente actualizado) throws Exception {
+        validarPaciente(actualizado);
+
+        PacienteConector data = datos.load();
+        for (int i = 0; i < data.getPacientes().size(); i++) {
+            var actual = data.getPacientes().get(i);
+
+            if (actual.getId().equalsIgnoreCase(actualizado.getId())) {
+                data.getPacientes().set(i, PacienteMapper.toXML(actualizado));
+
+                datos.save(data);
+                return actualizado;
+            }
+        }
+        throw new Exception("No existe paciente con id: " + actualizado.getId());
+    }
+
+    public boolean eliminar(String id) throws Exception {
+        PacienteConector conector = datos.load();
+        boolean eliminado = conector.getPacientes().removeIf(r -> r.getId().equalsIgnoreCase(id));
+        if (eliminado) {
+            datos.save(conector);
+        }
+        return eliminado;
+    }
+    public Paciente buscarPorId(String pacienteId) {
+        return datos.load().getPacientes().stream()
+                .map(PacienteMapper::fromXML) // usa el mapper sencillo
+                .filter(p -> p.getId().equalsIgnoreCase(pacienteId))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

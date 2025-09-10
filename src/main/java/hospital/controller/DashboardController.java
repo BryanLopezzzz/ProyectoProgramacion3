@@ -1,59 +1,31 @@
 package hospital.controller;
 
-import hospital.logica.RecetaLogica;
-import hospital.model.EstadoReceta;
-import hospital.model.Receta;
-import hospital.model.DetalleReceta;
+import hospital.logica.EstadisticaRecetaLogica;
 import hospital.model.Usuario;
+
 import java.time.YearMonth;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
 
 public class DashboardController {
-    private final RecetaLogica recetaLogica;
+    private final EstadisticaRecetaLogica estadistica;
 
     public DashboardController() {
-        this.recetaLogica = new RecetaLogica();
+        this.estadistica = new EstadisticaRecetaLogica();
     }
 
-   //Cuenta cuántas unidades de un medicamento se prescribieron por mes
-    public Map<YearMonth, Integer> contarMedicamentosPorMes(
-            Usuario usuario, String codigoMedicamento,
-            YearMonth desde, YearMonth hasta) throws Exception {
-
+    public LinkedHashMap<String, Integer> contarMedicamentosPorMes(
+            Usuario usuario,
+            String codigoMedicamento,
+            YearMonth desde,
+            YearMonth hasta
+    ) throws Exception {
         validarUsuario(usuario);
-
-        List<Receta> recetas = recetaLogica.listar();
-
-        return recetas.stream()
-                .filter(r -> r.getFecha() != null)
-                .filter(r -> {
-                    YearMonth ym = YearMonth.from(r.getFecha());
-                    return !ym.isBefore(desde) && !ym.isAfter(hasta);
-                })
-                .flatMap(r -> r.getDetalles().stream()
-                        .filter(d -> d.getMedicamento().getCodigo().equalsIgnoreCase(codigoMedicamento))
-                        .map(d -> Map.entry(YearMonth.from(r.getFecha()), d.getCantidad()))
-                )
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        Integer::sum // en caso de colisión (varios detalles mismo mes)
-                ));
+        return estadistica.medicamentosPorMes(codigoMedicamento, desde, hasta);
     }
 
-    //Cuenta recetas por estado
-    public Map<EstadoReceta, Integer> contarRecetasPorEstado(Usuario usuario) throws Exception {
+    public LinkedHashMap<String, Long> contarRecetasPorEstado(Usuario usuario) throws Exception {
         validarUsuario(usuario);
-
-        List<Receta> recetas = recetaLogica.listar();
-
-        return recetas.stream()
-                .collect(Collectors.groupingBy(
-                        Receta::getEstado,
-                        Collectors.summingInt(r -> 1)
-                ));
+        return estadistica.recetasPorEstado();
     }
 
     private void validarUsuario(Usuario usuario) throws Exception {

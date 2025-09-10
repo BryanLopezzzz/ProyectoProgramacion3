@@ -40,24 +40,6 @@ public class FarmaceutaLogica {
                 .collect(Collectors.toList());
     }
 
-    public Farmaceuta buscarPorId(String id) {
-        if (id == null) return null;
-        return datos.load().getFarmaceutas().stream()
-                .filter(f -> f.getId().equalsIgnoreCase(id))
-                .map(FarmaceutaMapper::fromXML)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Farmaceuta> buscarPorNombre(String nombre) {
-        if (nombre == null) nombre = "";
-        final String q = nombre.toLowerCase();
-        return datos.load().getFarmaceutas().stream()
-                .filter(f -> f.getNombre() != null && f.getNombre().toLowerCase().contains(q))
-                .map(FarmaceutaMapper::fromXML)
-                .collect(Collectors.toList());
-    }
-
     public void modificar(Farmaceuta farmaceuta) throws Exception {
         validarModificacion(farmaceuta);
 
@@ -71,16 +53,6 @@ public class FarmaceutaLogica {
         // La clave no se cambia aquí, solo desde el módulo de login/cambio clave.
 
         ordenarPorNombre(con);
-        datos.save(con);
-    }
-
-    public void borrar(String id) throws Exception {
-        if (id == null || id.isBlank()) throw new Exception("El id es obligatorio.");
-
-        FarmaceutaConector con = datos.load();
-        boolean removed = con.getFarmaceutas().removeIf(f -> f.getId().equalsIgnoreCase(id));
-        if (!removed) throw new Exception("No existe farmaceuta con id: " + id);
-
         datos.save(con);
     }
 
@@ -101,4 +73,49 @@ public class FarmaceutaLogica {
                 e -> Objects.toString(e.getNombre(), ""), String.CASE_INSENSITIVE_ORDER
         ));
     }
+
+    //Clase
+    public Farmaceuta actualizar(Farmaceuta actualizado) throws Exception {
+        validarModificacion(actualizado);
+
+        FarmaceutaConector data = datos.load();
+        for (int i = 0; i < data.getFarmaceutas().size(); i++) {
+            FarmaceutaEntidad actual = data.getFarmaceutas().get(i);
+
+            if (actual.getId().equalsIgnoreCase(actualizado.getId())) {
+                data.getFarmaceutas().set(i, FarmaceutaMapper.toXML(actualizado));
+                datos.save(data);
+                return actualizado;
+            }
+        }
+        throw new Exception("No existe farmaceuta con id: " + actualizado.getId());
+    }
+
+    public boolean eliminar(String id) throws Exception {
+        FarmaceutaConector conector = datos.load();
+        boolean eliminado = conector.getFarmaceutas().removeIf(f -> f.getId().equalsIgnoreCase(id));
+        if (eliminado) {
+            datos.save(conector);
+        }
+        return eliminado;
+    }
+
+    public Farmaceuta buscarPorId(String id) {
+        if (id == null) return null;
+        return datos.load().getFarmaceutas().stream()
+                .filter(f -> f.getId().equalsIgnoreCase(id))
+                .map(FarmaceutaMapper::fromXML)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Farmaceuta> buscarPorNombre(String nombre) {
+        if (nombre == null) nombre = "";
+        final String q = nombre.toLowerCase();
+        return datos.load().getFarmaceutas().stream()
+                .filter(f -> f.getNombre() != null && f.getNombre().toLowerCase().contains(q))
+                .map(FarmaceutaMapper::fromXML)
+                .collect(Collectors.toList());
+    }
+
 }

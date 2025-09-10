@@ -5,6 +5,7 @@ import hospital.logica.PacienteLogica;
 import hospital.model.*;
 import hospital.logica.MedicoLogica;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecetaMapper {
@@ -36,7 +37,8 @@ public class RecetaMapper {
 
         // Resolver paciente
         if (entity.getPacienteId() != null && pacienteLogica != null) {
-            Paciente p = pacienteLogica.buscarPorId(entity.getPacienteId());
+            List<Paciente> pacientes = pacienteLogica.buscarPorId(entity.getPacienteId());
+            Paciente p = pacientes.isEmpty() ? null : pacientes.get(0);
             if (p == null && strict) {
                 throw new RuntimeException("Paciente no encontrado: " + entity.getPacienteId());
             }
@@ -47,7 +49,8 @@ public class RecetaMapper {
 
         // Resolver médico
         if (entity.getMedicoId() != null && medicoLogica != null) {
-            Medico m = medicoLogica.buscarPorId(entity.getMedicoId());
+            List<Medico> medicos = medicoLogica.buscarPorId(entity.getMedicoId());
+            Medico m = medicos.isEmpty() ? null : medicos.get(0);
             if (m == null && strict) {
                 throw new RuntimeException("Médico no encontrado: " + entity.getMedicoId());
             }

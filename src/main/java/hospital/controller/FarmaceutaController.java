@@ -40,7 +40,7 @@ public class FarmaceutaController {
 
     public void borrar(Administrador admin, String id) throws Exception {
         validarAdmin(admin);
-        logica.borrar(id);
+        logica.eliminar(id);
     }
 
     private void validarAdmin(Administrador admin) throws Exception {

@@ -54,9 +54,14 @@ public class FarmaceutaDatos {
 
         File out = path.toFile();
         File parent = out.getParentFile();
-        if (parent != null) parent.mkdirs();
 
-        m.marshal(data, out);
+        if(parent != null){
+            parent.mkdirs();
+        }
+
+        java.io.StringWriter sw = new java.io.StringWriter();
+        m.marshal(data, sw);
+        m.marshal(data,out);
     }
 
     public Path getPath() { return path; }

@@ -35,32 +35,12 @@ public class AdministradorLogica {
         datos.save(con);
     }
 
-    // ==== Listar ====
     public List<Administrador> listar() {
         return datos.load().getAdministradores().stream()
                 .map(AdministradorMapper::fromXML)
                 .collect(Collectors.toList());
     }
 
-    public Administrador buscarPorId(String id) {
-        if (id == null) return null;
-        return datos.load().getAdministradores().stream()
-                .filter(a -> a.getId().equalsIgnoreCase(id))
-                .map(AdministradorMapper::fromXML)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Administrador> buscarPorNombre(String nombre) {
-        if (nombre == null) nombre = "";
-        final String q = nombre.toLowerCase();
-        return datos.load().getAdministradores().stream()
-                .filter(a -> a.getNombre() != null && a.getNombre().toLowerCase().contains(q))
-                .map(AdministradorMapper::fromXML)
-                .collect(Collectors.toList());
-    }
-
-    // ==== Modificar ====
     public void modificar(Administrador admin) throws Exception {
         validarModificacion(admin);
 
@@ -75,16 +55,6 @@ public class AdministradorLogica {
         // La clave no se cambia aquí, se hace desde el módulo login/cambio clave
 
         ordenarPorNombre(con);
-        datos.save(con);
-    }
-
-    public void borrar(String id) throws Exception {
-        if (id == null || id.isBlank()) throw new Exception("El id es obligatorio.");
-
-        AdministradorConector con = datos.load();
-        boolean removed = con.getAdministradores().removeIf(a -> a.getId().equalsIgnoreCase(id));
-        if (!removed) throw new Exception("No existe administrador con id: " + id);
-
         datos.save(con);
     }
 
@@ -105,5 +75,50 @@ public class AdministradorLogica {
         con.getAdministradores().sort(Comparator.comparing(
                 e -> Objects.toString(e.getNombre(), ""), String.CASE_INSENSITIVE_ORDER
         ));
+    }
+
+    //Clase
+    public Administrador actualizar(Administrador actualizado) throws Exception {
+        validarModificacion(actualizado);
+
+        AdministradorConector data = datos.load();
+        for (int i = 0; i < data.getAdministradores().size(); i++) {
+            AdministradorEntidad actual = data.getAdministradores().get(i);
+
+            if (actual.getId().equalsIgnoreCase(actualizado.getId())) {
+                data.getAdministradores().set(i, AdministradorMapper.toXML(actualizado));
+                datos.save(data);
+                return actualizado;
+            }
+        }
+        throw new Exception("No existe administrador con id: " + actualizado.getId());
+    }
+
+    //Clase
+    public boolean eliminar(String id) throws Exception {
+        AdministradorConector conector = datos.load();
+        boolean eliminado = conector.getAdministradores().removeIf(a -> a.getId().equalsIgnoreCase(id));
+        if (eliminado) {
+            datos.save(conector);
+        }
+        return eliminado;
+    }
+
+    public Administrador buscarPorId(String id) {
+        if (id == null) return null;
+        return datos.load().getAdministradores().stream()
+                .filter(a -> a.getId().equalsIgnoreCase(id))
+                .map(AdministradorMapper::fromXML)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Administrador> buscarPorNombre(String nombre) {
+        if (nombre == null) nombre = "";
+        final String q = nombre.toLowerCase();
+        return datos.load().getAdministradores().stream()
+                .filter(a -> a.getNombre() != null && a.getNombre().toLowerCase().contains(q))
+                .map(AdministradorMapper::fromXML)
+                .collect(Collectors.toList());
     }
 }

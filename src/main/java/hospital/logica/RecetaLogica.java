@@ -1,12 +1,13 @@
 package hospital.logica;
 
 import hospital.datos.RecetaDatos;
+import hospital.datos.conector.PacienteConector;
 import hospital.datos.conector.RecetaConector;
+import hospital.datos.entidades.RecetaEntidad;
+import hospital.logica.mapper.PacienteMapper;
 import hospital.logica.mapper.RecetaMapper;
-import hospital.model.EstadoReceta;
-import hospital.model.Medicamento;
-import hospital.model.DetalleReceta;
-import hospital.model.Receta;
+import hospital.model.*;
+import jakarta.xml.bind.JAXBException;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -58,21 +59,12 @@ public class RecetaLogica {
 
         DetalleReceta detalle = RecetaMapper.crearDetalle(medicamento, cantidad, indicaciones, diasTratamiento);
         receta.agregarDetalle(detalle);
-        actualizarReceta(receta);
+        actualizar(receta);
     }
 
     // =========================
     // Helpers internos
     // =========================
-    private void actualizarReceta(Receta receta) throws Exception {
-        RecetaConector conector = datos.load();
-
-        // Remueve la receta anterior y agrega la actualizada
-        conector.getRecetas().removeIf(r -> r.getId().equalsIgnoreCase(receta.getId()));
-        conector.getRecetas().add(RecetaMapper.toXML(receta));
-
-        datos.save(conector);
-    }
 
     private void validarReceta(Receta r) throws Exception {
         if (r == null) throw new Exception("La receta no puede ser nula.");
@@ -108,6 +100,55 @@ public class RecetaLogica {
             throw new Exception("Transición de estado inválida: " + anterior + " → " + nuevoEstado);
         }
 
-        actualizarReceta(receta);
+        actualizar(receta);
     }
+    //Clase
+    public Receta actualizar(Receta receta) throws Exception {
+        validarReceta(receta);
+
+        RecetaConector data = datos.load();
+        for (int i = 0; i < data.getRecetas().size(); i++) {
+            var actual = data.getRecetas().get(i);
+
+            if (actual.getId().equalsIgnoreCase(receta.getId())) {
+                // Reemplazar el registro en XML
+                data.getRecetas().set(i, RecetaMapper.toXML(receta));
+
+                datos.save(data);
+                return receta;
+            }
+        }
+        throw new Exception("No existe receta con id: " + receta.getId());
+    }
+
+    public boolean eliminar(String id) throws Exception {
+        RecetaConector conector = datos.load();
+        boolean eliminado = conector.getRecetas().removeIf(r -> r.getId().equalsIgnoreCase(id));
+        if (eliminado) {
+            datos.save(conector);
+        }
+        return eliminado;
+    }
+
+    public List<Receta> buscarPorPaciente(String pacienteId) {
+        return datos.load().getRecetas().stream()
+                .map(e -> RecetaMapper.fromXML(e, pacienteLogica, medicoLogica, false))
+                .filter(r -> r.getPaciente().getId().equalsIgnoreCase(pacienteId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Receta> buscarPorMedico(String medicoId) {
+        return datos.load().getRecetas().stream()
+                .map(e -> RecetaMapper.fromXML(e, pacienteLogica, medicoLogica, false))
+                .filter(r -> r.getMedico().getId().equalsIgnoreCase(medicoId))
+                .collect(Collectors.toList());
+    }
+
+//    public Receta create(Receta nuevo) throws JAXBException {
+//        RecetaConector data= datos.load();
+//        RecetaEntidad receta = RecetaMapper.toXML(nuevo);
+//        data.getRecetas().add(receta);
+//        datos.save(data);
+//        return RecetaMapper.fromXML(receta);
+//    }
 }

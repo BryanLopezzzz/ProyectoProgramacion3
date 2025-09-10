@@ -41,24 +41,6 @@ public class MedicoLogica {
                 .collect(Collectors.toList());
     }
 
-    public Medico buscarPorId(String id) {
-        if (id == null) return null;
-        return datos.load().getMedicos().stream()
-                .filter(m -> m.getId().equalsIgnoreCase(id))
-                .map(MedicoMapper::fromXML)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Medico> buscarPorNombre(String nombre) {
-        if (nombre == null) nombre = "";
-        final String q = nombre.toLowerCase();
-        return datos.load().getMedicos().stream()
-                .filter(m -> m.getNombre() != null && m.getNombre().toLowerCase().contains(q))
-                .map(MedicoMapper::fromXML)
-                .collect(Collectors.toList());
-    }
-
     public void modificar(Medico medico) throws Exception {
         validarMedicoModificacion(medico);
 
@@ -75,16 +57,6 @@ public class MedicoLogica {
         // La clave NO se cambia aquí (lo harían desde “cambiar clave” del login general)
 
         ordenarPorNombre(con);
-        datos.save(con);
-    }
-
-    public void borrar(String id) throws Exception {
-        if (id == null || id.isBlank()) throw new Exception("El id es obligatorio.");
-
-        MedicoConector con = datos.load();
-        boolean removed = con.getMedicos().removeIf(m -> m.getId().equalsIgnoreCase(id));
-        if (!removed) throw new Exception("No existe médico con id: " + id);
-
         datos.save(con);
     }
 
@@ -109,5 +81,48 @@ public class MedicoLogica {
         con.getMedicos().sort(Comparator.comparing(
                 e -> Objects.toString(e.getNombre(), ""), String.CASE_INSENSITIVE_ORDER
         ));
+    }
+    //Clase
+
+    public Medico actualizar(Medico actualizado) throws Exception {
+        validarMedicoModificacion(actualizado);
+
+        MedicoConector data = datos.load();
+        for (int i = 0; i < data.getMedicos().size(); i++) {
+            MedicoEntidad actual = data.getMedicos().get(i);
+
+            if (actual.getId().equalsIgnoreCase(actualizado.getId())) {
+                data.getMedicos().set(i, MedicoMapper.toXML(actualizado));
+                datos.save(data);
+                return actualizado;
+            }
+        }
+        throw new Exception("No existe médico con id: " + actualizado.getId());
+    }
+
+    public Medico buscarPorId(String medicoId) {
+        return datos.load().getMedicos().stream()
+                .map(MedicoMapper::fromXML) // usa el mapper sencillo
+                .filter(m -> m.getId().equalsIgnoreCase(medicoId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public boolean eliminar(String id) throws Exception {
+        MedicoConector conector = datos.load();
+        boolean eliminado = conector.getMedicos().removeIf(r -> r.getId().equalsIgnoreCase(id));
+        if (eliminado) {
+            datos.save(conector);
+        }
+        return eliminado;
+    }
+
+    public List<Medico> buscarPorNombre(String nombre) {
+        if (nombre == null) nombre = "";
+        final String q = nombre.toLowerCase();
+        return datos.load().getMedicos().stream()
+                .filter(m -> m.getNombre() != null && m.getNombre().toLowerCase().contains(q))
+                .map(MedicoMapper::fromXML)
+                .collect(Collectors.toList());
     }
 }
