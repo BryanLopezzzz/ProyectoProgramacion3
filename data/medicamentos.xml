@@ -2,14 +2,9 @@
 <MedicamentosData>
     <Medicamentos>
         <Medicamento>
-            <codigo>123</codigo>
+            <codigo>500</codigo>
             <nombre>Acetaminofen</nombre>
-            <presentacion>500mg</presentacion>
-        </Medicamento>
-        <Medicamento>
-            <codigo>123</codigo>
-            <nombre>Acetaminofen</nombre>
-            <presentacion>500</presentacion>
+            <presentacion>Oral</presentacion>
         </Medicamento>
     </Medicamentos>
 </MedicamentosData>
