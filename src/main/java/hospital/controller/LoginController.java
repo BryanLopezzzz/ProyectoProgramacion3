@@ -5,7 +5,6 @@ import hospital.logica.UsuarioManager;
 
 public class LoginController {
     private final UsuarioManager usuarioManager;
-    private Usuario usuarioActual; // almacena el usuario logueado en sesión
 
     public LoginController() {
         this.usuarioManager = new UsuarioManager();
@@ -14,17 +13,18 @@ public class LoginController {
     // ==== LOGIN ====
     public Usuario login(String id, String clave) throws Exception {
         Usuario u = usuarioManager.login(id, clave);
-        this.usuarioActual = u;
+        UsuarioManager.setUsuarioActual(u);
         return u;
     }
 
     // ==== LOGOUT ====
     public void logout() {
-        this.usuarioActual = null;
+        UsuarioManager.logout();
     }
 
     // ==== CAMBIO DE CLAVE ====
     public void cambiarClave(String actual, String nueva) throws Exception {
+        Usuario usuarioActual = UsuarioManager.getUsuarioActual();
         if (usuarioActual == null) {
             throw new Exception("No hay un usuario autenticado.");
         }
@@ -35,10 +35,10 @@ public class LoginController {
 
     // ==== Estado de sesión ====
     public Usuario getUsuarioActual() {
-        return usuarioActual;
+        return UsuarioManager.getUsuarioActual();
     }
 
     public boolean isLoggedIn() {
-        return usuarioActual != null;
+        return UsuarioManager.getUsuarioActual() != null;
     }
 }

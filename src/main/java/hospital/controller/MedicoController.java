@@ -50,4 +50,9 @@ public class MedicoController {
             throw new Exception("Solo los administradores pueden ejecutar esta acción.");
         }
     }
+
+    public void generarReporte(Administrador admin, String rutaReporte) throws Exception {
+        validarAdmin(admin);
+        logica.generarReporte(rutaReporte);
+    }
 }
