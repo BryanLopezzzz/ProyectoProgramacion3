@@ -293,7 +293,16 @@ public class PreescribirRecetaView {
         }
 
         Stage stage = (Stage) btnVolver.getScene().getWindow();
-        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.setTitle("Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarError("Error", "No se pudo cargar el dashboard: " + e.getMessage());
+        }
     }
 
     // Métodos de utilidad

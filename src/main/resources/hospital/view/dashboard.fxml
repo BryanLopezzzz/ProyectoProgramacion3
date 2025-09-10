@@ -58,7 +58,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Button>
-            <Button id="btnPrescribirReceta" fx:id="btnPrescribirReceta" layoutX="64.0" layoutY="301.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Prescribir receta" textFill="WHITE">
+            <Button id="btnPrescribirReceta" fx:id="btnPrescribirReceta" layoutX="64.0" layoutY="301.0" mnemonicParsing="false" onAction="#irAPreescribirReceta" prefHeight="30.0" prefWidth="132.0" style="-fx-cursor: hand; -fx-background-color: transparent;" text="Prescribir receta" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>

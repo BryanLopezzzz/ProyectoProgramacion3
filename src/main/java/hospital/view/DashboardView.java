@@ -105,6 +105,22 @@ public class DashboardView {
         mostrarGraficoPastel();
     }
 
+    @FXML
+    public void irAPreescribirReceta() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/prescribirReceta.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) btnPrescribirReceta.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Prescribir Receta");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la vista de prescribir receta.");
+            alert.showAndWait();
+        }
+    }
+
     private void mostrarGraficoLineas() {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
