@@ -106,10 +106,14 @@ public class PreescribirRecetaView {
     @FXML
     private void BuscarPaciente(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/busqueda/buscarPacientePreescripcion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarPacientePrescripcion.fxml"));
             Parent root = loader.load();
 
             BuscarPacientePreescripcionView buscarView = loader.getController();
+
+            // (Opcional) pasar el usuario/admin
+            // buscarView.setUsuario(usuario);
+            // buscarView.setAdmin(admin);    in
 
             Stage stage = new Stage();
             stage.setTitle("Buscar Paciente");
@@ -118,9 +122,12 @@ public class PreescribirRecetaView {
             stage.initOwner(btnBuscarPaciente.getScene().getWindow());
             stage.showAndWait();
 
+            // Recuperar selección después de cerrar
             pacienteSeleccionado = buscarView.getPacienteSeleccionado();
             if (pacienteSeleccionado != null) {
-                txtBuscarPaciente.setText(pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")");
+                txtBuscarPaciente.setText(
+                        pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")"
+                );
                 btnPreescribir.setDisable(false);
             }
 

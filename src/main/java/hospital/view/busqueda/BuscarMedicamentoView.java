@@ -41,6 +41,8 @@ public class BuscarMedicamentoView implements Initializable {
     private final MedicamentoController medicamentoController;
     private final Administrador administrador;
     private ObservableList<Medicamento> medicamentos;
+    private Medicamento medicamentoSeleccionado;
+
 
     public BuscarMedicamentoView() {
         this.medicamentoController = new MedicamentoController();
@@ -224,4 +226,20 @@ public class BuscarMedicamentoView implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    public Medicamento getMedicamentoSeleccionado() {
+        return medicamentoSeleccionado;
+    }
+
+    @FXML
+    private void SeleccionarMedicamento() {
+        medicamentoSeleccionado = tblMedicos.getSelectionModel().getSelectedItem();
+        if (medicamentoSeleccionado == null) {
+            mostrarError("Debe seleccionar un medicamento.");
+            return;
+        }
+        Stage stage = (Stage) tblMedicos.getScene().getWindow();
+        stage.close();
+    }
+
 }
