@@ -1,10 +1,6 @@
 package hospital.view;
 import hospital.controller.RecetaController;
-import hospital.model.DetalleReceta;
-import hospital.model.Medico;
-import hospital.model.Paciente;
-import hospital.model.Receta;
-import hospital.model.EstadoReceta;
+import hospital.model.*;
 import hospital.view.busqueda.BuscarPacientePreescripcionView;
 import hospital.view.busqueda.BuscarMedicamentoView;
 import javafx.collections.FXCollections;
@@ -42,6 +38,7 @@ public class PreescribirRecetaView {
     @FXML private Button btnVolver;
     @FXML private Button btnPreescribir;
 
+    private ObservableList<Medicamento> medicamentos;
     private final RecetaController recetaController = new RecetaController();
     private ObservableList<DetalleReceta> listaDetalles = FXCollections.observableArrayList();
     private Paciente pacienteSeleccionado;
@@ -111,9 +108,6 @@ public class PreescribirRecetaView {
 
             BuscarPacientePreescripcionView buscarView = loader.getController();
 
-            // (Opcional) pasar el usuario/admin
-            // buscarView.setUsuario(usuario);
-            // buscarView.setAdmin(admin);    in
 
             Stage stage = new Stage();
             stage.setTitle("Buscar Paciente");
@@ -149,10 +143,10 @@ public class PreescribirRecetaView {
                 crearRecetaTemporal();
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/busqueda/buscarMedicamento.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
             Parent root = loader.load();
 
-            BuscarMedicamentoView buscarMedicamentoView = loader.getController();
+            DetalleRecetaView buscarMedicamentoView = loader.getController();
 
             Stage stage = new Stage();
             stage.setTitle("Seleccionar Medicamento");

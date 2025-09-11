@@ -7,5 +7,17 @@
             <telefono>22562222</telefono>
             <fechaNacimiento>2020-09-29</fechaNacimiento>
         </Paciente>
+        <Paciente>
+            <id>124</id>
+            <nombre>Bryan Lopez</nombre>
+            <telefono>12345678</telefono>
+            <fechaNacimiento>2015-09-04</fechaNacimiento>
+        </Paciente>
+        <Paciente>
+            <id>1235</id>
+            <nombre>Aaron Guapo</nombre>
+            <telefono>88888888</telefono>
+            <fechaNacimiento>2021-09-16</fechaNacimiento>
+        </Paciente>
     </Pacientes>
 </PacientesData>
