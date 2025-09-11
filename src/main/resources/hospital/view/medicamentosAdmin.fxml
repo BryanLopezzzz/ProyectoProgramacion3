@@ -39,11 +39,12 @@
       </Label>
       <TableView fx:id="tblMedicos" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn fx:id="colCodigo" prefWidth="126.0" text="ID" />
-            <TableColumn fx:id="colNombre" prefWidth="317.0" text="Nombre" />
-            <TableColumn fx:id="colPresentacion" prefWidth="263.0" text="Presentación" />
+            <TableColumn fx:id="colCodigo" prefWidth="126.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="ID" />
+            <TableColumn fx:id="colNombre" prefWidth="317.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Nombre" />
+            <TableColumn fx:id="colPresentacion" prefWidth="263.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Presentación" />
          </columns>
       </TableView>
+
       <Button fx:id="btnAgregarMedicamento" layoutX="91.0" layoutY="275.0" mnemonicParsing="false" onAction="#AgregarMedicamento" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="25.0" preserveRatio="true">

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <PacientesData>
-    <Pacientes/>
+    <Pacientes>
+        <Paciente>
+            <id>123</id>
+            <nombre>Jose Castro Oviedo</nombre>
+            <telefono>22562222</telefono>
+            <fechaNacimiento>2020-09-29</fechaNacimiento>
+        </Paciente>
+    </Pacientes>
 </PacientesData>

@@ -51,9 +51,7 @@ public class PacienteController {
 
     public boolean eliminar(Administrador admin, String codigo) throws Exception {
         validarAdmin(admin);
-        pacienteLogica.eliminar(codigo);
-
-        return pacienteLogica.eliminar(codigo) ? true : false;
+        return pacienteLogica.eliminar(codigo);
     }
 
     public void modificar(Administrador admin, Paciente medicamento) throws Exception {
