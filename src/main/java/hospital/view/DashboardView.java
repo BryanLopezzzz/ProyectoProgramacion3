@@ -75,7 +75,7 @@ public class DashboardView {
     public void initialize() {
         Usuario usuario = Sesion.getUsuario();
         if (usuario != null && lblUsuario != null) {
-            lblUsuario.setText(usuario.getNombre() + " / " + usuario.getId());
+            lblUsuario.setText(usuario.getNombre());
         }
         configurarPermisosPorRol(usuario);
         mostrarGraficoLineas(usuario);
