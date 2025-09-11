@@ -2,6 +2,7 @@ package hospital.view;
 
 import hospital.controller.DashboardController;
 import hospital.controller.LoginController;
+import hospital.logica.UsuarioManager;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +60,7 @@ public class DashboardView {
 
     private final DashboardController dashboardController = new DashboardController();
     private Usuario usuario;
+    private final UsuarioManager usuarioManager = new UsuarioManager();
     private LoginController loginController;
 
     public void setUsuario(Usuario usuario) {
@@ -67,6 +69,7 @@ public class DashboardView {
         if (lblUsuario != null && usuario != null) {
             lblUsuario.setText(usuario.getNombre());
         }
+        configurarPermisosPorRol();
     }
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
@@ -85,6 +88,91 @@ public class DashboardView {
         }
         mostrarGraficoLineas();
         mostrarGraficoPastel();
+    }
+    private void configurarPermisosPorRol() {
+        if (usuario == null || usuario.getId() == null) {
+            ocultarTodosLosBotones();
+            return;
+        }
+
+        UsuarioManager.TipoUsuario tipo = usuarioManager.determinarTipoUsuario(usuario.getId());
+
+        switch (tipo) {
+            case MEDICO:
+                configurarPermisosMedico();
+                break;
+            case FARMACEUTA:
+                configurarPermisosFarmaceuta();
+                break;
+            case ADMINISTRADOR:
+                configurarPermisosAdministrador();
+                break;
+            default:
+                ocultarTodosLosBotones();
+                System.err.println("Tipo de usuario no reconocido: " + usuario.getId());
+                break;
+        }
+    }
+
+    private void configurarPermisosAdministrador() {
+        btnMedicos.setVisible(true);
+        btnFarmaceutas.setVisible(true);
+        btnPacientes.setVisible(true);
+        btnMedicamentos.setVisible(true);
+
+        btnPrescribirReceta.setVisible(false);
+        btnDespachoReceta.setVisible(false);
+        btnHistoricoRecetas.setVisible(true);
+        btnCambiarClave.setVisible(true);
+        btnAcercaDe.setVisible(true);
+        btnLogout.setVisible(true);
+    }
+
+    private void configurarPermisosMedico() {
+        // Ocultar funciones no permitidas
+        btnMedicos.setVisible(false);
+        btnFarmaceutas.setVisible(false);
+        btnPacientes.setVisible(false);
+        btnMedicamentos.setVisible(false);
+        btnDespachoReceta.setVisible(false);
+
+        // Mostrar funciones permitidas
+        btnPrescribirReceta.setVisible(true);
+        btnHistoricoRecetas.setVisible(true);
+        btnCambiarClave.setVisible(true);
+        btnAcercaDe.setVisible(true);
+        btnLogout.setVisible(true);
+    }
+
+    private void configurarPermisosFarmaceuta() {
+        // Ocultar funciones no permitidas
+        btnMedicos.setVisible(false);
+        btnFarmaceutas.setVisible(false);
+        btnPacientes.setVisible(false);
+        btnMedicamentos.setVisible(false);
+        btnPrescribirReceta.setVisible(false);
+
+        // Mostrar funciones permitidas
+        btnDespachoReceta.setVisible(true);
+        btnHistoricoRecetas.setVisible(true);
+        btnCambiarClave.setVisible(true);
+        btnAcercaDe.setVisible(true);
+        btnLogout.setVisible(true);
+    }
+
+    private void ocultarTodosLosBotones() {
+        btnMedicos.setVisible(false);
+        btnFarmaceutas.setVisible(false);
+        btnPacientes.setVisible(false);
+        btnMedicamentos.setVisible(false);
+        btnPrescribirReceta.setVisible(false);
+        btnDespachoReceta.setVisible(false);
+
+        // Solo funciones básicas
+        btnHistoricoRecetas.setVisible(true);
+        btnCambiarClave.setVisible(true);
+        btnAcercaDe.setVisible(true);
+        btnLogout.setVisible(true);
     }
 
     private void mostrarGraficoLineas() {
