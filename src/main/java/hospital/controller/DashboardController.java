@@ -15,12 +15,11 @@ public class DashboardController {
 
     public LinkedHashMap<String, Integer> contarMedicamentosPorMes(
             Usuario usuario,
-            String codigoMedicamento,
             YearMonth desde,
             YearMonth hasta
     ) throws Exception {
         validarUsuario(usuario);
-        return estadistica.medicamentosPorMes(codigoMedicamento, desde, hasta);
+        return estadistica.medicamentosPorMes(desde, hasta);
     }
 
     public LinkedHashMap<String, Long> contarRecetasPorEstado(Usuario usuario) throws Exception {

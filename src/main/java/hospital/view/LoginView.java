@@ -1,6 +1,7 @@
 package hospital.view;
 
 import hospital.controller.LoginController;
+import hospital.logica.Sesion;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,8 @@ public class LoginView {
         }
 
         try {
-            Usuario u = loginController.login(id, clave);
+            Usuario usuario = loginController.login(id, clave);
+            Sesion.setUsuario(usuario);
 
             // cargar la vista principal(esto puede cambiar si el menu correcto no es ese)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
@@ -49,7 +51,6 @@ public class LoginView {
 
             // mandar el usuario al dashboard
             DashboardView dashboardView = loader.getController();
-            dashboardView.setUsuario(u);
             dashboardView.setLoginController(loginController);
 
             Stage stage = new Stage();

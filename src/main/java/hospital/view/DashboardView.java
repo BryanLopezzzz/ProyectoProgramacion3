@@ -2,6 +2,7 @@ package hospital.view;
 
 import hospital.controller.DashboardController;
 import hospital.controller.LoginController;
+import hospital.logica.Sesion;
 import hospital.logica.UsuarioManager;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
@@ -59,18 +60,9 @@ public class DashboardView {
     private Pane panePieChart;
 
     private final DashboardController dashboardController = new DashboardController();
-    private Usuario usuario;
     private final UsuarioManager usuarioManager = new UsuarioManager();
     private LoginController loginController;
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-
-        if (lblUsuario != null && usuario != null) {
-            lblUsuario.setText(usuario.getNombre());
-        }
-        configurarPermisosPorRol();
-    }
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
@@ -81,15 +73,15 @@ public class DashboardView {
 
     @FXML
     public void initialize() {
-        System.out.println("initialize called. lblUsuario: " + (lblUsuario != null ? "not null" : "null"));
+        Usuario usuario = Sesion.getUsuario();
         if (usuario != null && lblUsuario != null) {
             lblUsuario.setText(usuario.getNombre() + " / " + usuario.getId());
-            System.out.println("lblUsuario text set in initialize to: " + lblUsuario.getText());
         }
-        mostrarGraficoLineas();
-        mostrarGraficoPastel();
+        configurarPermisosPorRol(usuario);
+        mostrarGraficoLineas(usuario);
+        mostrarGraficoPastel(usuario);
     }
-    private void configurarPermisosPorRol() {
+    private void configurarPermisosPorRol(Usuario usuario) {
         if (usuario == null || usuario.getId() == null) {
             ocultarTodosLosBotones();
             return;
@@ -175,7 +167,8 @@ public class DashboardView {
         btnLogout.setVisible(true);
     }
 
-    private void mostrarGraficoLineas() {
+    private void mostrarGraficoLineas(Usuario usuario) {
+        if (usuario == null) return;
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
@@ -187,7 +180,6 @@ public class DashboardView {
         try {
             var datos = dashboardController.contarMedicamentosPorMes(
                     usuario,
-                    "A001",
                     YearMonth.now().minusMonths(5),
                     YearMonth.now()
             );
@@ -201,7 +193,8 @@ public class DashboardView {
         paneLineChart.getChildren().add(lineChart);
     }
 
-    private void mostrarGraficoPastel() {
+    private void mostrarGraficoPastel(Usuario usuario) {
+        if (usuario == null) return;
         PieChart pieChart = new PieChart();
         pieChart.setTitle("Recetas por estado");
 
@@ -345,7 +338,7 @@ public class DashboardView {
             Scene scene = new Scene(fxmlLoader.load());
 
             CambioClaveView cambioClaveView = fxmlLoader.getController();
-            cambioClaveView.setUsuario(usuario);
+            cambioClaveView.setUsuario(Sesion.getUsuario());
             cambioClaveView.setLoginController(loginController);
 
             Stage stage = (Stage) btnCambiarClave.getScene().getWindow();

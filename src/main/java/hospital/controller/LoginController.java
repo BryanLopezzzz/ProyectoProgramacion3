@@ -1,5 +1,6 @@
 package hospital.controller;
 
+import hospital.logica.Sesion;
 import hospital.model.Usuario;
 import hospital.logica.UsuarioManager;
 
@@ -13,13 +14,13 @@ public class LoginController {
     // ==== LOGIN ====
     public Usuario login(String id, String clave) throws Exception {
         Usuario u = usuarioManager.login(id, clave);
-        UsuarioManager.setUsuarioActual(u);
+        Sesion.setUsuario(u);
         return u;
     }
 
     // ==== LOGOUT ====
     public void logout() {
-        UsuarioManager.logout();
+        Sesion.setUsuario(null);
     }
 
     // ==== CAMBIO DE CLAVE ====

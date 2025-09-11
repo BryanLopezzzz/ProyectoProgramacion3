@@ -2,10 +2,10 @@
 <MedicosData>
     <Medicos>
         <Medico>
-            <id>1234</id>
-            <clave>1234</clave>
-            <nombre>Mora</nombre>
-            <especialidad>Generalidades</especialidad>
+            <id>666</id>
+            <clave>666</clave>
+            <nombre>Claudia</nombre>
+            <especialidad>Rectologa</especialidad>
         </Medico>
     </Medicos>
 </MedicosData>

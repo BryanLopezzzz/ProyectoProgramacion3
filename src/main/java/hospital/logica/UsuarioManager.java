@@ -119,10 +119,11 @@ public class UsuarioManager {
     }
 
     public TipoUsuario getTipoUsuarioActual() {
-        if (usuarioActual == null) {
+        Usuario u = Sesion.getUsuario();
+        if (u == null) {
             return TipoUsuario.DESCONOCIDO;
         }
-        return determinarTipoUsuario(usuarioActual.getId());
+        return determinarTipoUsuario(u.getId());
     }
 
     public boolean tienePermiso(String id, String funcionalidad) {

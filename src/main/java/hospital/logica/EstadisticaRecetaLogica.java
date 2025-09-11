@@ -47,11 +47,7 @@ public class EstadisticaRecetaLogica {
     }
 
     // Estadística: medicamentos por mes (para un medicamento específico)
-    public LinkedHashMap<String, Integer> medicamentosPorMes(
-            String codigoMedicamento,
-            YearMonth desde,
-            YearMonth hasta
-    ) {
+    public LinkedHashMap<String, Integer> medicamentosPorMes(YearMonth desde, YearMonth hasta) {
         LinkedHashMap<String, Integer> resultado = new LinkedHashMap<>();
 
         Map<String, Integer> conteos = cargarRecetas().stream()
@@ -61,13 +57,12 @@ public class EstadisticaRecetaLogica {
                     return !ym.isBefore(desde) && !ym.isAfter(hasta);
                 })
                 .flatMap(r -> r.getDetalles().stream()
-                        .filter(d -> d.getMedicamento().getCodigo().equalsIgnoreCase(codigoMedicamento))
                         .map(d -> Map.entry(YearMonth.from(r.getFecha()).toString(), d.getCantidad()))
                 )
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
-                        Integer::sum // si se repite mes, suma las cantidades
+                        Integer::sum
                 ));
 
         YearMonth actual = desde;
