@@ -110,16 +110,12 @@ public class UsuarioManager {
         if (id == null || id.isEmpty()) {
             return TipoUsuario.DESCONOCIDO;
         }
-        if (id.equalsIgnoreCase("admin")) {
-            return TipoUsuario.ADMINISTRADOR;
-        }
 
-        String prefijo = id.substring(0, 1).toUpperCase();
-        switch (prefijo) {
-            case "M": return TipoUsuario.MEDICO;
-            case "F": return TipoUsuario.FARMACEUTA;
-            default: return TipoUsuario.DESCONOCIDO;
-        }
+        if (administradorLogica.buscarPorId(id) != null) return TipoUsuario.ADMINISTRADOR;
+        if (medicoLogica.buscarPorId(id) != null) return TipoUsuario.MEDICO;
+        if (farmaceutaLogica.buscarPorId(id) != null) return TipoUsuario.FARMACEUTA;
+
+        return TipoUsuario.DESCONOCIDO;
     }
 
     public TipoUsuario getTipoUsuarioActual() {
@@ -179,56 +175,13 @@ public class UsuarioManager {
     }
 
     public boolean validarFormatoId(String id) {
-        if (id == null || id.length() < 2) {
-            return false;
-        }
-
-        if (id.equalsIgnoreCase("admin")) return true;
-
-        String prefijo = id.substring(0, 1).toUpperCase();
-        switch (prefijo) {
-            case "M":
-                return id.matches("^[Mm]\\d+.*");
-            case "F":
-                return id.matches("^[Ff]\\d+.*");
-            default:
-                return false;
-        }
+        return id != null && !id.isBlank();
     }
 
     public String getMensajeErrorFormatoId(String id) {
         if (id == null || id.isEmpty()) {
             return "El ID no puede estar vacío.";
         }
-        if (id.equalsIgnoreCase("admin")) {
-            return "ID válido: Administrador del sistema.";
-        }
-        if (id.length() < 2) {
-            return "El ID debe tener al menos 2 caracteres.\n\n" +
-                    "Formatos válidos:\n" +
-                    "• Médicos: M001, M002, etc.\n" +
-                    "• Farmaceutas: F001, F002, etc.\n";
-        }
-
-        String prefijo = id.substring(0, 1).toUpperCase();
-        switch (prefijo) {
-            case "M":
-                if (!id.matches("^[Mm]\\d+.*")) {
-                    return "Los IDs de médicos deben comenzar con 'M' seguido de números.\nEjemplo: M001";
-                }
-                break;
-            case "F":
-                if (!id.matches("^[Ff]\\d+.*")) {
-                    return "Los IDs de farmaceutas deben comenzar con 'F' seguido de números.\nEjemplo: F001";
-                }
-                break;
-            default:
-                return "El ID debe comenzar con:\n" +
-                        "• 'M' para médicos (ej: M001)\n" +
-                        "• 'F' para farmaceutas (ej: F001)\n"+
-                        "• 'admin' para el administrador del sistema";
-        }
-
         return "Formato de ID correcto.";
     }
 }
