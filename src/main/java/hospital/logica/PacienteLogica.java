@@ -97,7 +97,7 @@ public class PacienteLogica {
                 conector.getPacientes().add(PacienteMapper.toXML(m));
             }
 
-            JAXBContext context = JAXBContext.newInstance(MedicamentoConector.class);
+            JAXBContext context = JAXBContext.newInstance(PacienteConector.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");

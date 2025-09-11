@@ -15,6 +15,7 @@ module ProyectoProgramacion3 {
     opens hospital.datos.conector to jakarta.xml.bind;
     opens hospital.datos.entidades to jakarta.xml.bind, org.glassfish.jaxb.runtime;
     opens hospital.model to jakarta.xml.bind;
+    opens hospital.datos to org.glassfish.jaxb.core, org.glassfish.jaxb.runtime;
 
     opens icons to javafx.fxml, javafx.graphics;
 

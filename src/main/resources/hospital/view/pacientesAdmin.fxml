@@ -38,10 +38,10 @@
       </Label>
       <TableView fx:id="tblPacientes" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn id="colIdentificacionPaciente" fx:id="colIdentificacionPaciente" prefWidth="127.66665649414062" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="ID" />
-            <TableColumn id="colNombrePaciente" fx:id="colNombrePaciente" prefWidth="257.3333435058594" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Nombre" />
-            <TableColumn id="colTelefonoPaciente" fx:id="colTelefonoPaciente" minWidth="0.0" prefWidth="131.66665649414062" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Teléfono" />
-            <TableColumn id="colFechaNac" fx:id="colFechaNac" prefWidth="188.00003051757812" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Fecha de nacimiento" />
+            <TableColumn id="colIdentificacionPaciente" fx:id="colIdentificacionPaciente" prefWidth="127.66665649414062" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="ID" />
+            <TableColumn id="colNombrePaciente" fx:id="colNombrePaciente" prefWidth="257.3333435058594" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Nombre" />
+            <TableColumn id="colTelefonoPaciente" fx:id="colTelefonoPaciente" minWidth="0.0" prefWidth="131.66665649414062" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Teléfono" />
+            <TableColumn id="colFechaNac" fx:id="colFechaNac" prefWidth="188.00003051757812" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Fecha de nacimiento" />
          </columns>
       </TableView>
       <Button id="btnAgregarPaciente" fx:id="btnAgregarPaciente" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="275.0" mnemonicParsing="false" onAction="#AgregarPaciente" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Agregar">

@@ -122,16 +122,25 @@ public class BuscarPacienteView {
             mostrarError("Debe seleccionar un paciente para eliminar.");
             return;
         }
-        try {
-            boolean eliminado = pacienteController.eliminar(admin, seleccionado.getId());
-            if (eliminado) {
-                mostrarInfo("Paciente eliminado correctamente.");
-                cargarPacientes();
-            } else {
-                mostrarError("No se pudo eliminar el paciente.");
+
+        // Agregar confirmación
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText("¿Está seguro que desea eliminar el paciente?");
+        confirmacion.setContentText("Paciente: " + seleccionado.getNombre() + " (ID: " + seleccionado.getId() + ")");
+
+        if (confirmacion.showAndWait().get() == ButtonType.OK) {
+            try {
+                boolean eliminado = pacienteController.eliminar(admin, seleccionado.getId());
+                if (eliminado) {
+                    mostrarInfo("Paciente eliminado correctamente.");
+                    cargarPacientes();
+                } else {
+                    mostrarError("No se pudo eliminar el paciente.");
+                }
+            } catch (Exception e) {
+                mostrarError("Error al eliminar: " + e.getMessage());
             }
-        } catch (Exception e) {
-            mostrarError("Error al eliminar: " + e.getMessage());
         }
     }
 
@@ -179,6 +188,7 @@ public class BuscarPacienteView {
         if (archivo != null) {
             try {
                 pacienteController.generarReporte(admin, archivo.getAbsolutePath());
+                mostrarInfo("Reporte generado exitosamente en: " + archivo.getAbsolutePath());
             } catch (Exception e) {
                 mostrarError("Error al generar reporte: " + e.getMessage());
             }
@@ -187,28 +197,28 @@ public class BuscarPacienteView {
 
     @FXML
     public void BuscarPaciente(ActionEvent event) {
-        String criterio = txtBuscar.getText().trim();
-        String filtro = btnFiltro.getValue();
-
-        if (criterio.isEmpty()) {
-            cargarPacientes();
+        Paciente seleccionado = tblPacientes.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            mostrarError("Debe seleccionar un paciente para eliminar.");
             return;
         }
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText("¿Está seguro que desea eliminar el paciente?");
+        confirmacion.setContentText("Paciente: " + seleccionado.getNombre() + " (ID: " + seleccionado.getId() + ")");
 
-        try {
-            List<Paciente> resultados;
-            if ("Nombre".equalsIgnoreCase(filtro)) {
-                resultados = pacienteController.buscarPorNombre(admin, criterio);
-            } else {
-                Paciente p = pacienteController.buscarPorId(admin, criterio);
-                resultados = (p != null) ? List.of(p) : List.of();
+        if (confirmacion.showAndWait().get() == ButtonType.OK) {
+            try {
+                boolean eliminado = pacienteController.eliminar(admin, seleccionado.getId());
+                if (eliminado) {
+                    mostrarInfo("Paciente eliminado correctamente.");
+                    cargarPacientes();
+                } else {
+                    mostrarError("No se pudo eliminar el paciente.");
+                }
+            } catch (Exception e) {
+                mostrarError("Error al eliminar: " + e.getMessage());
             }
-
-            pacientesObs = FXCollections.observableArrayList(resultados);
-            tblPacientes.setItems(pacientesObs);
-
-        } catch (Exception e) {
-            mostrarError("Error en búsqueda: " + e.getMessage());
         }
     }
 

@@ -39,26 +39,24 @@ public class RegistroPacienteView {
                 return;
             }
 
-            // Crear nuevo paciente
             Paciente nuevoPaciente = new Paciente();
             nuevoPaciente.setId(txtIdentificacion.getText().trim());
             nuevoPaciente.setNombre(txtNombre.getText().trim());
             nuevoPaciente.setTelefono(txtTelefono.getText().trim());
             nuevoPaciente.setFechaNacimiento(dtpFechaNac.getValue());
 
-            // Verificar que el ID no exista ya
-            if (pacienteController.buscarPorId(admin, nuevoPaciente.getId()) != null) {
-                mostrarError("Ya existe un paciente con el ID: " + nuevoPaciente.getId());
-                return;
-            }
-
-            // Guardar paciente
             pacienteController.agregar(admin, nuevoPaciente);
 
-            mostrarInfo("Paciente registrado correctamente.");
+            mostrarInfo("Paciente registrado exitosamente.\nID: " + nuevoPaciente.getId() +
+                    "\nNombre: " + nuevoPaciente.getNombre() +
+                    "\nTeléfono: " + nuevoPaciente.getTelefono() +
+                    "\nFecha de nacimiento: " + nuevoPaciente.getFechaNacimiento());
 
             // Limpiar formulario después de guardar
             limpiarCampos();
+
+            // Volver a búsqueda como en RegistroMedicoView
+            volverABusqueda();
 
         } catch (Exception e) {
             mostrarError("Error al registrar paciente: " + e.getMessage());
@@ -73,37 +71,32 @@ public class RegistroPacienteView {
     private boolean validarCampos() {
         StringBuilder errores = new StringBuilder();
 
-        // Validar ID
-        if (txtIdentificacion.getText().trim().isEmpty()) {
+        String id = txtIdentificacion.getText();
+        String nombre = txtNombre.getText();
+        String telefono = txtTelefono.getText();
+        LocalDate fecha = dtpFechaNac.getValue();
+
+        // Validaciones básicas como en las otras clases
+        if (id == null || id.trim().isEmpty()) {
             errores.append("- El ID es obligatorio.\n");
+        } else if (id.trim().length() < 2) {
+            errores.append("- El ID debe tener al menos 2 caracteres.\n");
         }
 
-        // Validar nombre
-        if (txtNombre.getText().trim().isEmpty()) {
+        if (nombre == null || nombre.trim().isEmpty()) {
             errores.append("- El nombre es obligatorio.\n");
+        } else if (nombre.trim().length() < 2) {
+            errores.append("- El nombre debe tener al menos 2 caracteres.\n");
         }
 
-        // Validar teléfono
-        if (txtTelefono.getText().trim().isEmpty()) {
+        if (telefono == null || telefono.trim().isEmpty()) {
             errores.append("- El teléfono es obligatorio.\n");
         }
 
-        // Validar fecha de nacimiento
-        if (dtpFechaNac.getValue() == null) {
+        if (fecha == null) {
             errores.append("- La fecha de nacimiento es obligatoria.\n");
-        } else if (dtpFechaNac.getValue().isAfter(LocalDate.now())) {
+        } else if (fecha.isAfter(LocalDate.now())) {
             errores.append("- La fecha de nacimiento no puede ser futura.\n");
-        }
-
-        // Validaciones adicionales
-        String id = txtIdentificacion.getText().trim();
-        if (!id.isEmpty() && !esIdValido(id)) {
-            errores.append("- El ID debe contener solo números y letras.\n");
-        }
-
-        String telefono = txtTelefono.getText().trim();
-        if (!telefono.isEmpty() && !esTelefonoValido(telefono)) {
-            errores.append("- El formato del teléfono no es válido.\n");
         }
 
         if (errores.length() > 0) {
@@ -157,10 +150,11 @@ public class RegistroPacienteView {
         alert.showAndWait();
     }
 
+
     private void mostrarInfo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
-        alert.setHeaderText("Operación exitosa");
+        alert.setTitle("Registro Exitoso");
+        alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
