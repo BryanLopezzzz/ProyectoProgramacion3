@@ -2,7 +2,7 @@
 <MedicamentosData>
     <Medicamentos>
         <Medicamento>
-            <codigo>500</codigo>
+            <codigo>400</codigo>
             <nombre>Acetaminofen</nombre>
             <presentacion>Oral</presentacion>
         </Medicamento>

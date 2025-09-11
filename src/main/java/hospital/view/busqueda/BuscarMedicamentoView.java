@@ -163,7 +163,7 @@ public class BuscarMedicamentoView implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/EditarMedicamentoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/editarMedicamento.fxml"));
             Parent root = loader.load();
 
             EditarMedicamentoView editarController = loader.getController();
