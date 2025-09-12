@@ -22,11 +22,11 @@
       </Text>
       <TableView fx:id="tblRecetas" layoutX="89.0" layoutY="270.0" prefHeight="253.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn id="colIdentificacionReceta" fx:id="colIdentificacionReceta" prefWidth="93.33334350585938" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="ID" />
-            <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="217.0" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Medicamento" />
-            <TableColumn id="colPresentacion" fx:id="colPresentacion" minWidth="0.0" prefWidth="116.66668701171875" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Presentación" />
-            <TableColumn id="colFechaConfeccion" fx:id="colFechaConfeccion" minWidth="0.0" prefWidth="158.66668701171875" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Fecha de confección" />
-            <TableColumn id="colEstado" fx:id="colEstado" minWidth="0.0" prefWidth="117.33331298828125" style="-fx-background-color: #16254c; -fx-border-color: #b3b3b3;" text="Estado" />
+            <TableColumn id="colIdentificacionReceta" fx:id="colIdentificacionReceta" prefWidth="93.33334350585938" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="ID" />
+            <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="217.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Medicamento" />
+            <TableColumn id="colPresentacion" fx:id="colPresentacion" minWidth="0.0" prefWidth="116.66668701171875" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Presentación" />
+            <TableColumn id="colFechaConfeccion" fx:id="colFechaConfeccion" minWidth="0.0" prefWidth="158.66668701171875" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Fecha de confección" />
+            <TableColumn id="colEstado" fx:id="colEstado" minWidth="0.0" prefWidth="117.33331298828125" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Estado" />
          </columns>
       </TableView>
       <Button id="btnVerDetalle" fx:id="btnVerDetalle" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="224.0" mnemonicParsing="false" onAction="#VerDetalle" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Ver">

@@ -1,8 +1,9 @@
 package hospital.view;
+
 import hospital.controller.RecetaController;
 import hospital.model.*;
 import hospital.view.busqueda.BuscarPacientePreescripcionView;
-import hospital.view.busqueda.BuscarMedicamentoView;
+import hospital.view.busqueda.BuscarMedicamentoPreescripcionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -37,30 +39,29 @@ public class PreescribirRecetaView {
     @FXML private Button btnEditarReceta;
     @FXML private Button btnVolver;
     @FXML private Button btnPreescribir;
+    @FXML private Button btnLimpiarTodo;  // Nuevo botón para limpiar manualmente
 
-    private ObservableList<Medicamento> medicamentos;
-    private final RecetaController recetaController = new RecetaController();
     private ObservableList<DetalleReceta> listaDetalles = FXCollections.observableArrayList();
+    private final RecetaController recetaController = new RecetaController();
     private Paciente pacienteSeleccionado;
-    private Medico medico; // Se inyecta desde la vista anterior
-    private Receta recetaActual; // La receta que se está creando
+    private Medico medico;
+    private Receta recetaActual;
 
     @FXML
     public void initialize() {
         configurarTabla();
         configurarFechaConfeccion();
         configurarFechaRetiro();
+        cargarDatosPersistentes(); // Cargar datos si existen
 
-        // Listener para habilitar/deshabilitar botones
-        tblRecetas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            boolean haySeleccion = newSelection != null;
-            btnEliminarReceta.setDisable(!haySeleccion);
-            btnEditarReceta.setDisable(!haySeleccion);
+        tblRecetas.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            boolean hay = newSel != null;
+            btnEliminarReceta.setDisable(!hay);
+            btnEditarReceta.setDisable(!hay);
         });
     }
 
     private void configurarTabla() {
-        // Configurar las columnas de la tabla
         colNombreMedicamento.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(
                         cellData.getValue().getMedicamento() != null ?
@@ -77,27 +78,39 @@ public class PreescribirRecetaView {
         conCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         colDuracion.setCellValueFactory(new PropertyValueFactory<>("diasTratamiento"));
 
-        // Asignar la lista observable a la tabla
         tblRecetas.setItems(listaDetalles);
 
-        // Deshabilitar botones inicialmente
         btnEliminarReceta.setDisable(true);
         btnEditarReceta.setDisable(true);
     }
 
     private void configurarFechaConfeccion() {
-        // Mostrar fecha actual como fecha de confección (solo lectura)
-        LocalDate hoy = LocalDate.now();
-        txtFechaConfeccion.setText(hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        txtFechaConfeccion.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     private void configurarFechaRetiro() {
-        // Establecer fecha de retiro por defecto (7 días después)
-        dtpFechaRetiro.setValue(LocalDate.now().plusDays(7));
+        // Solo configurar si no hay fecha ya establecida
+        if (dtpFechaRetiro.getValue() == null) {
+            dtpFechaRetiro.setValue(LocalDate.now().plusDays(7));
+        }
+    }
+
+    private void cargarDatosPersistentes() {
+        // Si hay datos de una sesión anterior, mantenerlos
+        // En una implementación real podrías cargar desde un archivo temporal o preferencias
+        System.out.println("Cargando datos persistentes - Detalles: " + listaDetalles.size());
+
+        // Actualizar estado de botones
+        actualizarEstadoBotones();
+    }
+
+    private void actualizarEstadoBotones() {
+        btnPreescribir.setDisable(pacienteSeleccionado == null || listaDetalles.isEmpty());
     }
 
     public void setMedico(Medico medico) {
         this.medico = medico;
+        System.out.println("Médico configurado: " + (medico != null ? medico.getNombre() : "NULL"));
     }
 
     @FXML
@@ -108,7 +121,6 @@ public class PreescribirRecetaView {
 
             BuscarPacientePreescripcionView buscarView = loader.getController();
 
-
             Stage stage = new Stage();
             stage.setTitle("Buscar Paciente");
             stage.setScene(new Scene(root));
@@ -116,13 +128,15 @@ public class PreescribirRecetaView {
             stage.initOwner(btnBuscarPaciente.getScene().getWindow());
             stage.showAndWait();
 
-            // Recuperar selección después de cerrar
-            pacienteSeleccionado = buscarView.getPacienteSeleccionado();
-            if (pacienteSeleccionado != null) {
-                txtBuscarPaciente.setText(
-                        pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")"
-                );
-                btnPreescribir.setDisable(false);
+            Paciente pacienteNuevo = buscarView.getPacienteSeleccionado();
+            if (pacienteNuevo != null) {
+                // Solo cambiar si es diferente al actual
+                if (pacienteSeleccionado == null || !pacienteSeleccionado.getId().equals(pacienteNuevo.getId())) {
+                    pacienteSeleccionado = pacienteNuevo;
+                    txtBuscarPaciente.setText(pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")");
+                    // No limpiar los medicamentos, mantenerlos
+                }
+                actualizarEstadoBotones();
             }
 
         } catch (IOException e) {
@@ -132,31 +146,70 @@ public class PreescribirRecetaView {
 
     @FXML
     private void AgregarReceta(ActionEvent event) {
-        if (pacienteSeleccionado == null) {
-            mostrarAdvertencia("Paciente requerido", "Debe seleccionar un paciente antes de agregar medicamentos.");
+        if (medico == null) {
+            mostrarError("Acceso denegado", "Debe estar autenticado como médico para preescribir recetas.");
             return;
         }
 
         try {
-            // Crear receta si no existe
             if (recetaActual == null) {
                 crearRecetaTemporal();
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            // Buscar medicamento
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarMedicamentoPrescripcion.fxml"));
             Parent root = loader.load();
-
-            DetalleRecetaView buscarMedicamentoView = loader.getController();
+            BuscarMedicamentoPreescripcionView buscarView = loader.getController();
 
             Stage stage = new Stage();
-            stage.setTitle("Seleccionar Medicamento");
+            stage.setTitle("Buscar Medicamento");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(btnAgregarReceta.getScene().getWindow());
             stage.showAndWait();
 
-            // Después de seleccionar medicamento, abrir vista de detalles
-            // Esta funcionalidad requeriría modificaciones adicionales en BuscarMedicamentoView
+            Medicamento seleccionado = buscarView.getMedicamentoSeleccionado();
+            if (seleccionado == null) {
+                return;
+            }
+
+            // Verificar si el medicamento ya está en la lista
+            boolean yaExiste = listaDetalles.stream()
+                    .anyMatch(d -> d.getMedicamento() != null &&
+                            d.getMedicamento().getCodigo().equals(seleccionado.getCodigo()));
+
+            if (yaExiste) {
+                Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmacion.setTitle("Medicamento duplicado");
+                confirmacion.setHeaderText("El medicamento ya está en la receta");
+                confirmacion.setContentText("¿Desea agregar una nueva entrada para " + seleccionado.getNombre() + "?");
+
+                Optional<ButtonType> resultado = confirmacion.showAndWait();
+                if (resultado.isEmpty() || resultado.get() != ButtonType.OK) {
+                    return;
+                }
+            }
+
+            // Abrir detalle
+            FXMLLoader detalleLoader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            Parent detalleRoot = detalleLoader.load();
+            DetalleRecetaView detalleView = detalleLoader.getController();
+
+            detalleView.setContext(medico, recetaActual.getId(), seleccionado.getCodigo());
+
+            Stage detalleStage = new Stage();
+            detalleStage.setTitle("Detalle de Medicamento");
+            detalleStage.setScene(new Scene(detalleRoot));
+            detalleStage.initModality(Modality.WINDOW_MODAL);
+            detalleStage.initOwner(btnAgregarReceta.getScene().getWindow());
+            detalleStage.showAndWait();
+
+            DetalleReceta nuevoDetalle = detalleView.getDetalleCreado();
+            if (nuevoDetalle != null) {
+                agregarDetalleReceta(nuevoDetalle);
+                actualizarTablaDetalles();
+                actualizarEstadoBotones();
+            }
 
         } catch (IOException e) {
             mostrarError("Error", "No se pudo abrir la ventana de selección de medicamentos: " + e.getMessage());
@@ -166,7 +219,6 @@ public class PreescribirRecetaView {
     @FXML
     private void EliminarReceta(ActionEvent event) {
         DetalleReceta detalleSeleccionado = tblRecetas.getSelectionModel().getSelectedItem();
-
         if (detalleSeleccionado == null) {
             mostrarAdvertencia("Selección requerida", "Debe seleccionar un detalle para eliminar.");
             return;
@@ -181,20 +233,22 @@ public class PreescribirRecetaView {
         Optional<ButtonType> resultado = confirmacion.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             listaDetalles.remove(detalleSeleccionado);
-
-            // Si no quedan detalles, habilitar de nuevo el botón de agregar
-            if (listaDetalles.isEmpty()) {
-                btnPreescribir.setDisable(pacienteSeleccionado == null);
+            if (recetaActual != null) {
+                recetaActual.getDetalles().remove(detalleSeleccionado);
             }
+            actualizarEstadoBotones();
         }
     }
 
     @FXML
     private void EditarReceta(ActionEvent event) {
         DetalleReceta detalleSeleccionado = tblRecetas.getSelectionModel().getSelectedItem();
-
         if (detalleSeleccionado == null) {
             mostrarAdvertencia("Selección requerida", "Debe seleccionar un detalle para editar.");
+            return;
+        }
+        if (medico == null) {
+            mostrarError("Acceso denegado", "Debe estar autenticado como médico para editar la receta.");
             return;
         }
 
@@ -203,8 +257,15 @@ public class PreescribirRecetaView {
             Parent root = loader.load();
 
             DetalleRecetaView detalleView = loader.getController();
-            detalleView.setContext(medico, recetaActual.getId(),
-                    detalleSeleccionado.getMedicamento().getCodigo());
+
+            String recetaId = recetaActual != null ? recetaActual.getId() : generarIdReceta();
+            String medicamentoId = null;
+            if (detalleSeleccionado.getMedicamento() != null) {
+                medicamentoId = detalleSeleccionado.getMedicamento().getCodigo();
+            }
+
+            detalleView.setContext(medico, recetaId, medicamentoId);
+            detalleView.setDetalleParaEditar(detalleSeleccionado);
 
             Stage stage = new Stage();
             stage.setTitle("Editar Detalle de Receta");
@@ -213,8 +274,18 @@ public class PreescribirRecetaView {
             stage.initOwner(btnEditarReceta.getScene().getWindow());
             stage.showAndWait();
 
-            // Recargar los detalles de la receta
-            actualizarTablaDetalles();
+            DetalleReceta editado = detalleView.getDetalleCreado();
+            if (editado != null) {
+                if (!listaDetalles.contains(editado)) {
+                    listaDetalles.remove(detalleSeleccionado);
+                    listaDetalles.add(editado);
+                }
+                if (recetaActual != null) {
+                    recetaActual.getDetalles().clear();
+                    recetaActual.getDetalles().addAll(listaDetalles);
+                }
+                actualizarTablaDetalles();
+            }
 
         } catch (IOException e) {
             mostrarError("Error", "No se pudo abrir el formulario de edición: " + e.getMessage());
@@ -227,44 +298,50 @@ public class PreescribirRecetaView {
             mostrarAdvertencia("Paciente requerido", "Debe seleccionar un paciente.");
             return;
         }
-
+        if (medico == null) {
+            mostrarError("Acceso denegado", "Debe estar autenticado como médico para preescribir recetas.");
+            return;
+        }
         if (dtpFechaRetiro.getValue() == null) {
             mostrarAdvertencia("Fecha requerida", "Debe establecer una fecha de retiro.");
             return;
         }
-
         if (dtpFechaRetiro.getValue().isBefore(LocalDate.now())) {
             mostrarAdvertencia("Fecha inválida", "La fecha de retiro no puede ser anterior a hoy.");
             return;
         }
-
         if (listaDetalles.isEmpty()) {
             mostrarAdvertencia("Medicamentos requeridos", "Debe agregar al menos un medicamento a la receta.");
             return;
         }
 
         try {
-            // Crear la receta final
             Receta receta = new Receta();
-            receta.setId(generarIdReceta());
+            receta.setId(recetaActual != null ? recetaActual.getId() : generarIdReceta());
             receta.setPaciente(pacienteSeleccionado);
             receta.setMedico(medico);
             receta.setFecha(LocalDate.now());
             receta.setFechaRetiro(dtpFechaRetiro.getValue());
             receta.setEstado(EstadoReceta.CONFECCIONADA);
 
-            // Agregar todos los detalles
-            for (DetalleReceta detalle : listaDetalles) {
-                receta.agregarDetalle(detalle);
+            for (DetalleReceta d : listaDetalles) {
+                receta.agregarDetalle(d);
             }
 
-            // Guardar la receta
             recetaController.crearReceta(medico, receta);
 
             mostrarInformacion("Éxito", "Receta preescrita correctamente con ID: " + receta.getId());
 
-            // Limpiar formulario
-            limpiarFormulario();
+            // NO limpiar automáticamente - mantener los datos
+            // Solo resetear algunos campos para nueva receta
+            recetaActual = null;
+            dtpFechaRetiro.setValue(LocalDate.now().plusDays(7));
+            configurarFechaConfeccion();
+
+            mostrarInformacion("Información",
+                    "La receta ha sido creada exitosamente.\n" +
+                            "Los medicamentos se mantienen para facilitar la creación de recetas similares.\n" +
+                            "Use 'Limpiar Todo' si desea empezar desde cero.");
 
         } catch (Exception e) {
             mostrarError("Error al preescribir", e.getMessage());
@@ -272,16 +349,40 @@ public class PreescribirRecetaView {
     }
 
     @FXML
+    private void LimpiarTodo() {
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar limpieza");
+        confirmacion.setHeaderText("¿Limpiar todos los datos?");
+        confirmacion.setContentText("Se eliminarán todos los medicamentos y se restablecerán los campos.\n¿Desea continuar?");
+
+        Optional<ButtonType> resultado = confirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            limpiarFormulario();
+        }
+    }
+
+    @FXML
     private void Volver(ActionEvent event) {
-        // Confirmar si hay cambios sin guardar
         if (!listaDetalles.isEmpty() || pacienteSeleccionado != null) {
             Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
             confirmacion.setTitle("Confirmar salida");
-            confirmacion.setHeaderText("¿Salir sin guardar?");
-            confirmacion.setContentText("Hay cambios sin guardar. ¿Está seguro que desea salir?");
+            confirmacion.setHeaderText("¿Salir manteniendo los datos?");
+            confirmacion.setContentText("Los datos se mantendrán para cuando regrese a esta vista.\n¿Desea continuar?");
+
+            ButtonType mantener = new ButtonType("Mantener datos");
+            ButtonType limpiar = new ButtonType("Limpiar y salir");
+            ButtonType cancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            confirmacion.getButtonTypes().setAll(mantener, limpiar, cancelar);
 
             Optional<ButtonType> resultado = confirmacion.showAndWait();
-            if (resultado.isEmpty() || resultado.get() != ButtonType.OK) {
+            if (resultado.isPresent()) {
+                if (resultado.get() == limpiar) {
+                    limpiarFormulario();
+                } else if (resultado.get() == cancelar) {
+                    return;
+                }
+            } else {
                 return;
             }
         }
@@ -294,16 +395,16 @@ public class PreescribirRecetaView {
             stage.setTitle("Dashboard");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
             mostrarError("Error", "No se pudo cargar el dashboard: " + e.getMessage());
         }
     }
 
-    // Métodos de utilidad
     private void crearRecetaTemporal() {
         recetaActual = new Receta();
         recetaActual.setId(generarIdReceta());
-        recetaActual.setPaciente(pacienteSeleccionado);
+        if (pacienteSeleccionado != null) {
+            recetaActual.setPaciente(pacienteSeleccionado);
+        }
         recetaActual.setMedico(medico);
         recetaActual.setFecha(LocalDate.now());
         recetaActual.setFechaRetiro(dtpFechaRetiro.getValue());
@@ -316,8 +417,10 @@ public class PreescribirRecetaView {
 
     private void actualizarTablaDetalles() {
         if (recetaActual != null) {
-            listaDetalles.setAll(recetaActual.getDetalles());
+            recetaActual.getDetalles().clear();
+            recetaActual.getDetalles().addAll(listaDetalles);
         }
+        tblRecetas.refresh();
     }
 
     private void limpiarFormulario() {
@@ -326,47 +429,48 @@ public class PreescribirRecetaView {
         txtBuscarPaciente.clear();
         listaDetalles.clear();
         dtpFechaRetiro.setValue(LocalDate.now().plusDays(7));
-        btnPreescribir.setDisable(true);
+        configurarFechaConfeccion();
+        actualizarEstadoBotones();
+
+        System.out.println("Formulario limpiado completamente");
     }
 
-    // Métodos para mostrar alertas
+    public void agregarDetalleReceta(DetalleReceta detalle) {
+        if (detalle != null) {
+            listaDetalles.add(detalle);
+            if (recetaActual != null) {
+                recetaActual.agregarDetalle(detalle);
+            }
+            System.out.println("Detalle agregado. Total: " + listaDetalles.size());
+        }
+    }
+
+    // Getters
+    public Receta getRecetaActual() { return recetaActual; }
+    public Paciente getPacienteSeleccionado() { return pacienteSeleccionado; }
+
+    // Métodos de UI
     private void mostrarError(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(titulo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
 
     private void mostrarAdvertencia(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(titulo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
 
     private void mostrarInformacion(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
-        alert.setHeaderText(titulo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
-    }
-
-    // Métodos públicos para integración con otras vistas
-    public void agregarDetalleReceta(DetalleReceta detalle) {
-        listaDetalles.add(detalle);
-        if (recetaActual != null) {
-            recetaActual.agregarDetalle(detalle);
-        }
-    }
-
-    public Receta getRecetaActual() {
-        return recetaActual;
-    }
-
-    public Paciente getPacienteSeleccionado() {
-        return pacienteSeleccionado;
     }
 }

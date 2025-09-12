@@ -4,6 +4,7 @@ import hospital.controller.DashboardController;
 import hospital.controller.LoginController;
 import hospital.logica.Sesion;
 import hospital.logica.UsuarioManager;
+import hospital.model.Medico;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -274,15 +275,36 @@ public class DashboardView {
     @FXML
     public void irAPreescribirReceta() {
         try {
+            Usuario usuarioActual = Sesion.getUsuario();
+
+            // Verificar que el usuario sea realmente un médico
+            UsuarioManager.TipoUsuario tipo = usuarioManager.determinarTipoUsuario(usuarioActual.getId());
+            if (tipo != UsuarioManager.TipoUsuario.MEDICO) {
+                Alerta.error("Acceso denegado", "Solo los médicos pueden prescribir recetas.");
+                return;
+            }
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/prescribirReceta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+
+            // Obtener el controlador y configurar el médico
+            PreescribirRecetaView controller = fxmlLoader.getController();
+
+            // Crear objeto Medico con los datos del usuario autenticado
+            Medico medico = new Medico();
+            medico.setId(usuarioActual.getId());
+            medico.setNombre(usuarioActual.getNombre());
+            // Agregar otros campos necesarios según tu modelo Medico
+
+            controller.setMedico(medico);
+
             Stage stage = (Stage) btnPrescribirReceta.getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Prescribir Receta");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-           Alerta.error("Error", "Error al cargar la vista de prescribir receta.");
+            Alerta.error("Error", "Error al cargar la vista de prescribir receta: " + e.getMessage());
         }
     }
 
