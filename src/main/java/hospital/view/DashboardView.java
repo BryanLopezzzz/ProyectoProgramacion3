@@ -108,64 +108,64 @@ public class DashboardView {
     }
 
     private void configurarPermisosAdministrador() {
-        btnMedicos.setVisible(true);
-        btnFarmaceutas.setVisible(true);
-        btnPacientes.setVisible(true);
-        btnMedicamentos.setVisible(true);
+        btnMedicos.setDisable(false);
+        btnFarmaceutas.setDisable(false);
+        btnPacientes.setDisable(false);
+        btnMedicamentos.setDisable(false);
 
-        btnPrescribirReceta.setVisible(false);
-        btnDespachoReceta.setVisible(false);
-        btnHistoricoRecetas.setVisible(true);
-        btnCambiarClave.setVisible(true);
-        btnAcercaDe.setVisible(true);
-        btnLogout.setVisible(true);
+        btnPrescribirReceta.setDisable(true);
+        btnDespachoReceta.setDisable(true);
+        btnHistoricoRecetas.setDisable(false);
+        btnCambiarClave.setDisable(false);
+        btnAcercaDe.setDisable(false);
+        btnLogout.setDisable(false);
     }
 
     private void configurarPermisosMedico() {
-        // Ocultar funciones no permitidas
-        btnMedicos.setVisible(false);
-        btnFarmaceutas.setVisible(false);
-        btnPacientes.setVisible(false);
-        btnMedicamentos.setVisible(false);
-        btnDespachoReceta.setVisible(false);
+        // Deshabilitar funciones no permitidas
+        btnMedicos.setDisable(true);
+        btnFarmaceutas.setDisable(true);
+        btnPacientes.setDisable(true);
+        btnMedicamentos.setDisable(true);
+        btnDespachoReceta.setDisable(true);
 
-        // Mostrar funciones permitidas
-        btnPrescribirReceta.setVisible(true);
-        btnHistoricoRecetas.setVisible(true);
-        btnCambiarClave.setVisible(true);
-        btnAcercaDe.setVisible(true);
-        btnLogout.setVisible(true);
+        // Habilitar funciones permitidas
+        btnPrescribirReceta.setDisable(false);
+        btnHistoricoRecetas.setDisable(false);
+        btnCambiarClave.setDisable(false);
+        btnAcercaDe.setDisable(false);
+        btnLogout.setDisable(false);
     }
 
     private void configurarPermisosFarmaceuta() {
-        // Ocultar funciones no permitidas
-        btnMedicos.setVisible(false);
-        btnFarmaceutas.setVisible(false);
-        btnPacientes.setVisible(false);
-        btnMedicamentos.setVisible(false);
-        btnPrescribirReceta.setVisible(false);
+        // Deshabilitar funciones no permitidas
+        btnMedicos.setDisable(true);
+        btnFarmaceutas.setDisable(true);
+        btnPacientes.setDisable(true);
+        btnMedicamentos.setDisable(true);
+        btnPrescribirReceta.setDisable(true);
 
-        // Mostrar funciones permitidas
-        btnDespachoReceta.setVisible(true);
-        btnHistoricoRecetas.setVisible(true);
-        btnCambiarClave.setVisible(true);
-        btnAcercaDe.setVisible(true);
-        btnLogout.setVisible(true);
+        // Habilitar funciones permitidas
+        btnDespachoReceta.setDisable(false);
+        btnHistoricoRecetas.setDisable(false);
+        btnCambiarClave.setDisable(false);
+        btnAcercaDe.setDisable(false);
+        btnLogout.setDisable(false);
     }
 
     private void ocultarTodosLosBotones() {
-        btnMedicos.setVisible(false);
-        btnFarmaceutas.setVisible(false);
-        btnPacientes.setVisible(false);
-        btnMedicamentos.setVisible(false);
-        btnPrescribirReceta.setVisible(false);
-        btnDespachoReceta.setVisible(false);
+        btnMedicos.setDisable(true);
+        btnFarmaceutas.setDisable(true);
+        btnPacientes.setDisable(true);
+        btnMedicamentos.setDisable(true);
+        btnPrescribirReceta.setDisable(true);
+        btnDespachoReceta.setDisable(true);
 
-        // Solo funciones básicas
-        btnHistoricoRecetas.setVisible(true);
-        btnCambiarClave.setVisible(true);
-        btnAcercaDe.setVisible(true);
-        btnLogout.setVisible(true);
+        // Funciones básicas siempre deshabilitadas si no hay usuario reconocido
+        btnHistoricoRecetas.setDisable(true);
+        btnCambiarClave.setDisable(true);
+        btnAcercaDe.setDisable(true);
+        btnLogout.setDisable(true);
     }
 
     private void mostrarGraficoLineas(Usuario usuario) {

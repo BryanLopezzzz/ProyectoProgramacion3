@@ -7,5 +7,11 @@
             <nombre>Claudia</nombre>
             <especialidad>Rectologa</especialidad>
         </Medico>
+        <Medico>
+            <id>999</id>
+            <clave>999</clave>
+            <nombre>Geminis</nombre>
+            <especialidad>SOLID</especialidad>
+        </Medico>
     </Medicos>
 </MedicosData>
