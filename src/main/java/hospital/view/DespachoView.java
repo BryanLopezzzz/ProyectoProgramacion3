@@ -1,5 +1,10 @@
 package hospital.view;
 
+import hospital.controller.RecetaController;
+import javafx.collections.FXCollections;
+import hospital.logica.Sesion;
+import hospital.model.*;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,28 +12,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import hospital.model.Receta;
+
+import java.util.List;
 
 public class DespachoView {
     @FXML
     private TextField txtBuscar;
 
     @FXML
-    private TableView tblRecetas;
+    private TableView<Receta> tblRecetas;
 
     @FXML
-    private TableColumn colIdentificacionReceta;
+    private TableColumn<Receta, String> colIdentificacionReceta;
 
     @FXML
-    private TableColumn colNombreMedicamento;
+    private TableColumn<Receta, String> colNombreMedicamento;
 
     @FXML
-    private TableColumn colPresentacion;
+    private TableColumn<Receta, String> colPresentacion;
 
     @FXML
-    private TableColumn colFechaConfeccion;
+    private TableColumn<Receta, String> colFechaConfeccion;
 
     @FXML
-    private TableColumn colEstado;
+    private TableColumn<Receta, String> colEstado;
 
     @FXML
     private Button btnVerDetalle;
@@ -39,14 +47,127 @@ public class DespachoView {
     @FXML
     private Button btnBuscar;
 
-    @FXML
-    public void VerDetalle(ActionEvent event) {
+    private final RecetaController recetaController = new RecetaController();
+    private final ObservableList<Receta> recetasObservable = FXCollections.observableArrayList();
 
+    public void initialize() {
+        // Configuración de columnas
+        colIdentificacionReceta.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(
+                data.getValue().getId()
+        ));
+
+        colNombreMedicamento.setCellValueFactory(data -> {
+            if (!data.getValue().getDetalles().isEmpty()) {
+                return new javafx.beans.property.SimpleStringProperty(
+                        data.getValue().getDetalles().get(0).getMedicamento().getNombre()
+                );
+            }
+            return new javafx.beans.property.SimpleStringProperty("-");
+        });
+
+        colPresentacion.setCellValueFactory(data -> {
+            if (!data.getValue().getDetalles().isEmpty()) {
+                return new javafx.beans.property.SimpleStringProperty(
+                        data.getValue().getDetalles().get(0).getMedicamento().getPresentacion()
+                );
+            }
+            return new javafx.beans.property.SimpleStringProperty("-");
+        });
+
+        colFechaConfeccion.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(
+                data.getValue().getFecha() != null ? data.getValue().getFecha().toString() : "-"
+        ));
+
+        colEstado.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(
+                data.getValue().getEstado().name()
+        ));
+
+        tblRecetas.setItems(recetasObservable);
+        cargarRecetas();
+    }
+
+    private void cargarRecetas() {
+        try {
+            List<Receta> recetas = recetaController.listarRecetas();
+            recetasObservable.setAll(recetas);
+        } catch (Exception e) {
+            Alerta.error("Error", "Error cargando recetas: " + e.getMessage());
+        }
     }
 
     @FXML
     public void BuscarPaciente(ActionEvent event) {
+        String filtro = txtBuscar.getText().trim();
+        if (filtro.isEmpty()) {
+            cargarRecetas();
+            return;
+        }
+        try {
+            Receta receta = recetaController.buscarReceta(filtro);
+            if (receta != null) {
+                recetasObservable.setAll(receta);
+            } else {
+                recetasObservable.clear();
+                Alerta.info("Búsqueda", "No se encontró receta con ese ID.");
+            }
+        } catch (Exception e) {
+            Alerta.error("Error en búsqueda", e.getMessage());
+        }
+    }
 
+    @FXML
+    public void VerDetalle(ActionEvent event) {
+        Receta seleccionada = tblRecetas.getSelectionModel().getSelectedItem();
+        if (seleccionada == null) {
+            Alerta.info("Detalle", "Debe seleccionar una receta de la lista.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            Parent root = loader.load();
+            DetalleRecetaView controller = loader.getController();
+            controller.setReceta(seleccionada);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Detalle de Receta");
+            stage.show();
+        } catch (Exception e) {
+            Alerta.error("Error", "No se pudo cargar el detalle de la receta.");
+        }
+    }
+
+    @FXML
+    private void CambiarEstado(ActionEvent event) {
+        Receta seleccionada = tblRecetas.getSelectionModel().getSelectedItem();
+        if (seleccionada == null) {
+            Alerta.info("Estado", "Debe seleccionar una receta primero.");
+            return;
+        }
+        try {
+            Farmaceuta f = (Farmaceuta) Sesion.getUsuario();
+            EstadoReceta nuevoEstado = siguienteEstado(seleccionada.getEstado());
+            if (nuevoEstado == seleccionada.getEstado()) {
+                Alerta.info("Estado", "No se puede avanzar más en el flujo de estados.");
+                return;
+            }
+            recetaController.actualizarEstado(f, seleccionada.getId(), nuevoEstado);
+            seleccionada.setEstado(nuevoEstado);
+            tblRecetas.refresh();
+            Alerta.info("Estado actualizado", "La receta pasó a estado: " + nuevoEstado);
+        } catch (Exception e) {
+            Alerta.error("Error cambiando estado", e.getMessage());
+        }
+    }
+
+    private EstadoReceta siguienteEstado(EstadoReceta actual) {
+        return switch (actual) {
+            case CONFECCIONADA -> EstadoReceta.EN_PROCESO;
+            case EN_PROCESO -> EstadoReceta.LISTA;
+            case LISTA -> EstadoReceta.ENTREGADA;
+            default -> actual;
+        };
     }
 
     @FXML
@@ -59,9 +180,7 @@ public class DespachoView {
             stage.setTitle("Dashboard");
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar el dashboard.");
-            alert.showAndWait();
+            Alerta.error("Error", "Error al cargar el dashboard.");
         }
     }
 }
