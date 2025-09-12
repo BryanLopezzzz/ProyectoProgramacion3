@@ -106,7 +106,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="paneLineChart" layoutX="362.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" />
-      <Pane fx:id="panePieChart" layoutX="632.0" layoutY="128.0" prefHeight="200.0" prefWidth="200.0" />
+      <Pane fx:id="paneLineChart" cache="true" cacheHint="QUALITY" layoutX="347.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
+      <Pane fx:id="panePieChart" layoutX="587.0" layoutY="341.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -174,6 +174,8 @@ public class DashboardView {
         NumberAxis yAxis = new NumberAxis();
         LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle("Medicamentos por mes");
+        lineChart.setPrefWidth(350);
+        lineChart.setPrefHeight(250);
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Medicamentos");
@@ -198,6 +200,8 @@ public class DashboardView {
         if (usuario == null) return;
         PieChart pieChart = new PieChart();
         pieChart.setTitle("Recetas por estado");
+        pieChart.setPrefWidth(350);
+        pieChart.setPrefHeight(250);
 
         try {
             var datos = dashboardController.contarRecetasPorEstado(usuario);
