@@ -3,6 +3,8 @@ module ProyectoProgramacion3 {
     requires javafx.fxml;
     requires java.desktop;
     requires jakarta.xml.bind;
+    requires javafx.base;
+    requires javafx.graphics;
 
     // JavaFX
     opens hospital.view to javafx.fxml;

@@ -332,61 +332,13 @@ public class PreescribirRecetaView {
 
             mostrarInformacion("Éxito", "Receta preescrita correctamente con ID: " + receta.getId());
 
-            // NO limpiar automáticamente - mantener los datos
-            // Solo resetear algunos campos para nueva receta
-            recetaActual = null;
-            dtpFechaRetiro.setValue(LocalDate.now().plusDays(7));
-            configurarFechaConfeccion();
-
-            mostrarInformacion("Información",
-                    "La receta ha sido creada exitosamente.\n" +
-                            "Los medicamentos se mantienen para facilitar la creación de recetas similares.\n" +
-                            "Use 'Limpiar Todo' si desea empezar desde cero.");
-
         } catch (Exception e) {
             mostrarError("Error al preescribir", e.getMessage());
         }
     }
 
-    @FXML
-    private void LimpiarTodo() {
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar limpieza");
-        confirmacion.setHeaderText("¿Limpiar todos los datos?");
-        confirmacion.setContentText("Se eliminarán todos los medicamentos y se restablecerán los campos.\n¿Desea continuar?");
-
-        Optional<ButtonType> resultado = confirmacion.showAndWait();
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            limpiarFormulario();
-        }
-    }
-
-    @FXML
+        @FXML
     private void Volver(ActionEvent event) {
-        if (!listaDetalles.isEmpty() || pacienteSeleccionado != null) {
-            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmacion.setTitle("Confirmar salida");
-            confirmacion.setHeaderText("¿Salir manteniendo los datos?");
-            confirmacion.setContentText("Los datos se mantendrán para cuando regrese a esta vista.\n¿Desea continuar?");
-
-            ButtonType mantener = new ButtonType("Mantener datos");
-            ButtonType limpiar = new ButtonType("Limpiar y salir");
-            ButtonType cancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            confirmacion.getButtonTypes().setAll(mantener, limpiar, cancelar);
-
-            Optional<ButtonType> resultado = confirmacion.showAndWait();
-            if (resultado.isPresent()) {
-                if (resultado.get() == limpiar) {
-                    limpiarFormulario();
-                } else if (resultado.get() == cancelar) {
-                    return;
-                }
-            } else {
-                return;
-            }
-        }
-
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));

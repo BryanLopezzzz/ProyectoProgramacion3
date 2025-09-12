@@ -124,9 +124,9 @@ public class DespachoView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/verRecetaDespacho.fxml"));
             Parent root = loader.load();
-            DetalleRecetaView controller = loader.getController();
+            VerRecetaDespachoView controller = loader.getController();
             controller.setReceta(seleccionada);
 
             Stage stage = new Stage();

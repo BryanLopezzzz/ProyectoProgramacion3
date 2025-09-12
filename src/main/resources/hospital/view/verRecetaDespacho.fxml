@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.VerRecetaDespachoView">
    <children>
       <Text fill="#16254c" layoutX="389.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receta">
          <font>
@@ -34,17 +34,17 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="108.0" layoutY="29.0" prefHeight="25.0" prefWidth="151.0" text="123456789" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblPacienteId" layoutX="108.0" layoutY="29.0" prefHeight="25.0" prefWidth="151.0" text="123456789" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="108.0" layoutY="59.0" prefHeight="25.0" prefWidth="206.0" text="Paulina López" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblPacienteNombre" layoutX="108.0" layoutY="59.0" prefHeight="25.0" prefWidth="206.0" text="Paulina López" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="108.0" layoutY="92.0" prefHeight="25.0" prefWidth="140.0" text="23/12/2002" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblPacienteNacimiento" layoutX="108.0" layoutY="92.0" prefHeight="25.0" prefWidth="140.0" text="23/12/2002" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="108.0" layoutY="125.0" prefHeight="25.0" prefWidth="140.0" text="89858624" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblPacienteTelefono" layoutX="108.0" layoutY="125.0" prefHeight="25.0" prefWidth="140.0" text="89858624" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -78,7 +78,7 @@
       </Button>
       <Pane layoutX="91.0" layoutY="321.0" prefHeight="200.0" prefWidth="336.0" style="-fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <children>
-            <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="27.0" prefHeight="150.0" prefWidth="268.0" text="En nuestro despacho de recetas nos dedicamos a brindar un servicio ágil, seguro y confiable a todos los pacientes. Nuestro equipo está comprometido con la salud y el bienestar de la comunidad, asegurando que cada persona reciba la medicación prescrita de manera oportuna y con la orientación adecuada para su uso responsable." textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblIndicaciones" alignment="TOP_LEFT" layoutX="34.0" layoutY="27.0" prefHeight="150.0" prefWidth="268.0" text="En nuestro despacho de recetas nos dedicamos a brindar un servicio ágil, seguro y confiable a todos los pacientes. Nuestro equipo está comprometido con la salud y el bienestar de la comunidad, asegurando que cada persona reciba la medicación prescrita de manera oportuna y con la orientación adecuada para su uso responsable." textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -103,12 +103,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="23.0" prefHeight="25.0" prefWidth="166.0" text="Acetaminofen" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicamentoNombre" layoutX="156.0" layoutY="23.0" prefHeight="25.0" prefWidth="166.0" text="Acetaminofen" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="52.0" prefHeight="25.0" prefWidth="166.0" text="500mg" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicamentoPresentacion" layoutX="156.0" layoutY="52.0" prefHeight="25.0" prefWidth="166.0" text="500mg" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -129,12 +129,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="80.0" prefHeight="25.0" prefWidth="166.0" text="25mg" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicamentoCantidad" layoutX="156.0" layoutY="80.0" prefHeight="25.0" prefWidth="166.0" text="25mg" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="108.0" prefHeight="25.0" prefWidth="166.0" text="Vitalicio" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicamentoDuracion" layoutX="156.0" layoutY="108.0" prefHeight="25.0" prefWidth="166.0" text="Vitalicio" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -144,7 +144,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="136.0" prefHeight="25.0" prefWidth="166.0" text="15/06/2045" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblRecetaConfeccion" layoutX="156.0" layoutY="136.0" prefHeight="25.0" prefWidth="166.0" text="15/06/2045" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -159,12 +159,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="164.0" prefHeight="25.0" prefWidth="166.0" text="18/06/2045" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblRecetaRetiro" layoutX="156.0" layoutY="164.0" prefHeight="25.0" prefWidth="166.0" text="18/06/2045" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="193.0" prefHeight="25.0" prefWidth="166.0" text="Lista" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblRecetaEstado" layoutX="156.0" layoutY="193.0" prefHeight="25.0" prefWidth="166.0" text="Lista" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -188,17 +188,17 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="142.0" layoutY="23.0" prefHeight="25.0" prefWidth="151.0" text="123456789" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicoId" layoutX="142.0" layoutY="23.0" prefHeight="25.0" prefWidth="151.0" text="123456789" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="142.0" layoutY="55.0" prefHeight="25.0" prefWidth="173.0" text="Aaron Ruiz Medina" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicoNombre" layoutX="142.0" layoutY="55.0" prefHeight="25.0" prefWidth="173.0" text="Aaron Ruiz Medina" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="143.0" layoutY="87.0" prefHeight="25.0" prefWidth="87.0" text="Ginecología" textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="lblMedicoEspecialidad" layoutX="143.0" layoutY="87.0" prefHeight="25.0" prefWidth="87.0" text="Ginecología" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>

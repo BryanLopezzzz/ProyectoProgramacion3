@@ -79,6 +79,27 @@ public class Receta {
     public void setFechaRetiro(LocalDate fechaRetiro) {
         this.fechaRetiro = fechaRetiro;
     }
+
+    public String getPrimerMedicamento() {
+        if (detalles != null && !detalles.isEmpty()) {
+            Medicamento med = detalles.get(0).getMedicamento();
+            return med != null ? med.getNombre() : "N/A";
+        }
+        return "N/A";
+    }
+
+    public String getPresentacionPrimerMedicamento() {
+        if (detalles != null && !detalles.isEmpty()) {
+            Medicamento med = detalles.get(0).getMedicamento();
+            return med != null ? med.getPresentacion() : "N/A";
+        }
+        return "N/A";
+    }
+
+    public LocalDate getFechaConfeccion() {
+        return fecha;
+    }
+
     @Override
     public String toString() {
         return "Receta " + id + " - " + (paciente != null ? paciente.getNombre() : "Paciente?")

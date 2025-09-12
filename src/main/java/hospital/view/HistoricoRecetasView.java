@@ -66,12 +66,12 @@ public class HistoricoRecetasView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/verRecetaDespacho.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("Detalle de la Receta");
 
-            DetalleRecetaView detalleController = loader.getController();
+            VerRecetaDespachoView detalleController = loader.getController();
             detalleController.setReceta(seleccionada);
 
             stage.show();
