@@ -92,7 +92,7 @@
             </Button>
          </children>
       </Pane>
-      <Text fill="#16254c" layoutX="510.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estadísticas">
+      <Text fill="#16254c" layoutX="546.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estadísticas">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>

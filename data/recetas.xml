@@ -23,7 +23,7 @@
             <id>REC-B6409B5F</id>
             <pacienteId>1235</pacienteId>
             <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
+            <fecha>2025-09-05</fecha>
             <fechaRetiro>2025-09-18</fechaRetiro>
             <estado>CONFECCIONADA</estado>
             <Detalles>
@@ -377,6 +377,47 @@
                     <cantidad>5</cantidad>
                     <diasTratamiento>5</diasTratamiento>
                     <indicaciones>dfdfdsfs</indicaciones>
+                    <medicamento>
+                        <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-60922622</id>
+            <pacienteId>123</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-09-12</fecha>
+            <fechaRetiro>2025-09-19</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>12</cantidad>
+                    <diasTratamiento>1</diasTratamiento>
+                    <indicaciones>cada 3 horas</indicaciones>
+                    <medicamento>
+                        <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-6367236C</id>
+            <pacienteId>123</pacienteId>
+            <medicoId>999</medicoId>
+            <fecha>2025-09-12</fecha>
+            <fechaRetiro>2025-09-19</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>31</cantidad>
+                    <diasTratamiento>2</diasTratamiento>
+                    <indicaciones>hols
+erg</indicaciones>
                     <medicamento>
                         <codigo>400</codigo>
                         <nombre>Acetaminofen</nombre>

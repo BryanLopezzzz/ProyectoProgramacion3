@@ -12,15 +12,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1"  fx:controller="hospital.view.EditarPacienteView" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.EditarPacienteView">
    <children>
       <Pane layoutX="64.0" layoutY="98.0" prefHeight="360.0" prefWidth="749.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <children>
-            <TextField id="txtTelefono" fx:id="txtTelefono" layoutX="411.0" layoutY="188.0" prefHeight="37.0" prefWidth="266.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </TextField>
             <Text fill="#16254c" layoutX="276.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar paciente">
                <font>
                   <Font name="System Bold" size="30.0" />
@@ -62,15 +57,20 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Line endX="46.0" layoutX="453.0" layoutY="188.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
-            <Label layoutX="434.0" layoutY="173.0" text="Teléfono" textFill="#9a9a9a">
+            <DatePicker id="dtpFechaNac" fx:id="dtpFechaNac" layoutX="107.0" layoutY="187.0" prefHeight="37.0" prefWidth="258.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@../../styles/datePicker.css" />
+            <TextField id="txtTelefono" fx:id="txtTelefono" layoutX="411.0" layoutY="188.0" prefHeight="37.0" prefWidth="266.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </TextField>
+            <Line endX="138.33334350585938" layoutX="143.0" layoutY="188.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
+            <Label layoutX="124.0" layoutY="173.0" text="Fecha de naciemiento" textFill="#9a9a9a">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <DatePicker id="dtpFechaNac" fx:id="dtpFechaNac" layoutX="107.0" layoutY="187.0" prefHeight="37.0" prefWidth="258.0" style="-fx-border-radius: 4; -fx-border-color: #b3b3b3;" stylesheets="@../../styles/datePicker.css" />
-            <Line endX="138.33334350585938" layoutX="143.0" layoutY="188.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
-            <Label layoutX="124.0" layoutY="173.0" text="Fecha de naciemiento" textFill="#9a9a9a">
+            <Line endX="46.0" layoutX="453.0" layoutY="188.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
+            <Label layoutX="434.0" layoutY="173.0" text="Teléfono" textFill="#9a9a9a">
                <font>
                   <Font size="16.0" />
                </font>

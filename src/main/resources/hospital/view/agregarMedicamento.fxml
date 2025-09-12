@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="hospital.view.registro.RegistroMedicamentoView" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="873.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.view.registro.RegistroMedicamentoView">
    <children>
       <Pane layoutX="64.0" layoutY="98.0" prefHeight="360.0" prefWidth="749.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <children>
@@ -45,6 +45,11 @@
                   <Font size="16.0" />
                </font>
             </Label>
+            <TextField id="txtCodigo" fx:id="txtCodigo" layoutX="223.0" layoutY="189.0" prefHeight="37.0" prefWidth="134.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </TextField>
             <TextField id="txtPresentacion" fx:id="txtPresentacion" layoutX="382.0" layoutY="189.0" prefHeight="37.0" prefWidth="195.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
                <font>
                   <Font name="Segoe UI" size="14.0" />
@@ -56,11 +61,6 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="txtCodigo" fx:id="txtCodigo" layoutX="223.0" layoutY="189.0" prefHeight="37.0" prefWidth="134.0" style="-fx-border-radius: 4; -fx-background-color: #ffffff; -fx-border-color: #b3b3b3;">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </TextField>
             <Line endX="35.0" layoutX="265.0" layoutY="189.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
             <Label layoutX="246.0" layoutY="174.0" text="Código" textFill="#9a9a9a">
                <font>

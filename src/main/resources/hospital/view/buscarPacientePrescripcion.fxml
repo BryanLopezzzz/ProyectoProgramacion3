@@ -53,10 +53,10 @@
       </Text>
       <TableView fx:id="tableMedicos" layoutX="100.0" layoutY="250.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn id="colIdentificacion" fx:id="colIdentificacion" prefWidth="127.66665649414062" style="-fx-background-color:  #afc5fa; -fx-border-color: #b3b3b3;" text="ID" />
-            <TableColumn id="colNombre" fx:id="colNombre" prefWidth="257.3333435058594" style="-fx-background-color:  #afc5fa; -fx-border-color: #b3b3b3;" text="Nombre" />
-            <TableColumn id="colTelefono" fx:id="colTelefono" minWidth="0.0" prefWidth="131.66665649414062" style="-fx-background-color:  #afc5fa; -fx-border-color: #b3b3b3;" text="Teléfono" />
-            <TableColumn id="colFechaNacimiento" fx:id="colFechaNacimiento" prefWidth="188.00003051757812" style="-fx-background-color:  #afc5fa; -fx-border-color: #b3b3b3;" text="Fecha de nacimiento" />
+            <TableColumn id="colIdentificacion" fx:id="colIdentificacion" prefWidth="127.66665649414062" text="ID" />
+            <TableColumn id="colNombre" fx:id="colNombre" prefWidth="257.3333435058594" text="Nombre" />
+            <TableColumn id="colTelefono" fx:id="colTelefono" minWidth="0.0" prefWidth="131.66665649414062" text="Teléfono" />
+            <TableColumn id="colFechaNacimiento" fx:id="colFechaNacimiento" prefWidth="188.00003051757812" text="Fecha de nacimiento" />
          </columns>
       </TableView>
    </children>

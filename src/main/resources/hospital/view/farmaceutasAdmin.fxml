@@ -38,8 +38,8 @@
       </Label>
       <TableView id="tblFarmaceutas" fx:id="tblFarmaceutas" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn id="colIdentificacion" fx:id="colIdentificacion" prefWidth="231.33331298828125" style="-fx-background-color: #b8cdff; -fx-border-color: #b3b3b3;" text="ID" />
-            <TableColumn id="colNombre" fx:id="colNombre" prefWidth="472.66668701171875" style="-fx-background-color: #b2c9ff; -fx-border-color: #b3b3b3;" text="Nombre" />
+            <TableColumn id="colIdentificacion" fx:id="colIdentificacion" prefWidth="231.33331298828125" text="ID" />
+            <TableColumn id="colNombre" fx:id="colNombre" prefWidth="472.66668701171875" text="Nombre" />
          </columns>
       </TableView>
       <Button id="btnAgregarFarmaceuta" fx:id="btnAgregarFarmaceuta" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="275.0" mnemonicParsing="false" onAction="#AgregarFarmaceuta" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Agregar">

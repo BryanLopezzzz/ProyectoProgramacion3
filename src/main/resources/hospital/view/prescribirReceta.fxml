@@ -47,11 +47,11 @@
       </Button>
       <TableView id="tblRecetas" fx:id="tblRecetas" layoutX="90.0" layoutY="293.0" prefHeight="181.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="185.33334350585938" style="-fx-background-color:#afc5fa; -fx-border-color: #b3b3b3;" text="Medicamento" />
-            <TableColumn id="colIndicaciones" fx:id="colIndicaciones" minWidth="0.0" prefWidth="186.6666259765625" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Indicaciones" />
-            <TableColumn id="colPresentacion" fx:id="colPresentacion" minWidth="0.0" prefWidth="111.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Presentación" />
-            <TableColumn id="conCantidad" fx:id="conCantidad" minWidth="0.0" prefWidth="111.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Cantidad" />
-            <TableColumn id="colDuracion" fx:id="colDuracion" minWidth="0.0" prefWidth="114.0" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Duración" />
+            <TableColumn id="colNombreMedicamento" fx:id="colNombreMedicamento" prefWidth="185.33334350585938" text="Medicamento" />
+            <TableColumn id="colIndicaciones" fx:id="colIndicaciones" minWidth="0.0" prefWidth="186.6666259765625" text="Indicaciones" />
+            <TableColumn id="colPresentacion" fx:id="colPresentacion" minWidth="0.0" prefWidth="111.0" text="Presentación" />
+            <TableColumn id="conCantidad" fx:id="conCantidad" minWidth="0.0" prefWidth="111.0" text="Cantidad" />
+            <TableColumn id="colDuracion" fx:id="colDuracion" minWidth="0.0" prefWidth="114.0" text="Duración" />
          </columns>
       </TableView>
       <Button id="btnAgregarReceta" fx:id="btnAgregarReceta" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="246.0" mnemonicParsing="false" onAction="#AgregarReceta" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Agregar">

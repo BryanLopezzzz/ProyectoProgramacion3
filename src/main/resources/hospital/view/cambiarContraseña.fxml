@@ -16,11 +16,28 @@
    <children>
       <Pane layoutX="213.0" layoutY="91.0" prefHeight="398.0" prefWidth="445.0" style="-fx-background-color: #ffffff; -fx-border-radius: 4; -fx-border-color: #b3b3b3;">
          <children>
-            <Text fill="#16254c" layoutX="81.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar contraseña">
+            
+            <PasswordField id="txtContrasenaAnterior" fx:id="txtContrasenaAnterior" layoutX="89.0" layoutY="117.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
-                  <Font name="System Bold" size="32.0" />
+                  <Font name="Segoe UI" size="14.0" />
                </font>
-            </Text>
+            </PasswordField>
+            <TextField fx:id="txtContrasenaAnteriorVisible" layoutX="89.0" layoutY="117.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;" visible="false">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </TextField>
+            
+            <PasswordField id="txtNuevaContrasena" fx:id="txtNuevaContrasena" layoutX="88.0" layoutY="175.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </PasswordField>
+            <TextField fx:id="txtNuevaContrasenaVisible" layoutX="88.0" layoutY="175.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;" visible="false">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </TextField>
             
             <PasswordField id="txtConfirmarContrasena" fx:id="txtConfirmarContrasena" layoutX="88.0" layoutY="232.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
                <font>
@@ -32,6 +49,11 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </TextField>
+            <Text fill="#16254c" layoutX="81.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar contraseña">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
             
             <Line endX="136.5" layoutX="130.0" layoutY="233.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
             <Label layoutX="111.0" layoutY="218.0" text="Confirmar contraseña" textFill="#9a9a9a">
@@ -55,34 +77,12 @@
                </graphic>
             </Button>
             
-            <PasswordField id="txtNuevaContrasena" fx:id="txtNuevaContrasena" layoutX="88.0" layoutY="175.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </PasswordField>
-            <TextField fx:id="txtNuevaContrasenaVisible" layoutX="88.0" layoutY="175.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;" visible="false">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </TextField>
-            
             <Line endX="111.5" layoutX="130.0" layoutY="176.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
             <Label layoutX="111.0" layoutY="161.0" text="Nueva contraseña" textFill="#9a9a9a">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            
-            <PasswordField id="txtContrasenaAnterior" fx:id="txtContrasenaAnterior" layoutX="89.0" layoutY="117.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </PasswordField>
-            <TextField fx:id="txtContrasenaAnteriorVisible" layoutX="89.0" layoutY="117.0" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;" visible="false">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </TextField>
             
             <Line endX="124.5" layoutX="131.0" layoutY="118.0" startX="-20.0" stroke="WHITE" strokeWidth="3.0" />
             <Label layoutX="112.0" layoutY="103.0" text="Contraseña anterior" textFill="#9a9a9a">

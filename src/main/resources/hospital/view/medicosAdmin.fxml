@@ -38,9 +38,9 @@
       </Label>
       <TableView fx:id="tblMedicos" layoutX="89.0" layoutY="323.0" prefHeight="200.0" prefWidth="704.0" style="-fx-background-radius: 4;" styleClass="table" stylesheets="@../../styles/table.css">
          <columns>
-            <TableColumn id="colIdentificacion" fx:id="colIdentificacion" prefWidth="126.66667175292969" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="ID" />
-            <TableColumn id="colNombre" fx:id="colNombre" prefWidth="317.3333282470703" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Nombre" />
-            <TableColumn id="colEspecialidad" fx:id="colEspecialidad" prefWidth="263.66668701171875" style="-fx-background-color: #afc5fa; -fx-border-color: #b3b3b3;" text="Especialidad" />
+            <TableColumn id="colIdentificacion" fx:id="colIdentificacion" prefWidth="126.66667175292969" text="ID" />
+            <TableColumn id="colNombre" fx:id="colNombre" prefWidth="317.3333282470703" text="Nombre" />
+            <TableColumn id="colEspecialidad" fx:id="colEspecialidad" prefWidth="263.66668701171875" text="Especialidad" />
          </columns>
       </TableView>
       <Button id="btnAgregarMedico" fx:id="btnAgregarMedico" contentDisplay="GRAPHIC_ONLY" layoutX="91.0" layoutY="275.0" mnemonicParsing="false" onAction="#AgregarMedico" prefHeight="28.0" prefWidth="29.0" style="-fx-background-color: #75c594; -fx-border-radius: 4; -fx-cursor: hand;" text="Agregar">
