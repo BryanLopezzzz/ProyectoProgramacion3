@@ -331,7 +331,7 @@
             <medicoId>666</medicoId>
             <fecha>2025-09-12</fecha>
             <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
+            <estado>EN_PROCESO</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>6</cantidad>
@@ -371,7 +371,7 @@
             <medicoId>666</medicoId>
             <fecha>2025-09-12</fecha>
             <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
+            <estado>EN_PROCESO</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>5</cantidad>
@@ -418,6 +418,26 @@
                     <diasTratamiento>2</diasTratamiento>
                     <indicaciones>hols
 erg</indicaciones>
+                    <medicamento>
+                        <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-D1CF92A0</id>
+            <pacienteId>124</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-09-13</fecha>
+            <fechaRetiro>2025-09-20</fechaRetiro>
+            <estado>LISTA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>1</diasTratamiento>
+                    <indicaciones>tomar</indicaciones>
                     <medicamento>
                         <codigo>400</codigo>
                         <nombre>Acetaminofen</nombre>

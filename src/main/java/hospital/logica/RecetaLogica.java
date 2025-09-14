@@ -80,15 +80,18 @@ public class RecetaLogica {
         Receta receta = buscarPorId(recetaId);
         if (receta == null) throw new Exception("Receta no encontrada.");
 
-        // Regla: Para pasar a EN_PROCESO, debe estar en ventana de retiro [-3, +3] respecto a hoy
+        // Regla: Para pasar a EN_PROCESO, debe estar dentro de los 3 días posteriores a la fecha de confección
         if (nuevoEstado == EstadoReceta.EN_PROCESO) {
-            if (receta.getFechaRetiro() == null)
-                throw new Exception("La receta no tiene fecha de retiro definida.");
-
+            LocalDate fechaConfeccion = receta.getFecha();
             LocalDate hoy = LocalDate.now();
-            long diff = ChronoUnit.DAYS.between(receta.getFechaRetiro(), hoy); // positivo si hoy > retiro
-            if (diff < -3 || diff > 3) {
-                throw new Exception("No se puede poner en PROCESO: fuera de la ventana de retiro (±3 días).");
+
+            // Calcular la diferencia en días. Si hoy es antes de la fecha de confección, será negativo.
+            long diff = ChronoUnit.DAYS.between(fechaConfeccion, hoy);
+
+            // Permitir el cambio si 'hoy' está entre la fecha de confección y 3 días después (inclusive)
+            // Es decir, diff debe ser >= 0 y <= 3
+            if (diff < 0 || diff > 3) {
+                throw new Exception("No se puede poner en PROCESO: el estado solo puede cambiarse dentro de los 3 días posteriores a la fecha de confección.");
             }
         }
 
