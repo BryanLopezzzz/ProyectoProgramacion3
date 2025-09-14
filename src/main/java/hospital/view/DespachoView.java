@@ -182,22 +182,25 @@ public class DespachoView {
     private void CambiarEstado(ActionEvent event) {
         Receta seleccionada = tblRecetas.getSelectionModel().getSelectedItem();
         if (seleccionada == null) {
-            Alerta.info("Estado", "Debe seleccionar una receta primero.");
+            Alerta.info("Error", "Seleccione una receta primero.");
             return;
         }
+
         try {
-            Farmaceuta f = (Farmaceuta) Sesion.getUsuario();
-            EstadoReceta nuevoEstado = siguienteEstado(seleccionada.getEstado());
-            if (nuevoEstado == seleccionada.getEstado()) {
-                Alerta.info("Estado", "No se puede avanzar más en el flujo de estados.");
-                return;
-            }
-            recetaController.actualizarEstado(f, seleccionada.getId(), nuevoEstado);
-            seleccionada.setEstado(nuevoEstado);
-            tblRecetas.refresh();
-            Alerta.info("Estado actualizado", "La receta pasó a estado: " + nuevoEstado);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/editarEstadoReceta.fxml"));
+            Parent root = loader.load();
+            EditarDetalleRecetaView controller = loader.getController();
+            controller.setReceta(seleccionada);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Cambiar Estado");
+            stage.showAndWait();
+
+            tblRecetas.refresh(); // Refrescar tabla
+
         } catch (Exception e) {
-            Alerta.error("Error cambiando estado", e.getMessage());
+            Alerta.error("Error", "No se pudo abrir la ventana.");
         }
     }
 

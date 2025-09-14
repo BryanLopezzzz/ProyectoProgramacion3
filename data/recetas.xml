@@ -121,7 +121,7 @@
             <medicoId>666</medicoId>
             <fecha>2025-09-11</fecha>
             <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
+            <estado>LISTA</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>1</cantidad>
@@ -472,7 +472,7 @@ erg</indicaciones>
             <medicoId>666</medicoId>
             <fecha>2025-09-13</fecha>
             <fechaRetiro>2025-09-20</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
+            <estado>ENTREGADA</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>2</cantidad>
