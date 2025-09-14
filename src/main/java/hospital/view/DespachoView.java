@@ -103,7 +103,7 @@ public class DespachoView {
             return;
         }
         try {
-            List<Receta> receta = recetaController.buscarPorPacientw(filtro);
+            List<Receta> receta = recetaController.buscarPorPaciente(filtro);
             if (!receta.isEmpty()) {
                 recetasObservable.setAll(receta);
             } else {
