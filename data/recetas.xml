@@ -426,5 +426,65 @@ erg</indicaciones>
                 </Detalle>
             </Detalles>
         </Receta>
+        <Receta>
+            <id>REC-98201A0C</id>
+            <pacienteId>1235</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-09-13</fecha>
+            <fechaRetiro>2025-09-20</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>7</cantidad>
+                    <diasTratamiento>45</diasTratamiento>
+                    <indicaciones>Despues de cada comida</indicaciones>
+                    <medicamento>
+                        <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-98201A0C</id>
+            <pacienteId>1235</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-09-13</fecha>
+            <fechaRetiro>2025-09-20</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>45</diasTratamiento>
+                    <indicaciones>Despues de cada comida</indicaciones>
+                    <medicamento>
+                        <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-1098C911</id>
+            <pacienteId>12345678</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-09-13</fecha>
+            <fechaRetiro>2025-09-20</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>7777</diasTratamiento>
+                    <indicaciones>Comer diariamente</indicaciones>
+                    <medicamento>
+                        <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
     </Recetas>
 </RecetasData>

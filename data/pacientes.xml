@@ -19,5 +19,11 @@
             <telefono>88888888</telefono>
             <fechaNacimiento>2021-09-16</fechaNacimiento>
         </Paciente>
+        <Paciente>
+            <id>12345678</id>
+            <nombre>Mario Kempes</nombre>
+            <telefono>89698747</telefono>
+            <fechaNacimiento>1988-09-08</fechaNacimiento>
+        </Paciente>
     </Pacientes>
 </PacientesData>
