@@ -44,6 +44,10 @@ public class RecetaController {
         return recetaLogica.buscarPorId(id);
     }
 
+    public List<Receta> buscarPorPacientw(String id) throws Exception {
+        return recetaLogica.buscarPorPaciente(id);
+    }
+
     public List<Receta> listarRecetas() {
         return recetaLogica.listar();
     }
