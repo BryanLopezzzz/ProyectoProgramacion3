@@ -331,7 +331,7 @@
             <medicoId>666</medicoId>
             <fecha>2025-09-12</fecha>
             <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
+            <estado>EN_PROCESO</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>6</cantidad>
@@ -371,7 +371,7 @@
             <medicoId>666</medicoId>
             <fecha>2025-09-12</fecha>
             <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
+            <estado>EN_PROCESO</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>5</cantidad>
@@ -427,17 +427,17 @@ erg</indicaciones>
             </Detalles>
         </Receta>
         <Receta>
-            <id>REC-78E662AE</id>
+            <id>REC-D1CF92A0</id>
             <pacienteId>124</pacienteId>
             <medicoId>666</medicoId>
             <fecha>2025-09-13</fecha>
-            <fechaRetiro>2025-09-14</fechaRetiro>
+            <fechaRetiro>2025-09-20</fechaRetiro>
             <estado>LISTA</estado>
             <Detalles>
                 <Detalle>
-                    <cantidad>2</cantidad>
-                    <diasTratamiento>7</diasTratamiento>
-                    <indicaciones>Cada 5 horas</indicaciones>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>1</diasTratamiento>
+                    <indicaciones>tomar</indicaciones>
                     <medicamento>
                         <codigo>400</codigo>
                         <nombre>Acetaminofen</nombre>
