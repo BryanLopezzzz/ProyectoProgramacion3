@@ -58,11 +58,14 @@ public class HistoricoRecetasView {
         colFechaConfeccion.setCellValueFactory(new PropertyValueFactory<>("fechaConfeccion"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
-        cmbFiltrar.setItems(FXCollections.observableArrayList("Paciente", "Médico", "Estado"));
+        cmbFiltrar.setItems(FXCollections.observableArrayList(
+                "ID Receta", "Paciente", "Médico", "Medicamento", "Estado", "Todos"
+        ));
         Usuario usuarioActual = Sesion.getUsuario();
         cargarRecetas(controller.listarRecetas(usuarioActual));
 
         configurarBusquedaEnTiempoReal();
+        cmbFiltrar.setOnAction(event -> Buscar());
     }
     private void configurarBusquedaEnTiempoReal() {
         txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> {
