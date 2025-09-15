@@ -5,6 +5,7 @@ import hospital.logica.Sesion;
 import hospital.model.EstadoReceta;
 import hospital.model.Receta;
 import hospital.model.Usuario;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +17,10 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HistoricoRecetasView {
 
@@ -43,6 +47,8 @@ public class HistoricoRecetasView {
 
     private HistoricoRecetasController controller = new HistoricoRecetasController();
     private ObservableList<Receta> recetasObservable;
+    private ObservableList<Receta> todasLasRecetas;
+    private Timer searchTimer;
 
     @FXML
     public void initialize() {
@@ -55,6 +61,22 @@ public class HistoricoRecetasView {
         cmbFiltrar.setItems(FXCollections.observableArrayList("Paciente", "Médico", "Estado"));
         Usuario usuarioActual = Sesion.getUsuario();
         cargarRecetas(controller.listarRecetas(usuarioActual));
+
+        configurarBusquedaEnTiempoReal();
+    }
+    private void configurarBusquedaEnTiempoReal() {
+        txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (searchTimer != null) {
+                searchTimer.cancel();
+            }
+            searchTimer = new Timer();
+            searchTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> Buscar());
+                }
+            }, 300); // Buscar después de 300ms de no escribir
+        });
     }
 
     @FXML
@@ -82,7 +104,12 @@ public class HistoricoRecetasView {
     }
 
     private void cargarRecetas(List<Receta> recetas) {
-        recetasObservable = FXCollections.observableArrayList(recetas);
+        recetasObservable = FXCollections.observableArrayList();
+        todasLasRecetas = FXCollections.observableArrayList();
+        if (recetas != null) {
+            recetasObservable.addAll(recetas);
+            todasLasRecetas.addAll(recetas);
+        }
         tblRecetas.setItems(recetasObservable);
     }
 
@@ -101,37 +128,79 @@ public class HistoricoRecetasView {
     }
     @FXML
     private void Buscar() {
-        String criterio = txtBuscar.getText().trim();
-        String filtro = cmbFiltrar.getValue();
-
-        Usuario usuario = Sesion.getUsuario();
-
-        if (criterio.isEmpty() || filtro == null) {
-            cargarRecetas(controller.listarRecetas(usuario));
+        String textoBusqueda = txtBuscar.getText();
+        if (textoBusqueda == null || textoBusqueda.trim().isEmpty()) {
+            recetasObservable.clear();
+            recetasObservable.addAll(todasLasRecetas);
             return;
         }
 
-        List<Receta> resultados;
-        switch (filtro) {
-            case "Paciente":
-                resultados = controller.buscarPorPaciente(usuario, criterio);
-                break;
-            case "Médico":
-                resultados = controller.buscarPorMedico(usuario, criterio);
-                break;
-            case "Estado":
-                try {
-                    EstadoReceta estado = EstadoReceta.valueOf(criterio.toUpperCase());
-                    resultados = controller.buscarPorEstado(usuario, estado);
-                } catch (IllegalArgumentException ex) {
-                    Alerta.error("Error","Estado inválido. Valores posibles: CONFECCIONADA, PROCESO, LISTA, ENTREGADA");
-                    return;
-                }
-                break;
-            default:
-                resultados = controller.listarRecetas(usuario);
+        try {
+            String filtro = cmbFiltrar.getValue();
+            if (filtro == null) filtro = "Todos"; // 🔹 fallback
+            String criterio = textoBusqueda.trim().toLowerCase();
+
+            List<Receta> resultados = new ArrayList<>();
+
+            switch (filtro) {
+                case "ID Receta":
+                    resultados = todasLasRecetas.stream()
+                            .filter(r -> r.getId() != null &&
+                                    r.getId().toLowerCase().contains(criterio))
+                            .toList();
+                    break;
+
+                case "Paciente":
+                    resultados = controller.buscarPorPaciente(Sesion.getUsuario(), textoBusqueda.trim());
+                    break;
+
+                case "Médico":
+                    resultados = controller.buscarPorMedico(Sesion.getUsuario(), textoBusqueda.trim());
+                    break;
+
+                case "Medicamento":
+                    resultados = todasLasRecetas.stream()
+                            .filter(r -> r.getPrimerMedicamento() != null &&
+                                    r.getPrimerMedicamento().toLowerCase().contains(criterio))
+                            .toList();
+                    break;
+
+                case "Estado":
+                    try {
+                        EstadoReceta estado = EstadoReceta.valueOf(textoBusqueda.trim().toUpperCase());
+                        resultados = controller.buscarPorEstado(Sesion.getUsuario(), estado);
+                    } catch (IllegalArgumentException ex) {
+                        resultados = todasLasRecetas.stream()
+                                .filter(r -> r.getEstado() != null &&
+                                        r.getEstado().toString().toLowerCase().contains(criterio))
+                                .toList();
+                    }
+                    break;
+
+                case "Todos":
+                default:
+                    resultados = todasLasRecetas.stream()
+                            .filter(r ->
+                                    (r.getId() != null && r.getId().toLowerCase().contains(criterio)) ||
+                                            (r.getPrimerMedicamento() != null && r.getPrimerMedicamento().toLowerCase().contains(criterio)) ||
+                                            (r.getPresentacionPrimerMedicamento() != null && r.getPresentacionPrimerMedicamento().toLowerCase().contains(criterio)) ||
+                                            (r.getEstado() != null && r.getEstado().toString().toLowerCase().contains(criterio)) ||
+                                            (r.getPaciente() != null && r.getPaciente().getNombre() != null &&
+                                                    r.getPaciente().getNombre().toLowerCase().contains(criterio)) ||
+                                            (r.getMedico() != null && r.getMedico().getNombre() != null &&
+                                                    r.getMedico().getNombre().toLowerCase().contains(criterio))
+                            )
+                            .toList();
+                    break;
+            }
+
+            recetasObservable.clear();
+            recetasObservable.addAll(resultados);
+
+        } catch (Exception e) {
+            Alerta.error("Error", "Error al buscar recetas: " + e.getMessage());
+            e.printStackTrace();
         }
-        cargarRecetas(resultados);
     }
 
 }

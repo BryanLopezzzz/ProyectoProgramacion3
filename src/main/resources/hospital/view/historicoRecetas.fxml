@@ -47,7 +47,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="txtBuscar" layoutX="101.0" layoutY="114.0" prefHeight="37.0" prefWidth="704.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+      <TextField id="txtBuscar" fx:id="txtBuscar" layoutX="101.0" layoutY="114.0" onAction="#Buscar" prefHeight="37.0" prefWidth="704.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
