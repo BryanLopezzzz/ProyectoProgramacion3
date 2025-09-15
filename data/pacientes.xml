@@ -2,28 +2,52 @@
 <PacientesData>
     <Pacientes>
         <Paciente>
-            <id>123</id>
-            <nombre>Jose Castro Oviedo</nombre>
-            <telefono>22562222</telefono>
-            <fechaNacimiento>2020-09-29</fechaNacimiento>
+            <id>300</id>
+            <nombre>Pedri</nombre>
+            <telefono>70001111</telefono>
+            <fechaNacimiento>2002-11-25</fechaNacimiento>
         </Paciente>
         <Paciente>
-            <id>124</id>
-            <nombre>Bryan Lopez</nombre>
-            <telefono>12345678</telefono>
-            <fechaNacimiento>2015-09-04</fechaNacimiento>
+            <id>301</id>
+            <nombre>Ousmane Dembele</nombre>
+            <telefono>70002222</telefono>
+            <fechaNacimiento>1997-05-15</fechaNacimiento>
         </Paciente>
         <Paciente>
-            <id>1235</id>
-            <nombre>Aaron Guapo</nombre>
-            <telefono>88888888</telefono>
-            <fechaNacimiento>2021-09-16</fechaNacimiento>
+            <id>302</id>
+            <nombre>Raphinha</nombre>
+            <telefono>70003333</telefono>
+            <fechaNacimiento>1996-12-14</fechaNacimiento>
         </Paciente>
         <Paciente>
-            <id>12345678</id>
-            <nombre>Mario Kempes</nombre>
-            <telefono>89698747</telefono>
-            <fechaNacimiento>1988-09-08</fechaNacimiento>
+            <id>303</id>
+            <nombre>Nico Paz</nombre>
+            <telefono>70004444</telefono>
+            <fechaNacimiento>2004-09-08</fechaNacimiento>
+        </Paciente>
+        <Paciente>
+            <id>305</id>
+            <nombre>Hugo Ekitike</nombre>
+            <telefono>70006666</telefono>
+            <fechaNacimiento>2002-06-20</fechaNacimiento>
+        </Paciente>
+        <Paciente>
+            <id>306</id>
+            <nombre>Alexander Isak</nombre>
+            <telefono>70007777</telefono>
+            <fechaNacimiento>1999-09-21</fechaNacimiento>
+        </Paciente>
+        <Paciente>
+            <id>307</id>
+            <nombre>Viktor Gyokeres</nombre>
+            <telefono>70008888</telefono>
+            <fechaNacimiento>1998-06-04</fechaNacimiento>
+        </Paciente>
+        <Paciente>
+            <id>516498</id>
+            <nombre>Vitinha</nombre>
+            <telefono>100111010</telefono>
+            <fechaNacimiento>2025-09-10</fechaNacimiento>
         </Paciente>
     </Pacientes>
 </PacientesData>
