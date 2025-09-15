@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BuscarPacienteView {
 
@@ -197,29 +198,26 @@ public class BuscarPacienteView {
 
     @FXML
     public void BuscarPaciente(ActionEvent event) {
-        Paciente seleccionado = tblPacientes.getSelectionModel().getSelectedItem();
-        if (seleccionado == null) {
-            mostrarError("Debe seleccionar un paciente para eliminar.");
+        String texto = txtBuscar.getText().toLowerCase();
+        String filtro = btnFiltro.getValue();
+
+        if (texto.isEmpty()) {
+            tblPacientes.setItems(pacientesObs); // muestra todo si no hay filtro
             return;
         }
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar eliminación");
-        confirmacion.setHeaderText("¿Está seguro que desea eliminar el paciente?");
-        confirmacion.setContentText("Paciente: " + seleccionado.getNombre() + " (ID: " + seleccionado.getId() + ")");
 
-        if (confirmacion.showAndWait().get() == ButtonType.OK) {
-            try {
-                boolean eliminado = pacienteController.eliminar(admin, seleccionado.getId());
-                if (eliminado) {
-                    mostrarInfo("Paciente eliminado correctamente.");
-                    cargarPacientes();
-                } else {
-                    mostrarError("No se pudo eliminar el paciente.");
-                }
-            } catch (Exception e) {
-                mostrarError("Error al eliminar: " + e.getMessage());
-            }
+        List<Paciente> filtrados;
+        if ("Nombre".equals(filtro)) {
+            filtrados = pacientesObs.stream()
+                    .filter(p -> p.getNombre().toLowerCase().contains(texto))
+                    .collect(Collectors.toList());
+        } else { // ID
+            filtrados = pacientesObs.stream()
+                    .filter(p -> p.getId().toLowerCase().contains(texto))
+                    .collect(Collectors.toList());
         }
+
+        tblPacientes.setItems(FXCollections.observableArrayList(filtrados));
     }
 
     @FXML
