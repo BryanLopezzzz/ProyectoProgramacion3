@@ -2,442 +2,277 @@
 <RecetasData>
     <Recetas>
         <Receta>
-            <id>REC-1481F028</id>
-            <pacienteId>123</pacienteId>
+            <id>REC-2001</id>
+            <pacienteId>300</pacienteId>
             <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
+            <fecha>2025-05-12</fecha>
+            <fechaRetiro>2025-05-19</fechaRetiro>
             <estado>CONFECCIONADA</estado>
             <Detalles>
                 <Detalle>
                     <cantidad>2</cantidad>
-                    <diasTratamiento>2</diasTratamiento>
-                    <indicaciones>Cada 8 horas</indicaciones>
+                    <diasTratamiento>7</diasTratamiento>
+                    <indicaciones>Tomar después de cada comida</indicaciones>
                     <medicamento>
                         <codigo>400</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>Oral</presentacion>
                     </medicamento>
                 </Detalle>
             </Detalles>
         </Receta>
         <Receta>
-            <id>REC-B6409B5F</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-05</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>3</cantidad>
-                    <diasTratamiento>3</diasTratamiento>
-                    <indicaciones>dsadsa</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-91598FCC</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
+            <id>REC-2002</id>
+            <pacienteId>301</pacienteId>
+            <medicoId>667</medicoId>
+            <fecha>2025-05-27</fecha>
+            <fechaRetiro>2025-06-03</fechaRetiro>
             <estado>EN_PROCESO</estado>
             <Detalles>
                 <Detalle>
-                    <cantidad>3</cantidad>
-                    <diasTratamiento>2</diasTratamiento>
-                    <indicaciones>cada 40 horas</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-17D113B0</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>LISTA</estado>
-            <Detalles>
-                <Detalle>
                     <cantidad>1</cantidad>
-                    <diasTratamiento>1</diasTratamiento>
-                    <indicaciones>Comer sieempreee</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-C15B9259</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>6</cantidad>
-                    <diasTratamiento>6</diasTratamiento>
-                    <indicaciones>tyghf</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-6E70EE82</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>32</cantidad>
-                    <diasTratamiento>32</diasTratamiento>
-                    <indicaciones>dsasd</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-162AB8F2</id>
-            <pacienteId>124</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>1</cantidad>
-                    <diasTratamiento>1</diasTratamiento>
-                    <indicaciones>561651651</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-3EAF7B6A</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>22</cantidad>
-                    <diasTratamiento>22</diasTratamiento>
-                    <indicaciones>JHGF</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-1816AC0C</id>
-            <pacienteId>124</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>22</cantidad>
-                    <diasTratamiento>2</diasTratamiento>
-                    <indicaciones>sad</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-F1F0F211</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>1</cantidad>
-                    <diasTratamiento>1</diasTratamiento>
-                    <indicaciones>1</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-121AFB6D</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-11</fecha>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>100</cantidad>
-                    <diasTratamiento>30</diasTratamiento>
-                    <indicaciones>tomar una cada 8 horas</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-                <Detalle>
-                    <cantidad>20</cantidad>
-                    <diasTratamiento>1000</diasTratamiento>
-                    <indicaciones>tomar una cada vez que la recuerde</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-0A4C5183</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>1</cantidad>
-                    <diasTratamiento>64</diasTratamiento>
-                    <indicaciones>una después de cada comida</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-47230148</id>
-            <pacienteId>124</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>123</cantidad>
-                    <diasTratamiento>10000</diasTratamiento>
-                    <indicaciones>comer a pau cada 3 horas</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-E33CB4AB</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>12</cantidad>
-                    <diasTratamiento>60</diasTratamiento>
-                    <indicaciones>jalarsela cada 2 horas</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-28BA58A7</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>12</cantidad>
-                    <diasTratamiento>10</diasTratamiento>
-                    <indicaciones>dejar de pensar en pri</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-79264A5E</id>
-            <pacienteId>124</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>6</cantidad>
-                    <diasTratamiento>9</diasTratamiento>
-                    <indicaciones>pauuuuuuu &lt;3</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-DBF203E4</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>EN_PROCESO</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>6</cantidad>
-                    <diasTratamiento>21</diasTratamiento>
-                    <indicaciones>comerse un banano con sprite</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-7AE22C0C</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>CONFECCIONADA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>1</cantidad>
-                    <diasTratamiento>12</diasTratamiento>
-                    <indicaciones>pene dos veces al dia</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-F90A633A</id>
-            <pacienteId>1235</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <estado>EN_PROCESO</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>5</cantidad>
                     <diasTratamiento>5</diasTratamiento>
-                    <indicaciones>dfdfdsfs</indicaciones>
+                    <indicaciones>Una tableta cada 8 horas</indicaciones>
                     <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
+                        <codigo>401</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>Tableta</presentacion>
                     </medicamento>
                 </Detalle>
             </Detalles>
         </Receta>
         <Receta>
-            <id>REC-60922622</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-12</fecha>
-            <fechaRetiro>2025-09-19</fechaRetiro>
+            <id>REC-2003</id>
+            <pacienteId>302</pacienteId>
+            <medicoId>668</medicoId>
+            <fecha>2025-06-02</fecha>
+            <fechaRetiro>2025-06-09</fechaRetiro>
+            <estado>LISTA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>3</cantidad>
+                    <diasTratamiento>10</diasTratamiento>
+                    <indicaciones>Tomar una tableta antes de dormir</indicaciones>
+                    <medicamento>
+                        <codigo>402</codigo>
+                        <nombre>Amoxicilina</nombre>
+                        <presentacion>Cápsula</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2004</id>
+            <pacienteId>303</pacienteId>
+            <medicoId>669</medicoId>
+            <fecha>2025-06-18</fecha>
+            <fechaRetiro>2025-06-25</fechaRetiro>
             <estado>CONFECCIONADA</estado>
             <Detalles>
                 <Detalle>
-                    <cantidad>12</cantidad>
-                    <diasTratamiento>1</diasTratamiento>
-                    <indicaciones>cada 3 horas</indicaciones>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>4</diasTratamiento>
+                    <indicaciones>Dos veces al día</indicaciones>
                     <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
+                        <codigo>403</codigo>
+                        <nombre>Loratadina</nombre>
+                        <presentacion>Jarabe</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2005</id>
+            <pacienteId>305</pacienteId>
+            <medicoId>670</medicoId>
+            <fecha>2025-06-29</fecha>
+            <fechaRetiro>2025-07-06</fechaRetiro>
+            <estado>EN_PROCESO</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>3</diasTratamiento>
+                    <indicaciones>Un comprimido cada 12 horas</indicaciones>
+                    <medicamento>
+                        <codigo>404</codigo>
+                        <nombre>Metformina</nombre>
+                        <presentacion>Tableta</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2006</id>
+            <pacienteId>306</pacienteId>
+            <medicoId>672</medicoId>
+            <fecha>2025-07-04</fecha>
+            <fechaRetiro>2025-07-11</fechaRetiro>
+            <estado>LISTA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>8</diasTratamiento>
+                    <indicaciones>Con abundante agua</indicaciones>
+                    <medicamento>
+                        <codigo>405</codigo>
+                        <nombre>Omeprazol</nombre>
+                        <presentacion>Cápsula</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2007</id>
+            <pacienteId>307</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-07-15</fecha>
+            <fechaRetiro>2025-07-22</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>6</diasTratamiento>
+                    <indicaciones>Una tableta por la mañana</indicaciones>
+                    <medicamento>
+                        <codigo>401</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>Tableta</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2008</id>
+            <pacienteId>516498</pacienteId>
+            <medicoId>667</medicoId>
+            <fecha>2025-07-29</fecha>
+            <fechaRetiro>2025-08-05</fechaRetiro>
+            <estado>EN_PROCESO</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>3</cantidad>
+                    <diasTratamiento>9</diasTratamiento>
+                    <indicaciones>Una tableta cada noche</indicaciones>
+                    <medicamento>
+                        <codigo>600</codigo>
+                        <nombre>Emma</nombre>
                         <presentacion>Oral</presentacion>
                     </medicamento>
                 </Detalle>
             </Detalles>
         </Receta>
         <Receta>
-            <id>REC-6367236C</id>
-            <pacienteId>123</pacienteId>
-            <medicoId>999</medicoId>
+            <id>REC-2009</id>
+            <pacienteId>300</pacienteId>
+            <medicoId>668</medicoId>
+            <fecha>2025-08-03</fecha>
+            <fechaRetiro>2025-08-10</fechaRetiro>
+            <estado>ENTREGADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>7</diasTratamiento>
+                    <indicaciones>Con alimentos</indicaciones>
+                    <medicamento>
+                        <codigo>402</codigo>
+                        <nombre>Amoxicilina</nombre>
+                        <presentacion>Cápsula</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2010</id>
+            <pacienteId>301</pacienteId>
+            <medicoId>669</medicoId>
+            <fecha>2025-08-12</fecha>
+            <fechaRetiro>2025-08-19</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>4</diasTratamiento>
+                    <indicaciones>Un comprimido después de cada comida</indicaciones>
+                    <medicamento>
+                        <codigo>403</codigo>
+                        <nombre>Loratadina</nombre>
+                        <presentacion>Jarabe</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2011</id>
+            <pacienteId>302</pacienteId>
+            <medicoId>670</medicoId>
+            <fecha>2025-08-25</fecha>
+            <fechaRetiro>2025-09-01</fechaRetiro>
+            <estado>EN_PROCESO</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>5</diasTratamiento>
+                    <indicaciones>Una cada 6 horas</indicaciones>
+                    <medicamento>
+                        <codigo>404</codigo>
+                        <nombre>Metformina</nombre>
+                        <presentacion>Tableta</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2012</id>
+            <pacienteId>303</pacienteId>
+            <medicoId>672</medicoId>
+            <fecha>2025-09-02</fecha>
+            <fechaRetiro>2025-09-09</fechaRetiro>
+            <estado>LISTA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>3</diasTratamiento>
+                    <indicaciones>Antes de acostarse</indicaciones>
+                    <medicamento>
+                        <codigo>405</codigo>
+                        <nombre>Omeprazol</nombre>
+                        <presentacion>Cápsula</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2013</id>
+            <pacienteId>305</pacienteId>
+            <medicoId>666</medicoId>
+            <fecha>2025-09-07</fecha>
+            <fechaRetiro>2025-09-14</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>3</cantidad>
+                    <diasTratamiento>10</diasTratamiento>
+                    <indicaciones>Un comprimido en la mañana y otro en la noche</indicaciones>
+                    <medicamento>
+                        <codigo>401</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>Tableta</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-2014</id>
+            <pacienteId>306</pacienteId>
+            <medicoId>667</medicoId>
             <fecha>2025-09-12</fecha>
             <fechaRetiro>2025-09-19</fechaRetiro>
             <estado>EN_PROCESO</estado>
             <Detalles>
                 <Detalle>
-                    <cantidad>31</cantidad>
-                    <diasTratamiento>2</diasTratamiento>
-                    <indicaciones>hols
-erg</indicaciones>
-                    <medicamento>
-                        <codigo>400</codigo>
-                        <nombre>Acetaminofen</nombre>
-                        <presentacion>Oral</presentacion>
-                    </medicamento>
-                </Detalle>
-            </Detalles>
-        </Receta>
-        <Receta>
-            <id>REC-D1CF92A0</id>
-            <pacienteId>124</pacienteId>
-            <medicoId>666</medicoId>
-            <fecha>2025-09-13</fecha>
-            <fechaRetiro>2025-09-20</fechaRetiro>
-            <estado>LISTA</estado>
-            <Detalles>
-                <Detalle>
-                    <cantidad>1</cantidad>
-                    <diasTratamiento>1</diasTratamiento>
-                    <indicaciones>tomar</indicaciones>
+                    <cantidad>2</cantidad>
+                    <diasTratamiento>6</diasTratamiento>
+                    <indicaciones>Tomar con leche</indicaciones>
                     <medicamento>
                         <codigo>400</codigo>
                         <nombre>Acetaminofen</nombre>

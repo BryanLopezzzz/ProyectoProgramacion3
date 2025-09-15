@@ -17,6 +17,11 @@
             <nombre>Jose</nombre>
         </Farmaceuta>
         <Farmaceuta>
+            <id>123456789</id>
+            <clave>123456789</clave>
+            <nombre>Juan Carlos</nombre>
+        </Farmaceuta>
+        <Farmaceuta>
             <id>123461</id>
             <clave>luisa77</clave>
             <nombre>Luisa</nombre>
