@@ -11,13 +11,12 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
-        // admin quemado por el momento
         // Usuario: admin Clave: admin
         AdministradorLogica adminLogica = new AdministradorLogica();
         if (adminLogica.buscarPorId("admin") == null) {
             Administrador superAdmin = new Administrador();
             superAdmin.setId("admin");
-            superAdmin.setNombre("Federico Lover");
+            superAdmin.setNombre("Atenea");
             adminLogica.agregar(superAdmin);
         }
 

@@ -1,6 +1,7 @@
 package hospital.view;
 
 import hospital.controller.RecetaController;
+import hospital.view.busqueda.BuscarPacientePreescripcionView;
 import javafx.collections.FXCollections;
 import hospital.logica.Sesion;
 import hospital.model.*;
@@ -10,11 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import hospital.model.Receta;
 
+import java.io.IOException;
 import java.util.List;
+
 
 public class DespachoView {
     @FXML
@@ -46,6 +50,8 @@ public class DespachoView {
 
     @FXML
     private Button btnBuscar;
+
+    private Paciente pacienteSeleccionado;
 
     private final RecetaController recetaController = new RecetaController();
     private final ObservableList<Receta> recetasObservable = FXCollections.observableArrayList();
@@ -96,25 +102,59 @@ public class DespachoView {
     }
 
     @FXML
-    public void BuscarPaciente(ActionEvent event) {
-        String filtro = txtBuscar.getText().trim();
-        if (filtro.isEmpty()) {
-            cargarRecetas();
-            return;
-        }
+    private void BuscarPaciente(ActionEvent event) {
         try {
-            List<Receta> receta = recetaController.buscarPorPaciente(filtro);
-            if (!receta.isEmpty()) {
-                recetasObservable.setAll(receta);
-            } else {
-                recetasObservable.clear();
-                Alerta.info("Búsqueda", "No se encontró receta con ese ID.");
+            // Cargar la ventana de búsqueda de pacientes (la misma que usa PreescribirRecetaView)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarPacientePrescripcion.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la ventana de búsqueda
+            BuscarPacientePreescripcionView buscarView = loader.getController();
+
+            // Crear y configurar la ventana modal
+            Stage stage = new Stage();
+            stage.setTitle("Buscar Paciente");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.WINDOW_MODAL);
+            // SOLUCIÓN: Usar btnBuscar en lugar de btnBuscarPaciente (según el FXML)
+            stage.initOwner(btnBuscar.getScene().getWindow());
+
+            // Mostrar la ventana y esperar a que se cierre
+            stage.showAndWait();
+
+            // Obtener el paciente seleccionado de la tabla
+            Paciente pacienteNuevo = buscarView.getPacienteSeleccionado();
+            if (pacienteNuevo != null) {
+                // Guardar el paciente seleccionado
+                pacienteSeleccionado = pacienteNuevo;
+
+                // Actualizar el campo de texto de búsqueda para mostrar el paciente seleccionado
+                txtBuscar.setText(pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")");
+
+                // Filtrar las recetas para mostrar solo las del paciente seleccionado
+                filtrarRecetasPorPaciente();
+
+                // Opcional: Mostrar mensaje informativo
+                Alerta.info("Paciente seleccionado",
+                        "Mostrando recetas para: " + pacienteSeleccionado.getNombre());
             }
-        } catch (Exception e) {
-            Alerta.error("Error en búsqueda", e.getMessage());
+
+        } catch (IOException e) {
+            Alerta.error("Error", "No se pudo abrir la ventana de búsqueda de pacientes: " + e.getMessage());
         }
     }
 
+    private void filtrarRecetasPorPaciente() {
+        if (pacienteSeleccionado != null) {
+            try {
+                // Obtener todas las recetas del paciente específico
+                List<Receta> recetasPaciente = recetaController.listarRecetasPorPaciente(pacienteSeleccionado.getId());
+                recetasObservable.setAll(recetasPaciente);
+            } catch (Exception e) {
+                Alerta.error("Error", "Error filtrando recetas del paciente: " + e.getMessage());
+            }
+        }
+    }
     @FXML
     public void VerDetalle(ActionEvent event) {
         Receta seleccionada = tblRecetas.getSelectionModel().getSelectedItem();
@@ -142,22 +182,25 @@ public class DespachoView {
     private void CambiarEstado(ActionEvent event) {
         Receta seleccionada = tblRecetas.getSelectionModel().getSelectedItem();
         if (seleccionada == null) {
-            Alerta.info("Estado", "Debe seleccionar una receta primero.");
+            Alerta.info("Error", "Seleccione una receta primero.");
             return;
         }
+
         try {
-            Farmaceuta f = (Farmaceuta) Sesion.getUsuario();
-            EstadoReceta nuevoEstado = siguienteEstado(seleccionada.getEstado());
-            if (nuevoEstado == seleccionada.getEstado()) {
-                Alerta.info("Estado", "No se puede avanzar más en el flujo de estados.");
-                return;
-            }
-            recetaController.actualizarEstado(f, seleccionada.getId(), nuevoEstado);
-            seleccionada.setEstado(nuevoEstado);
-            tblRecetas.refresh();
-            Alerta.info("Estado actualizado", "La receta pasó a estado: " + nuevoEstado);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/editarEstadoReceta.fxml"));
+            Parent root = loader.load();
+            EditarDetalleRecetaView controller = loader.getController();
+            controller.setReceta(seleccionada);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Cambiar Estado");
+            stage.showAndWait();
+
+            tblRecetas.refresh(); // Refrescar tabla
+
         } catch (Exception e) {
-            Alerta.error("Error cambiando estado", e.getMessage());
+            Alerta.error("Error", "No se pudo abrir la ventana.");
         }
     }
 
@@ -169,6 +212,7 @@ public class DespachoView {
             default -> actual;
         };
     }
+
 
     @FXML
     private void Volver(ActionEvent event) {
