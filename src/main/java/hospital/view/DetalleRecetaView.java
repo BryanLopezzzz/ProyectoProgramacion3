@@ -101,7 +101,7 @@ public class DetalleRecetaView {
                 this.detalleCreado = nuevo;
             }
 
-            // No persistimos aquí: devolvemos el detalle al padre
+            Alerta.info("Informacion", "Agregado correctamente.");
             cerrarVentana();
 
         } catch (NumberFormatException e) {
@@ -130,6 +130,11 @@ public class DetalleRecetaView {
         alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void mostrarInfo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, mensaje);
         alert.showAndWait();
     }
 }
