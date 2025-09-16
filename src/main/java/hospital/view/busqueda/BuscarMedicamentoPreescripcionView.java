@@ -85,6 +85,9 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
             List<Medicamento> lista = medicamentoController.listar(administrador);
             medicamentos.clear();
             medicamentos.addAll(lista);
+
+            todosMedicamentos.clear();
+            todosMedicamentos.addAll(lista);
         } catch (Exception e) {
             mostrarError("Error al cargar medicamentos: " + e.getMessage());
         }

@@ -47,12 +47,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="txtBuscar" layoutX="101.0" layoutY="114.0" prefHeight="37.0" prefWidth="704.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
+      <TextField id="txtBuscar" fx:id="txtBuscar" layoutX="101.0" layoutY="114.0" onAction="#Buscar" prefHeight="37.0" prefWidth="704.0" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="cmbFiltrar" layoutX="212.0" layoutY="163.0" prefHeight="27.0" prefWidth="122.0" promptText="Medicamento" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4; -fx-cursor: hand;" visibleRowCount="2" />
+      <ComboBox fx:id="cmbFiltrar" layoutX="212.0" layoutY="163.0" onAction="#Buscar" prefHeight="27.0" prefWidth="122.0" promptText="Medicamento" style="-fx-background-color: #ffffff; -fx-border-color: #b3b3b3; -fx-border-radius: 4; -fx-cursor: hand;" visibleRowCount="2" />
       <Text fill="#9a9a9a" layoutX="134.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar por:">
          <font>
             <Font name="Segoe UI" size="14.0" />

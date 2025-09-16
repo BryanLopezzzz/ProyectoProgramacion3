@@ -50,6 +50,7 @@ public class LoginController {
             default:
                 throw new Exception("Tipo de usuario desconocido, no se puede guardar la clave.");
         }
+        Sesion.setUsuario(usuarioActual);
     }
 
     // ==== Estado de sesión ====
