@@ -193,16 +193,8 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
 
     @FXML
     private void Volver() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) btnVolver.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Dashboard");
-            stage.show();
-        } catch (Exception e) {
-            mostrarError("Error al volver: " + e.getMessage());
-        }
+        Stage stage = (Stage) btnVolver.getScene().getWindow();
+        stage.close();
     }
 
     private void mostrarError(String mensaje) {
