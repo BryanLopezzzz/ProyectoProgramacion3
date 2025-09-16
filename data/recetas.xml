@@ -281,5 +281,45 @@
                 </Detalle>
             </Detalles>
         </Receta>
+        <Receta>
+            <id>REC-1D2AC97F</id>
+            <pacienteId>305</pacienteId>
+            <medicoId>668</medicoId>
+            <fecha>2025-09-15</fecha>
+            <fechaRetiro>2025-09-22</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>12</cantidad>
+                    <diasTratamiento>12</diasTratamiento>
+                    <indicaciones>por si las moscas</indicaciones>
+                    <medicamento>
+                        <codigo>405</codigo>
+                        <nombre>Difenidramina</nombre>
+                        <presentacion>150mg</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
+        <Receta>
+            <id>REC-13D96FE2</id>
+            <pacienteId>303</pacienteId>
+            <medicoId>668</medicoId>
+            <fecha>2025-09-15</fecha>
+            <fechaRetiro>2025-09-22</fechaRetiro>
+            <estado>CONFECCIONADA</estado>
+            <Detalles>
+                <Detalle>
+                    <cantidad>1</cantidad>
+                    <diasTratamiento>8</diasTratamiento>
+                    <indicaciones>no tomar más de dos</indicaciones>
+                    <medicamento>
+                        <codigo>600</codigo>
+                        <nombre>Emma</nombre>
+                        <presentacion>Oral</presentacion>
+                    </medicamento>
+                </Detalle>
+            </Detalles>
+        </Receta>
     </Recetas>
 </RecetasData>
