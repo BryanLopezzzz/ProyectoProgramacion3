@@ -4,7 +4,10 @@ import hospital.controller.MedicamentoController;
 import hospital.model.Administrador;
 import hospital.model.Medicamento;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -52,12 +55,10 @@ public class RegistroMedicamentoView implements Initializable {
             mostrarError("El código es obligatorio.");
             return;
         }
-
         if (nombre == null || nombre.trim().isEmpty()) {
             mostrarError("El nombre es obligatorio.");
             return;
         }
-
         if (presentacion == null || presentacion.trim().isEmpty()) {
             mostrarError("La presentación es obligatoria.");
             return;
@@ -72,9 +73,12 @@ public class RegistroMedicamentoView implements Initializable {
 
             medicamentoController.agregar(administrador, medicamento);
 
-            // Cerrar ventana tras agregar exitosamente
-            Stage stage = (Stage) btnGuardar.getScene().getWindow();
-            stage.close();
+            mostrarInfo("Medicamento guardado exitosamente.\n" +
+                    "Medicamento: " + medicamento.getNombre() + "\n" +
+                    "Codigo: " + medicamento.getCodigo() + "\n" +
+                    "Presentacion: " + medicamento.getPresentacion());
+
+            volverABusqueda();
 
         } catch (Exception e) {
             mostrarError("Error al agregar medicamento: " + e.getMessage());
@@ -82,9 +86,18 @@ public class RegistroMedicamentoView implements Initializable {
     }
 
     @FXML
-    private void Volver() {
-        Stage stage = (Stage) btnVolver.getScene().getWindow();
-        stage.close();
+    private void volverABusqueda() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/MedicamentosAdmin.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) btnVolver.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buscar Medicamentos");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarError("Error al volver a la vista de búsqueda.");
+        }
     }
 
     private void mostrarError(String mensaje) {
@@ -94,4 +107,12 @@ public class RegistroMedicamentoView implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+    private void mostrarInfo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Registro Exitoso");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
 }

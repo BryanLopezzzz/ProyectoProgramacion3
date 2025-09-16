@@ -114,22 +114,18 @@ public class BuscarMedicamentoView implements Initializable {
     @FXML
     private void AgregarMedicamento() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/AgregarMedicamento.fxml"));
-            Parent root = loader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/AgregarMedicamento.fxml"));
+            Parent root = fxmlLoader.load();
 
-            Stage stage = new Stage();
-            stage.setTitle("Agregar Medicamento");
+            Stage stage = (Stage) btnAgregarMedicamento.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
+            stage.setTitle("Agregar Medicamento");
+            stage.show();
 
-            cargarMedicamentos();
         } catch (Exception e) {
             mostrarError("Error al abrir ventana agregar medicamento: " + e.getMessage());
         }
     }
-
     @FXML
     private void EliminarMedicamento() {
         Medicamento seleccionado = tblMedicos.getSelectionModel().getSelectedItem();
@@ -169,19 +165,15 @@ public class BuscarMedicamentoView implements Initializable {
             EditarMedicamentoView editarController = loader.getController();
             editarController.setMedicamento(seleccionado);
 
-            Stage stage = new Stage();
-            stage.setTitle("Editar Medicamento");
+            Stage stage = (Stage) btnEditarMedicamento.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
+            stage.setTitle("Editar Medicamento");
+            stage.show();
 
-            cargarMedicamentos();
         } catch (Exception e) {
             mostrarError("Error al abrir ventana editar medicamento: " + e.getMessage());
         }
     }
-
     @FXML
     private void Volver() {
         try {

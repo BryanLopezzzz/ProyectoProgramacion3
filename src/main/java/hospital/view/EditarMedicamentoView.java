@@ -4,7 +4,10 @@ import hospital.controller.MedicamentoController;
 import hospital.model.Administrador;
 import hospital.model.Medicamento;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -93,7 +96,7 @@ public class EditarMedicamentoView implements Initializable {
 
             // Cerrar ventana tras editar exitosamente
             Stage stage = (Stage) btnGuardarMedicamento.getScene().getWindow();
-            stage.close();
+            Volver();
 
         } catch (Exception e) {
             mostrarError("Error al actualizar medicamento: " + e.getMessage());
@@ -102,8 +105,17 @@ public class EditarMedicamentoView implements Initializable {
 
     @FXML
     private void Volver() {
-        Stage stage = (Stage) btnVolver.getScene().getWindow();
-        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/MedicamentosAdmin.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) btnVolver.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Buscar Medicamentos");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarError("Error al volver a la vista de búsqueda.");
+        }
     }
 
     private void mostrarError(String mensaje) {

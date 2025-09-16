@@ -49,5 +49,11 @@
             <telefono>100111010</telefono>
             <fechaNacimiento>2025-09-10</fechaNacimiento>
         </Paciente>
+        <Paciente>
+            <id>1180</id>
+            <nombre>Aaron</nombre>
+            <telefono>84297869</telefono>
+            <fechaNacimiento>2000-09-20</fechaNacimiento>
+        </Paciente>
     </Pacientes>
 </PacientesData>

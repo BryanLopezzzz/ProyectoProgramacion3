@@ -107,16 +107,6 @@ public class RegistroPacienteView {
         return true;
     }
 
-    private boolean esIdValido(String id) {
-        // Permitir solo letras, números y guiones
-        return id.matches("^[a-zA-Z0-9-]+$") && id.length() >= 3;
-    }
-
-    private boolean esTelefonoValido(String telefono) {
-        // Permitir números, espacios, guiones y paréntesis
-        return telefono.matches("^[0-9\\s\\-\\(\\)\\+]+$") && telefono.length() >= 8;
-    }
-
     private void limpiarCampos() {
         txtIdentificacion.clear();
         txtNombre.clear();
