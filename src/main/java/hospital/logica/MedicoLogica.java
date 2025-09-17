@@ -29,13 +29,11 @@ public class MedicoLogica {
 
         MedicoConector con = datos.load();
 
-        // Unicidad de ID
         boolean existe = con.getMedicos().stream()
                 .anyMatch(m -> m.getId().equalsIgnoreCase(medico.getId()));
         if (existe) throw new Exception("Ya existe un médico con el id: " + medico.getId());
 
-        // Regla de enunciado: al agregar, la clave queda igual al id
-        medico.setClave(medico.getId()); // fuerza la regla del enunciado
+        medico.setClave(medico.getId());
 
         con.getMedicos().add(MedicoMapper.toXML(medico));
         ordenarPorNombre(con);
@@ -57,11 +55,8 @@ public class MedicoLogica {
                 .findFirst()
                 .orElseThrow(() -> new Exception("No existe médico con id: " + medico.getId()));
 
-        // Actualiza campos editables
         actual.setNombre(medico.getNombre());
         actual.setEspecialidad(medico.getEspecialidad());
-
-        // La clave NO se cambia aquí (lo harían desde “cambiar clave” del login general)
 
         ordenarPorNombre(con);
         datos.save(con);
@@ -73,7 +68,6 @@ public class MedicoLogica {
         if (m.getNombre() == null || m.getNombre().isBlank()) throw new Exception("El nombre es obligatorio.");
         if (m.getEspecialidad() == null || m.getEspecialidad().isBlank())
             throw new Exception("La especialidad es obligatoria.");
-        // m.getClave() la forzamos = id en agregar()
     }
 
     private void validarMedicoModificacion(Medico m) throws Exception {
@@ -89,7 +83,6 @@ public class MedicoLogica {
                 e -> Objects.toString(e.getNombre(), ""), String.CASE_INSENSITIVE_ORDER
         ));
     }
-    //Clase
 
     public Medico actualizar(Medico actualizado) throws Exception {
         validarMedicoModificacion(actualizado);

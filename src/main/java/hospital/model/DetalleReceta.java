@@ -3,7 +3,7 @@ package hospital.model;
 public class DetalleReceta {
     private Medicamento medicamento;
     private int cantidad;
-    private String indicaciones;// ej: "Tomar cada 8 horas"
+    private String indicaciones;
     private int diasTratamiento;
 
     public DetalleReceta() {}

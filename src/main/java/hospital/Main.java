@@ -11,12 +11,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
-        // Usuario: admin Clave: admin
+        //usuario: admin - clave: admin
+        //los demas usuarios entran con el id como clave
         AdministradorLogica adminLogica = new AdministradorLogica();
         if (adminLogica.buscarPorId("admin") == null) {
             Administrador superAdmin = new Administrador();
             superAdmin.setId("admin");
-            superAdmin.setNombre("Atenea");
+            superAdmin.setNombre("Administrador");
             adminLogica.agregar(superAdmin);
         }
 

@@ -63,7 +63,6 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
         todosMedicamentos = FXCollections.observableArrayList();
         tblMedicamento.setItems(medicamentos);
 
-        // Permitir selección con doble clic
         tblMedicamento.setRowFactory(tv -> {
             TableRow<Medicamento> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -128,7 +127,6 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
 
             switch (filtro) {
                 case "Código":
-                    // Búsqueda exacta por código
                     Medicamento medicamento = medicamentoController.buscarPorCodigo(administrador, textoBusqueda.trim());
                     if (medicamento != null) {
                         resultados.add(medicamento);
@@ -136,12 +134,10 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
                     break;
 
                 case "Nombre":
-                    // Búsqueda por nombre usando el controlador
                     resultados = medicamentoController.buscarPorNombre(administrador, textoBusqueda.trim());
                     break;
 
                 case "Presentación":
-                    // Búsqueda local por presentación
                     String busquedaMin = textoBusqueda.toLowerCase().trim();
                     resultados = todosMedicamentos.stream()
                             .filter(m -> m.getPresentacion() != null &&
@@ -150,7 +146,6 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
                     break;
 
                 case "Todos":
-                    // Búsqueda en todos los campos
                     String busquedaTodos = textoBusqueda.toLowerCase().trim();
                     resultados = todosMedicamentos.stream()
                             .filter(m ->
@@ -169,9 +164,7 @@ public class BuscarMedicamentoPreescripcionView implements Initializable {
             medicamentos.clear();
             medicamentos.addAll(resultados);
 
-            // Mostrar mensaje si no se encontraron resultados
             if (resultados.isEmpty()) {
-                // No mostrar alert, solo dejar la tabla vacía
                 System.out.println("No se encontraron resultados para: " + textoBusqueda);
             }
 

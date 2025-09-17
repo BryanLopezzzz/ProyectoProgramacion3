@@ -22,7 +22,6 @@ public class EstadisticaRecetaLogica {
         return cargarRecetas().size();
     }
 
-    // Estadística: recetas por estado (similar a clientesPorRangoEdad)
     public LinkedHashMap<String, Long> recetasPorEstado() {
         LinkedHashMap<String, Long> resultado = new LinkedHashMap<>();
         List<String> estados = Arrays.asList(
@@ -46,7 +45,6 @@ public class EstadisticaRecetaLogica {
         return resultado;
     }
 
-    // Estadística: medicamentos por mes (para un medicamento específico)
     public LinkedHashMap<String, Integer> medicamentosPorMes(YearMonth desde, YearMonth hasta) {
         LinkedHashMap<String, Integer> resultado = new LinkedHashMap<>();
 

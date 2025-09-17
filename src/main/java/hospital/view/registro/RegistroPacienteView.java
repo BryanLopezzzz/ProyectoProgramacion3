@@ -14,18 +14,16 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 public class RegistroPacienteView {
-
-    // Corregir los nombres de las variables para que coincidan con los IDs del FXML
     @FXML private TextField txtIdentificacion;
     @FXML private TextField txtNombre;
-    @FXML private TextField txtTelefono; // El FXML no tiene fx:id para este campo, necesita agregarse
+    @FXML private TextField txtTelefono;
     @FXML private DatePicker dtpFechaNac;
 
-    @FXML private Button btnGuardar; // El FXML no tiene fx:id, necesita agregarse
+    @FXML private Button btnGuardar;
     @FXML private Button btnVolver;
 
     private final PacienteController pacienteController = new PacienteController();
-    private final Administrador admin = new Administrador(); // Puedes pasar el admin logueado
+    private final Administrador admin = new Administrador();
 
     @FXML
     public void initialize() {
@@ -34,7 +32,6 @@ public class RegistroPacienteView {
     @FXML
     public void Guardar(ActionEvent event) {
         try {
-            // Validar campos
             if (!validarCampos()) {
                 return;
             }
@@ -52,10 +49,8 @@ public class RegistroPacienteView {
                     "\nTeléfono: " + nuevoPaciente.getTelefono() +
                     "\nFecha de nacimiento: " + nuevoPaciente.getFechaNacimiento());
 
-            // Limpiar formulario después de guardar
             limpiarCampos();
 
-            // Volver a búsqueda como en RegistroMedicoView
             volverABusqueda();
 
         } catch (Exception e) {
@@ -76,7 +71,6 @@ public class RegistroPacienteView {
         String telefono = txtTelefono.getText();
         LocalDate fecha = dtpFechaNac.getValue();
 
-        // Validaciones básicas como en las otras clases
         if (id == null || id.trim().isEmpty()) {
             errores.append("- El ID es obligatorio.\n");
         } else if (id.trim().length() < 2) {
@@ -113,7 +107,6 @@ public class RegistroPacienteView {
         txtTelefono.clear();
         dtpFechaNac.setValue(null);
 
-        // Poner foco en el primer campo
         txtIdentificacion.requestFocus();
     }
 
@@ -131,7 +124,6 @@ public class RegistroPacienteView {
         }
     }
 
-    // Métodos utilitarios para mostrar alertas
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

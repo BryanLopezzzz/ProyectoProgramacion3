@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class RecetaMapper {
 
-    // Convierte modelo → entidad XML
     public static RecetaEntidad toXML(Receta receta) {
         if (receta == null) return null;
 
@@ -35,7 +34,6 @@ public class RecetaMapper {
         Receta receta = new Receta();
         receta.setId(entity.getId());
 
-        // Resolver paciente
         if (entity.getPacienteId() != null && pacienteLogica != null) {
             Paciente pacientes = pacienteLogica.buscarPorId(entity.getPacienteId());
 
@@ -47,7 +45,6 @@ public class RecetaMapper {
             receta.setPaciente(null);
         }
 
-        // Resolver médico
         if (entity.getMedicoId() != null && medicoLogica != null) {
             Medico medicos = medicoLogica.buscarPorId(entity.getMedicoId());;
             if (medicos == null && strict) {
@@ -68,7 +65,6 @@ public class RecetaMapper {
         return receta;
     }
 
-    // Helper para crear detalles de receta
     public static DetalleReceta crearDetalle(Medicamento medicamento, int cantidad, String indicaciones, int diasTratamiento) throws Exception {
         if (medicamento == null) throw new Exception("El medicamento no puede ser nulo.");
         if (cantidad <= 0) throw new Exception("La cantidad debe ser mayor que 0.");

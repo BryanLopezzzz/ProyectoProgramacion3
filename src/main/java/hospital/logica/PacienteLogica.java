@@ -52,7 +52,7 @@ public class PacienteLogica {
             throw new Exception("El teléfono es obligatorio.");
         }
     }
-    //Clase
+
     public Paciente actualizar(Paciente actualizado) throws Exception {
         validarPaciente(actualizado);
 
@@ -88,10 +88,8 @@ public class PacienteLogica {
 
     public void generarReporte(String rutaReporte) {
         try {
-            // Obtener todos los pacietnes
             List<Paciente> lista = listar();
 
-            // Mapearlos a entidades XML
             PacienteConector conector = new PacienteConector();
             for (Paciente m : lista) {
                 conector.getPacientes().add(PacienteMapper.toXML(m));

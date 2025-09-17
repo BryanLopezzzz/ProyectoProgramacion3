@@ -3,7 +3,6 @@ package hospital.model;
 import java.time.LocalDate;
 
 public class Paciente {
-    //Estas caracteristicas estan en el enunciado
     private String id;
     private String nombre;
     private LocalDate fechaNacimiento;

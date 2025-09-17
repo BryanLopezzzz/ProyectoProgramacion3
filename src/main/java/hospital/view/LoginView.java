@@ -45,11 +45,11 @@ public class LoginView {
             Usuario usuario = loginController.login(id, clave);
             Sesion.setUsuario(usuario);
 
-            // cargar la vista principal(esto puede cambiar si el menu correcto no es ese)
+            //cargar la vista principal(esto puede cambiar si el menu correcto no es
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
             Scene scene = new Scene(loader.load());
 
-            // mandar el usuario al dashboard
+            //mandar el usuario al dashboard
             DashboardView dashboardView = loader.getController();
             dashboardView.setLoginController(loginController);
 
@@ -58,7 +58,7 @@ public class LoginView {
             stage.setScene(scene);
             stage.show();
 
-            // cerrar la ventana de login
+            //cerrar la ventana del login
             Stage loginStage = (Stage) btnEntrar.getScene().getWindow();
             loginStage.close();
 

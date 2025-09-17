@@ -1,7 +1,6 @@
 package hospital.model;
 
 public class Medicamento {
-    //Estas caracteristicas estan en el enunciado
     private String codigo;
     private String nombre;
     private String presentacion;

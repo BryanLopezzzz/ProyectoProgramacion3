@@ -132,10 +132,8 @@ public class CambioClaveView {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            // Aquí es importante obtener la instancia correcta del LoginController
-            // Si DashboardView lo necesita, hay que pasarlo.
             DashboardView dashboardView = fxmlLoader.getController();
-            dashboardView.setLoginController(this.loginController); // Re-establecer el controlador de login
+            dashboardView.setLoginController(this.loginController);
 
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(scene);

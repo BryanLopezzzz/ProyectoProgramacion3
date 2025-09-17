@@ -30,7 +30,6 @@ public class PacienteController {
         return pacienteLogica.buscarPorId(id);
     }
 
-    // búsqueda adicional específica de pacientes
     public List<Paciente> buscarPorNombre(Administrador admin, String nombre) throws Exception {
         validarAdmin(admin);
         return pacienteLogica.listar().stream()

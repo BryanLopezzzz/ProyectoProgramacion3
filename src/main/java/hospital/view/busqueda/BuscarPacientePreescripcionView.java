@@ -52,7 +52,6 @@ public class BuscarPacientePreescripcionView {
 
     @FXML
     public void initialize() {
-        // Configurar columnas
         colIdentificacion.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
         colNombre.setCellValueFactory(cellData ->
@@ -64,7 +63,6 @@ public class BuscarPacientePreescripcionView {
                         cellData.getValue().getFechaNacimiento().format(formatter)
                 ));
 
-        // Inicializar filtro
         btnFiltro.setItems(FXCollections.observableArrayList("Nombre", "ID"));
         btnFiltro.setValue("Nombre");
 
@@ -119,7 +117,6 @@ public class BuscarPacientePreescripcionView {
             mostrarError("Debe seleccionar un paciente.");
             return;
         }
-        // Cierra la ventana actual
         btnSeleccionar.getScene().getWindow().hide();
     }
 

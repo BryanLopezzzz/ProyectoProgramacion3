@@ -52,7 +52,6 @@ public class UsuarioManager {
         throw new Exception("Credenciales incorrectas.");
     }
 
-    // ==== Cambio de clave ====
     public void cambiarClave(String id, String actual, String nueva) throws Exception {
         if (id == null || id.isBlank())
             throw new Exception("El id es obligatorio.");
@@ -61,7 +60,6 @@ public class UsuarioManager {
         if (nueva == null || nueva.isBlank())
             throw new Exception("La nueva clave no puede estar vacía.");
 
-        // Buscar en cada tipo de usuario
         Administrador a = administradorLogica.buscarPorId(id);
         if (a != null) {
             if (!a.getClave().equals(actual))
@@ -76,7 +74,7 @@ public class UsuarioManager {
             if (!m.getClave().equals(actual))
                 throw new Exception("Clave actual incorrecta.");
             m.setClave(nueva);
-            medicoLogica.modificar(m); // Persistir
+            medicoLogica.modificar(m);
             return;
         }
 

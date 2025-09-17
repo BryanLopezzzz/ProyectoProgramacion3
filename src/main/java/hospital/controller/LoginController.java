@@ -11,19 +11,16 @@ public class LoginController {
         this.usuarioManager = new UsuarioManager();
     }
 
-    // ==== LOGIN ====
     public Usuario login(String id, String clave) throws Exception {
         Usuario u = usuarioManager.login(id, clave);
         Sesion.setUsuario(u);
         return u;
     }
 
-    // ==== LOGOUT ====
     public void logout() {
         Sesion.setUsuario(null);
     }
 
-    // ==== CAMBIO DE CLAVE ====
     public void cambiarClave(String actual, String nueva) throws Exception {
         Usuario usuarioActual = Sesion.getUsuario();
         if (usuarioActual == null) {
@@ -53,7 +50,6 @@ public class LoginController {
         Sesion.setUsuario(usuarioActual);
     }
 
-    // ==== Estado de sesión ====
     public Usuario getUsuarioActual() {
         return UsuarioManager.getUsuarioActual();
     }

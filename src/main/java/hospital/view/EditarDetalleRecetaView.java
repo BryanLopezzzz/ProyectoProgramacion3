@@ -25,7 +25,6 @@ public class EditarDetalleRecetaView {
     private final RecetaController recetaController = new RecetaController();
 
     public void initialize() {
-        // Cargar todos los estados en el ComboBox
         btnFiltro.setItems(FXCollections.observableArrayList(EstadoReceta.values()));
     }
 

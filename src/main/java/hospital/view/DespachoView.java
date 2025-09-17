@@ -57,7 +57,6 @@ public class DespachoView {
     private final ObservableList<Receta> recetasObservable = FXCollections.observableArrayList();
 
     public void initialize() {
-        // Configuración de columnas
         colIdentificacionReceta.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(
                 data.getValue().getId()
         ));
@@ -104,37 +103,28 @@ public class DespachoView {
     @FXML
     private void BuscarPaciente(ActionEvent event) {
         try {
-            // Cargar la ventana de búsqueda de pacientes (la misma que usa PreescribirRecetaView)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarPacientePrescripcion.fxml"));
             Parent root = loader.load();
 
-            // Obtener el controlador de la ventana de búsqueda
             BuscarPacientePreescripcionView buscarView = loader.getController();
 
-            // Crear y configurar la ventana modal
             Stage stage = new Stage();
             stage.setTitle("Buscar Paciente");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
-            // SOLUCIÓN: Usar btnBuscar en lugar de btnBuscarPaciente (según el FXML)
             stage.initOwner(btnBuscar.getScene().getWindow());
 
-            // Mostrar la ventana y esperar a que se cierre
+
             stage.showAndWait();
 
-            // Obtener el paciente seleccionado de la tabla
             Paciente pacienteNuevo = buscarView.getPacienteSeleccionado();
             if (pacienteNuevo != null) {
-                // Guardar el paciente seleccionado
                 pacienteSeleccionado = pacienteNuevo;
 
-                // Actualizar el campo de texto de búsqueda para mostrar el paciente seleccionado
                 txtBuscar.setText(pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")");
 
-                // Filtrar las recetas para mostrar solo las del paciente seleccionado
                 filtrarRecetasPorPaciente();
 
-                // Opcional: Mostrar mensaje informativo
                 Alerta.info("Paciente seleccionado",
                         "Mostrando recetas para: " + pacienteSeleccionado.getNombre());
             }
@@ -147,7 +137,6 @@ public class DespachoView {
     private void filtrarRecetasPorPaciente() {
         if (pacienteSeleccionado != null) {
             try {
-                // Obtener todas las recetas del paciente específico
                 List<Receta> recetasPaciente = recetaController.listarRecetasPorPaciente(pacienteSeleccionado.getId());
                 recetasObservable.setAll(recetasPaciente);
             } catch (Exception e) {
@@ -197,7 +186,7 @@ public class DespachoView {
             stage.setTitle("Cambiar Estado");
             stage.showAndWait();
 
-            tblRecetas.refresh(); // Refrescar tabla
+            tblRecetas.refresh();
 
         } catch (Exception e) {
             Alerta.error("Error", "No se pudo abrir la ventana.");

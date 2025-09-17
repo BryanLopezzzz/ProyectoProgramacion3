@@ -18,8 +18,7 @@ public class DetalleRecetaMapper {
         if (entity == null) return null;
 
         DetalleReceta detalle = new DetalleReceta();
-        // Aquí se resolvería el medicamento completo a partir del ID usando algún repositorio
-        detalle.setMedicamento(null); // placeholder
+        detalle.setMedicamento(null);
         detalle.setCantidad(entity.getCantidad());
         detalle.setIndicaciones(entity.getIndicaciones());
 

@@ -22,12 +22,11 @@ public class AdministradorLogica {
 
         AdministradorConector con = datos.load();
 
-        // Unicidad de ID
         boolean existe = con.getAdministradores().stream()
                 .anyMatch(a -> a.getId().equalsIgnoreCase(admin.getId()));
         if (existe) throw new Exception("Ya existe un administrador con id: " + admin.getId());
 
-        // Regla del enunciado: clave inicial = id
+        //  clave inicial = id
         admin.setClave(admin.getId());
 
         con.getAdministradores().add(AdministradorMapper.toXML(admin));
@@ -50,9 +49,8 @@ public class AdministradorLogica {
                 .findFirst()
                 .orElseThrow(() -> new Exception("No existe administrador con id: " + admin.getId()));
 
-        // Campos editables
         actual.setNombre(admin.getNombre());
-        // La clave no se cambia aquí, se hace desde el módulo login/cambio clave
+        // la clave no se cambia aquí, se hace desde el módulo login/cambio clave
 
         ordenarPorNombre(con);
         datos.save(con);
@@ -62,7 +60,6 @@ public class AdministradorLogica {
         if (a == null) throw new Exception("El administrador no puede ser nulo.");
         if (a.getId() == null || a.getId().isBlank()) throw new Exception("El id es obligatorio.");
         if (a.getNombre() == null || a.getNombre().isBlank()) throw new Exception("El nombre es obligatorio.");
-        // La clave la forzamos = id en agregar()
     }
 
     private void validarModificacion(Administrador a) throws Exception {
@@ -94,7 +91,6 @@ public class AdministradorLogica {
         throw new Exception("No existe administrador con id: " + actualizado.getId());
     }
 
-    //Clase
     public boolean eliminar(String id) throws Exception {
         AdministradorConector conector = datos.load();
         boolean eliminado = conector.getAdministradores().removeIf(a -> a.getId().equalsIgnoreCase(id));

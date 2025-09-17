@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Receta {
     private String id;                // consecutivo único
-    private Paciente paciente;        // paciente asociado
-    private Medico medico;            // médico que la emite
+    private Paciente paciente;
+    private Medico medico;
     private LocalDate fecha;
     private LocalDate fechaRetiro;
     private EstadoReceta estado;
-    private List<DetalleReceta> detalles; // medicamentos prescritos
+    private List<DetalleReceta> detalles;
 
     public Receta() {
         this.detalles = new ArrayList<>();
@@ -106,20 +106,8 @@ public class Receta {
                 + " (" + estado + ") - Retiro: " + (fechaRetiro != null ? fechaRetiro : "¿?");
     }
 
-    /////////////////////////////////////////////////
-    /// //Proceso:
-    ///     // Médico → confeccionada
-    ///     //
-    ///     //Farmaceuta en ventanilla → en proceso
-    ///     //
-    ///     //Farmaceuta alista → lista
-    ///     //
-    ///     //Farmaceuta entrega → entregada
-    ///////////////////////////////////////////////////
 
     public void cambiarEstado(EstadoReceta nuevoEstado) {
- //Así evitamos que alguien pase una receta de CONFECCIONADA directamente a ENTREGADA
-        // sin haber pasado por el proceso de farmacia.
         switch (this.estado) {
             case CONFECCIONADA:
                 if (nuevoEstado == EstadoReceta.EN_PROCESO || nuevoEstado == EstadoReceta.CANCELADA)

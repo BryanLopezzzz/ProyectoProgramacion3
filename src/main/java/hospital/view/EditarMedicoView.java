@@ -36,7 +36,6 @@ public class EditarMedicoView {
 
     @FXML
     public void initialize() {
-        // El ID no debe ser editable en la modificación
         txtIdentificacion.setEditable(false);
         txtIdentificacion.setStyle("-fx-background-color: #f0f0f0;");
     }
@@ -49,7 +48,7 @@ public class EditarMedicoView {
 
         this.medicoActual = medico;
 
-        // Cargar los datos en los campos
+        //cargar los datos en los campos
         txtIdentificacion.setText(medico.getId());
         txtNombre.setText(medico.getNombre());
         txtEspecialidad.setText(medico.getEspecialidad());
@@ -58,18 +57,15 @@ public class EditarMedicoView {
     @FXML
     public void Guardar(ActionEvent event) {
         try {
-            // Validar campos
             if (!validarCampos()) {
                 return;
             }
-
-            // Crear médico con los datos actualizados
             Medico medicoModificado = new Medico();
             medicoModificado.setId(txtIdentificacion.getText().trim());
             medicoModificado.setNombre(txtNombre.getText().trim());
             medicoModificado.setEspecialidad(txtEspecialidad.getText().trim());
 
-            // Si el médico original tenía clave, la mantenemos
+            //si el médico original tenía clave la mantiene
             if (medicoActual.getClave() != null) {
                 medicoModificado.setClave(medicoActual.getClave());
             }

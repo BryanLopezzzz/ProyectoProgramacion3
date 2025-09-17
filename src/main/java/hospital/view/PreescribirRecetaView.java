@@ -39,7 +39,7 @@ public class PreescribirRecetaView {
     @FXML private Button btnEditarReceta;
     @FXML private Button btnVolver;
     @FXML private Button btnPreescribir;
-    @FXML private Button btnLimpiarTodo;  // Nuevo botón para limpiar manualmente
+    @FXML private Button btnLimpiarTodo;
 
     private ObservableList<DetalleReceta> listaDetalles = FXCollections.observableArrayList();
     private final RecetaController recetaController = new RecetaController();
@@ -96,11 +96,7 @@ public class PreescribirRecetaView {
     }
 
     private void cargarDatosPersistentes() {
-        // Si hay datos de una sesión anterior, mantenerlos
-        // En una implementación real podrías cargar desde un archivo temporal o preferencias
         System.out.println("Cargando datos persistentes - Detalles: " + listaDetalles.size());
-
-        // Actualizar estado de botones
         actualizarEstadoBotones();
     }
 
@@ -130,11 +126,10 @@ public class PreescribirRecetaView {
 
             Paciente pacienteNuevo = buscarView.getPacienteSeleccionado();
             if (pacienteNuevo != null) {
-                // Solo cambiar si es diferente al actual
                 if (pacienteSeleccionado == null || !pacienteSeleccionado.getId().equals(pacienteNuevo.getId())) {
                     pacienteSeleccionado = pacienteNuevo;
                     txtBuscarPaciente.setText(pacienteSeleccionado.getNombre() + " (" + pacienteSeleccionado.getId() + ")");
-                    // No limpiar los medicamentos, mantenerlos
+                    // NO LIMPIAR los medicamentos MANTENGALOOOOS
                 }
                 actualizarEstadoBotones();
             }
@@ -156,7 +151,6 @@ public class PreescribirRecetaView {
                 crearRecetaTemporal();
             }
 
-            // Buscar medicamento
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarMedicamentoPrescripcion.fxml"));
             Parent root = loader.load();
             BuscarMedicamentoPreescripcionView buscarView = loader.getController();
@@ -173,7 +167,6 @@ public class PreescribirRecetaView {
                 return;
             }
 
-            // Verificar si el medicamento ya está en la lista
             boolean yaExiste = listaDetalles.stream()
                     .anyMatch(d -> d.getMedicamento() != null &&
                             d.getMedicamento().getCodigo().equals(seleccionado.getCodigo()));
@@ -190,7 +183,6 @@ public class PreescribirRecetaView {
                 }
             }
 
-            // Abrir detalle
             FXMLLoader detalleLoader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
             Parent detalleRoot = detalleLoader.load();
             DetalleRecetaView detalleView = detalleLoader.getController();
@@ -397,7 +389,6 @@ public class PreescribirRecetaView {
         }
     }
 
-    // Getters
     public Receta getRecetaActual() { return recetaActual; }
     public Paciente getPacienteSeleccionado() { return pacienteSeleccionado; }
 

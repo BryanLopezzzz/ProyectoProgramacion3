@@ -34,7 +34,7 @@ public class MedicamentoLogica {
 
     public List<Medicamento> listar() {
         return datos.load().getMedicamentos().stream()
-                .map(MedicamentoMapper::fromXML)   // Convertir cada MedicamentoEntidad a Medicamento
+                .map(MedicamentoMapper::fromXML)
                 .collect(Collectors.toList());
     }
 
@@ -111,10 +111,8 @@ public class MedicamentoLogica {
 
     public void generarReporte(String rutaReporte) {
         try {
-            // Obtener todos los medicamentos
             List<Medicamento> lista = listar();
 
-            // Mapearlos a entidades XML
             MedicamentoConector conector = new MedicamentoConector();
             for (Medicamento m : lista) {
                 conector.getMedicamentos().add(MedicamentoMapper.toXML(m));

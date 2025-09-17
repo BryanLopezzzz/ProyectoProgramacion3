@@ -26,23 +26,21 @@ public class RegistroFarmaceutaView {
     private Button btnVolver;
 
     private final FarmaceutaController farmaceutaController = new FarmaceutaController();
-    private final Administrador admin = new Administrador(); // Se debe pasar el admin logueado
+    private final Administrador admin = new Administrador(); // admin logueado
 
     @FXML
     public void initialize() {
-        // Configuraciones adicionales si son necesarias
+
         configurarValidaciones();
     }
 
     private void configurarValidaciones() {
-        // Validación en tiempo real para ID (solo números y letras)
         txtIdentificacion.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[a-zA-Z0-9]*")) {
                 txtIdentificacion.setText(oldValue);
             }
         });
 
-        // Validación para nombre (solo letras y espacios)
         txtNombre.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
                 txtNombre.setText(oldValue);
@@ -82,7 +80,6 @@ public class RegistroFarmaceutaView {
     private boolean validarCampos() {
         StringBuilder errores = new StringBuilder();
 
-        // Validar ID
         String id = txtIdentificacion.getText().trim();
         if (id.isEmpty()) {
             errores.append("- El ID es obligatorio.\n");
@@ -90,7 +87,6 @@ public class RegistroFarmaceutaView {
             errores.append("- El ID debe tener al menos 3 caracteres.\n");
         }
 
-        // Validar nombre
         String nombre = txtNombre.getText().trim();
         if (nombre.isEmpty()) {
             errores.append("- El nombre es obligatorio.\n");
@@ -98,7 +94,6 @@ public class RegistroFarmaceutaView {
             errores.append("- El nombre debe tener al menos 2 caracteres.\n");
         }
 
-        // Mostrar errores si existen
         if (errores.length() > 0) {
             mostrarError("Por favor corrija los siguientes errores:\n\n" + errores.toString());
             return false;
@@ -129,7 +124,6 @@ public class RegistroFarmaceutaView {
         }
     }
 
-    // Método para ser llamado desde otras vistas si se necesita precargar datos
     public void cargarDatos(String id, String nombre) {
         if (id != null) txtIdentificacion.setText(id);
         if (nombre != null) txtNombre.setText(nombre);
@@ -145,7 +139,6 @@ public class RegistroFarmaceutaView {
         }
     }
 
-    // Métodos utilitarios
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

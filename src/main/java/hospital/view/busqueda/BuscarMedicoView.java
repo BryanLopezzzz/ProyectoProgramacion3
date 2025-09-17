@@ -71,7 +71,6 @@ public class BuscarMedicoView {
         colEspecialidad.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEspecialidad()));
 
-        // Inicializar filtro
         cmbFiltrar.setItems(FXCollections.observableArrayList("Nombre", "ID"));
         cmbFiltrar.setValue("Nombre");
 
@@ -91,7 +90,6 @@ public class BuscarMedicoView {
     @FXML
     public void AgregarMedico(ActionEvent event) {
         try {
-            // Usar la ventana de agregar médico
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/agregarMedico.fxml"));
             Parent root = fxmlLoader.load();
 
@@ -114,7 +112,6 @@ public class BuscarMedicoView {
             return;
         }
 
-        // Confirmar eliminación
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
         confirmacion.setHeaderText("¿Está seguro que desea eliminar el médico?");
@@ -142,14 +139,11 @@ public class BuscarMedicoView {
         }
 
         try {
-            // Cargar la ventana de editar médico
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/editarMedico.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Obtener el controlador de la ventana de edición
             EditarMedicoView editarController = fxmlLoader.getController();
 
-            // Pasar los datos del médico seleccionado al controlador de edición
             editarController.inicializarConMedico(seleccionado);
 
             Stage stage = (Stage) btnEditarMedico.getScene().getWindow();
@@ -231,7 +225,6 @@ public class BuscarMedicoView {
         }
     }
 
-    // Método para filtrar (llamado por el ComboBox)
     public void filtrar(ActionEvent event) {
         Buscar(event);
     }

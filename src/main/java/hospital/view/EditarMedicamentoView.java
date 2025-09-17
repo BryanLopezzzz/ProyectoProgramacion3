@@ -44,7 +44,6 @@ public class EditarMedicamentoView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // El código del medicamento no debería ser editable
         txtCodigo.setEditable(false);
         txtCodigo.setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #b3b3b3; -fx-border-radius: 4;");
     }
@@ -64,7 +63,6 @@ public class EditarMedicamentoView implements Initializable {
         String nombre = txtNombre.getText();
         String presentacion = txtPresentacion.getText();
 
-        // Validaciones
         if (nombre == null || nombre.trim().isEmpty()) {
             mostrarError("El nombre es obligatorio.");
             return;
@@ -81,20 +79,16 @@ public class EditarMedicamentoView implements Initializable {
         }
 
         try {
-            // Crear medicamento con los nuevos datos
             Medicamento medicamentoEditado = new Medicamento(
                     medicamentoOriginal.getCodigo(), // El código no cambia
                     nombre.trim(),
                     presentacion.trim()
             );
 
-            // Actualizar el medicamento usando el controlador
             medicamentoController.modificar(administrador, medicamentoEditado);
 
-            // Mostrar confirmación
             mostrarInformacion("Medicamento actualizado correctamente.");
 
-            // Cerrar ventana tras editar exitosamente
             Stage stage = (Stage) btnGuardarMedicamento.getScene().getWindow();
             Volver();
 

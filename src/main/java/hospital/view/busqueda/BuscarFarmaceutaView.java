@@ -113,7 +113,6 @@ public class BuscarFarmaceutaView {
             return;
         }
 
-        // Confirmar eliminación
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
         confirmacion.setHeaderText("¿Está seguro que desea eliminar el farmaceuta?");
@@ -139,15 +138,12 @@ public class BuscarFarmaceutaView {
         }
 
         try {
-            // Cargar la vista de edición
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/editarFarmaceuta.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Obtener el controller de la vista de edición y pasarle el paciente
             hospital.view.EditarFarmaceutaView editarController = fxmlLoader.getController();
             editarController.cargarFarmaceuta(seleccionado);
 
-            // Cambiar la escena
             Stage stage = (Stage) btnEditar.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Editar Farmaceuta");
@@ -226,7 +222,6 @@ public class BuscarFarmaceutaView {
         }
     }
 
-    // Métodos utilitarios
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

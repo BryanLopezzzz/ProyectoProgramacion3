@@ -107,7 +107,6 @@ public class RegistroMedicoView {
         txtNombre.clear();
         txtEspecialidad.clear();
 
-        // Enfocar el primer campo para facilitar el ingreso de datos
         txtIdentificacion.requestFocus();
     }
 
@@ -142,18 +141,4 @@ public class RegistroMedicoView {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-    /*
-    public void precargarDatos(String id, String nombre, String especialidad) {
-        if (id != null && !id.isEmpty()) {
-            txtIdentificacion.setText(id);
-        }
-        if (nombre != null && !nombre.isEmpty()) {
-            txtNombre.setText(nombre);
-        }
-        if (especialidad != null && !especialidad.isEmpty()) {
-            txtEspecialidad.setText(especialidad);
-        }
-    }
-    */
-
 }

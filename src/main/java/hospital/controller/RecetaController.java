@@ -19,7 +19,7 @@ public class RecetaController {
         this.recetaLogica = new RecetaLogica();
     }
 
-    // MÉDICOS
+    // medicoos
     public Receta crearReceta(Medico medico, Receta receta) throws Exception {
         validarMedico(medico);
         return recetaLogica.crearReceta(receta);
@@ -30,23 +30,20 @@ public class RecetaController {
         recetaLogica.agregarDetalle(recetaId, medicamentoId, cantidad, indicaciones,diasTratamiento);
     }
 
-    // FARMACEUTAS
+    // farmaceutas
     public void actualizarEstado(Farmaceuta farmaceuta, String recetaId, EstadoReceta nuevoEstado) throws Exception {
         validarFarmaceuta(farmaceuta);
         recetaLogica.actualizarEstado(recetaId, nuevoEstado);
     }
 
-    // Método para listar recetas de un paciente específico
     public List<Receta> listarRecetasPorPaciente(String pacienteId) throws Exception {
         if (pacienteId == null || pacienteId.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID del paciente no puede estar vacío");
         }
 
         try {
-            // Obtener todas las recetas
             List<Receta> todasLasRecetas = listarRecetas();
 
-            // Filtrar por paciente
             return todasLasRecetas.stream()
                     .filter(receta -> receta.getPaciente() != null &&
                             pacienteId.equals(receta.getPaciente().getId()))
@@ -57,10 +54,9 @@ public class RecetaController {
         }
     }
 
-    // Método para buscar recetas por texto (ID de receta, nombre del paciente, medicamento, etc.)
     public List<Receta> buscarRecetas(String textoBusqueda) throws Exception {
         if (textoBusqueda == null || textoBusqueda.trim().isEmpty()) {
-            return listarRecetas(); // Si no hay texto, devolver todas
+            return listarRecetas();
         }
 
         try {
@@ -76,55 +72,45 @@ public class RecetaController {
         }
     }
 
-    // Método auxiliar para verificar si una receta coincide con el texto de búsqueda
     private boolean coincideConBusqueda(Receta receta, String textoBusqueda) {
-        // Buscar en ID de receta
         if (receta.getId() != null && receta.getId().toLowerCase().contains(textoBusqueda)) {
             return true;
         }
 
-        // Buscar en datos del paciente
         if (receta.getPaciente() != null) {
             Paciente paciente = receta.getPaciente();
 
-            // Nombre del paciente
             if (paciente.getNombre() != null &&
                     paciente.getNombre().toLowerCase().contains(textoBusqueda)) {
                 return true;
             }
 
-            // ID del paciente
             if (paciente.getId() != null &&
                     paciente.getId().toLowerCase().contains(textoBusqueda)) {
                 return true;
             }
         }
 
-        // Buscar en datos del médico
         if (receta.getMedico() != null && receta.getMedico().getNombre() != null &&
                 receta.getMedico().getNombre().toLowerCase().contains(textoBusqueda)) {
             return true;
         }
 
-        // Buscar en medicamentos
         if (receta.getDetalles() != null) {
             for (DetalleReceta detalle : receta.getDetalles()) {
                 if (detalle.getMedicamento() != null) {
                     Medicamento med = detalle.getMedicamento();
 
-                    // Nombre del medicamento
                     if (med.getNombre() != null &&
                             med.getNombre().toLowerCase().contains(textoBusqueda)) {
                         return true;
                     }
 
-                    // Código del medicamento
                     if (med.getCodigo() != null &&
                             med.getCodigo().toLowerCase().contains(textoBusqueda)) {
                         return true;
                     }
 
-                    // Presentación
                     if (med.getPresentacion() != null &&
                             med.getPresentacion().toLowerCase().contains(textoBusqueda)) {
                         return true;
@@ -133,7 +119,6 @@ public class RecetaController {
             }
         }
 
-        // Buscar en estado
         if (receta.getEstado() != null &&
                 receta.getEstado().name().toLowerCase().contains(textoBusqueda)) {
             return true;
@@ -141,7 +126,7 @@ public class RecetaController {
 
         return false;
     }
-    // CONSULTAS
+
     public Receta buscarReceta(String id) throws Exception {
         return recetaLogica.buscarPorId(id);
     }

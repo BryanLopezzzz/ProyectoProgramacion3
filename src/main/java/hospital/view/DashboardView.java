@@ -122,14 +122,12 @@ public class DashboardView {
     }
 
     private void configurarPermisosMedico() {
-        // Deshabilitar funciones no permitidas
         btnMedicos.setDisable(true);
         btnFarmaceutas.setDisable(true);
         btnPacientes.setDisable(true);
         btnMedicamentos.setDisable(true);
         btnDespachoReceta.setDisable(true);
 
-        // Habilitar funciones permitidas
         btnPrescribirReceta.setDisable(false);
         btnHistoricoRecetas.setDisable(false);
         btnCambiarClave.setDisable(false);
@@ -138,14 +136,12 @@ public class DashboardView {
     }
 
     private void configurarPermisosFarmaceuta() {
-        // Deshabilitar funciones no permitidas
         btnMedicos.setDisable(true);
         btnFarmaceutas.setDisable(true);
         btnPacientes.setDisable(true);
         btnMedicamentos.setDisable(true);
         btnPrescribirReceta.setDisable(true);
 
-        // Habilitar funciones permitidas
         btnDespachoReceta.setDisable(false);
         btnHistoricoRecetas.setDisable(false);
         btnCambiarClave.setDisable(false);
@@ -161,7 +157,6 @@ public class DashboardView {
         btnPrescribirReceta.setDisable(true);
         btnDespachoReceta.setDisable(true);
 
-        // Funciones básicas siempre deshabilitadas si no hay usuario reconocido
         btnHistoricoRecetas.setDisable(true);
         btnCambiarClave.setDisable(true);
         btnAcercaDe.setDisable(true);
@@ -281,7 +276,6 @@ public class DashboardView {
         try {
             Usuario usuarioActual = Sesion.getUsuario();
 
-            // Verificar que el usuario sea realmente un médico
             UsuarioManager.TipoUsuario tipo = usuarioManager.determinarTipoUsuario(usuarioActual.getId());
             if (tipo != UsuarioManager.TipoUsuario.MEDICO) {
                 Alerta.error("Acceso denegado", "Solo los médicos pueden prescribir recetas.");
@@ -291,14 +285,11 @@ public class DashboardView {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/prescribirReceta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            // Obtener el controlador y configurar el médico
             PreescribirRecetaView controller = fxmlLoader.getController();
 
-            // Crear objeto Medico con los datos del usuario autenticado
             Medico medico = new Medico();
             medico.setId(usuarioActual.getId());
             medico.setNombre(usuarioActual.getNombre());
-            // Agregar otros campos necesarios según tu modelo Medico
 
             controller.setMedico(medico);
 

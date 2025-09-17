@@ -11,8 +11,8 @@ import hospital.datos.LocalDateAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RecetaEntidad {
     private String id;
-    private String pacienteId; // Guardamos solo el ID
-    private String medicoId;   // Guardamos solo el ID
+    private String pacienteId;
+    private String medicoId;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fecha;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)

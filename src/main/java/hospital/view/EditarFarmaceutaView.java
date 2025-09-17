@@ -26,9 +26,9 @@ public class EditarFarmaceutaView {
     private Button btnVolver;
 
     private final FarmaceutaController farmaceutaController = new FarmaceutaController();
-    private final Administrador admin = new Administrador(); // Se debe pasar el admin logueado
+    private final Administrador admin = new Administrador();
 
-    private Farmaceuta farmaceutaOriginal; // Para almacenar el farmaceuta que se está editando
+    private Farmaceuta farmaceutaOriginal;
 
     @FXML
     public void initialize() {
@@ -37,7 +37,6 @@ public class EditarFarmaceutaView {
     }
 
     private void configurarValidaciones() {
-        // Validación para nombre (solo letras y espacios)
         txtNombreFarmaceuta.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
                 txtNombreFarmaceuta.setText(oldValue);
@@ -46,11 +45,8 @@ public class EditarFarmaceutaView {
     }
 
     private void configurarCampos() {
-        // El ID no se puede editar en modo edición
         txtIdentificacionFarmaceuta.setEditable(false);
         txtIdentificacionFarmaceuta.setStyle(txtIdentificacionFarmaceuta.getStyle() + "; -fx-background-color: #f0f0f0;");
-
-        // Enfocar el campo nombre por defecto
         txtNombreFarmaceuta.requestFocus();
     }
 
@@ -62,7 +58,6 @@ public class EditarFarmaceutaView {
 
         this.farmaceutaOriginal = farmaceuta;
 
-        // Cargar los datos en los campos
         txtIdentificacionFarmaceuta.setText(farmaceuta.getId());
         txtNombreFarmaceuta.setText(farmaceuta.getNombre());
     }
@@ -73,33 +68,26 @@ public class EditarFarmaceutaView {
             return;
         }
 
-        // Verificar si hubo cambios
         String nuevoNombre = txtNombreFarmaceuta.getText().trim();
         if (farmaceutaOriginal != null && nuevoNombre.equals(farmaceutaOriginal.getNombre())) {
             mostrarInfo("No se detectaron cambios para guardar.");
             return;
         }
 
-        // Mostrar confirmación antes de guardar
         mostrarConfirmacion("¿Está seguro que desea guardar los cambios?", () -> {
             try {
-                // Crear farmaceuta actualizado
                 Farmaceuta farmaceutaActualizado = new Farmaceuta();
                 farmaceutaActualizado.setId(txtIdentificacionFarmaceuta.getText().trim());
                 farmaceutaActualizado.setNombre(nuevoNombre);
 
-                // Si el farmaceuta original tiene clave, mantenerla
                 if (farmaceutaOriginal != null && farmaceutaOriginal.getClave() != null) {
                     farmaceutaActualizado.setClave(farmaceutaOriginal.getClave());
                 }
 
-                // Actualizar usando el controller
                 farmaceutaController.modificar(admin, farmaceutaActualizado);
 
-                // Mostrar mensaje de éxito
                 mostrarInfo("Farmaceuta actualizado exitosamente.");
 
-                // Volver a la vista de búsqueda
                 volverABusqueda();
 
             } catch (Exception e) {
@@ -110,7 +98,6 @@ public class EditarFarmaceutaView {
 
     @FXML
     public void Volver(ActionEvent event) {
-        // Verificar si hay cambios sin guardar
         if (hayCambiosSinGuardar()) {
             mostrarConfirmacion("Hay cambios sin guardar. ¿Está seguro que desea salir?",
                     this::volverABusqueda);
@@ -122,13 +109,11 @@ public class EditarFarmaceutaView {
     private boolean validarCampos() {
         StringBuilder errores = new StringBuilder();
 
-        // Validar que el ID no esté vacío (aunque no sea editable)
         String id = txtIdentificacionFarmaceuta.getText().trim();
         if (id.isEmpty()) {
             errores.append("- El ID no puede estar vacío.\n");
         }
 
-        // Validar nombre
         String nombre = txtNombreFarmaceuta.getText().trim();
         if (nombre.isEmpty()) {
             errores.append("- El nombre es obligatorio.\n");
@@ -136,7 +121,6 @@ public class EditarFarmaceutaView {
             errores.append("- El nombre debe tener al menos 2 caracteres.\n");
         }
 
-        // Mostrar errores si existen
         if (errores.length() > 0) {
             mostrarError("Por favor corrija los siguientes errores:\n\n" + errores.toString());
             return false;
@@ -170,7 +154,6 @@ public class EditarFarmaceutaView {
         }
     }
 
-    // Métodos utilitarios
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -196,10 +179,5 @@ public class EditarFarmaceutaView {
         if (alert.showAndWait().get() == ButtonType.OK) {
             accion.run();
         }
-    }
-
-    // Metodo getter para testing o uso externo
-    public Farmaceuta getFarmaceutaOriginal() {
-        return farmaceutaOriginal;
     }
 }

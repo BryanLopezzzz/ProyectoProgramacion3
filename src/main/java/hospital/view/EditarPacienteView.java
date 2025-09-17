@@ -41,7 +41,6 @@ public class EditarPacienteView {
 
     @FXML
     public void initialize() {
-        // Hacer el campo ID no editable (solo lectura)
         txtIdentificacion.setEditable(false);
         txtIdentificacion.setStyle(txtIdentificacion.getStyle() + "; -fx-background-color: #f5f5f5;");
     }
@@ -59,30 +58,25 @@ public class EditarPacienteView {
     @FXML
     public void Guardar(ActionEvent event) {
         try {
-            // Validar que los campos no estén vacíos
             if (!validarCampos()) {
                 return;
             }
 
-            // Crear objeto paciente actualizado
             Paciente pacienteActualizado = new Paciente();
             pacienteActualizado.setId(txtIdentificacion.getText().trim());
             pacienteActualizado.setNombre(txtNombre.getText().trim());
             pacienteActualizado.setTelefono(txtTelefono.getText().trim());
             pacienteActualizado.setFechaNacimiento(dtpFechaNac.getValue());
 
-            // Verificar que se hicieron cambios
             if (sonIguales(pacienteOriginal, pacienteActualizado)) {
                 mostrarInfo("No se han detectado cambios en los datos del paciente.");
                 return;
             }
 
-            // Actualizar paciente usando el controller
             pacienteController.modificar(admin, pacienteActualizado);
 
             mostrarInfo("Paciente actualizado correctamente.");
 
-            // Volver a la vista anterior después de guardar exitosamente
             volverABusqueda();
 
         } catch (Exception e) {
@@ -143,7 +137,6 @@ public class EditarPacienteView {
         }
     }
 
-    // Métodos utilitarios para mostrar alertas
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

@@ -76,7 +76,6 @@ public class BuscarPacienteView {
                 cellData.getValue().getFechaNacimiento().format(formatter)
         ));
 
-        // Inicializar filtro
         btnFiltro.setItems(FXCollections.observableArrayList("Nombre", "ID"));
         btnFiltro.setValue("Nombre");
 
@@ -101,7 +100,6 @@ public class BuscarPacienteView {
     @FXML
     public void AgregarPaciente(ActionEvent event) {
         try {
-            // Usar la ventana de editar pero sin cargar datos
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/agregarPaciente.fxml"));
             Parent root = fxmlLoader.load();
 
@@ -124,7 +122,6 @@ public class BuscarPacienteView {
             return;
         }
 
-        // Agregar confirmación
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
         confirmacion.setHeaderText("¿Está seguro que desea eliminar el paciente?");
@@ -154,15 +151,12 @@ public class BuscarPacienteView {
         }
 
         try {
-            // Cargar la vista de edición
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/editarPaciente.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Obtener el controller de la vista de edición y pasarle el paciente
             hospital.view.EditarPacienteView editarController = fxmlLoader.getController();
             editarController.cargarPaciente(seleccionado);
 
-            // Cambiar la escena
             Stage stage = (Stage) btnEditarPaciente.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Editar Paciente");
@@ -235,7 +229,6 @@ public class BuscarPacienteView {
         }
     }
 
-    // Utilitarios
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR, mensaje);
         alert.showAndWait();

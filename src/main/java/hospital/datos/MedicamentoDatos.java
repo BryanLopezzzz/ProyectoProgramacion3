@@ -67,7 +67,6 @@ public class MedicamentoDatos {
         return path;
     }
 
-    // Búsqueda rápida por código
     public Medicamento buscarPorCodigo(String codigo) {
         return load().getMedicamentos().stream()
                 .map(MedicamentoMapper::fromXML)   // convertir a Medicamento

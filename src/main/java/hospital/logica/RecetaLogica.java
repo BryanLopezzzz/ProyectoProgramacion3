@@ -34,9 +34,7 @@ public class RecetaLogica {
                 .findFirst()
                 .orElse(null);
     }
-    // =========================
-    // CRUD Básico
-    // =========================
+
     public Receta crearReceta(Receta receta) throws Exception {
         validarReceta(receta);
 
@@ -47,9 +45,6 @@ public class RecetaLogica {
         return receta;
     }
 
-    // =========================
-    // Detalles / Estado
-    // =========================
     public void agregarDetalle(String recetaId, String medicamentoId, int cantidad, String indicaciones, int diasTratamiento) throws Exception {
         Receta receta = buscarPorId(recetaId);
         if (receta == null) throw new Exception("Receta no encontrada.");
@@ -61,10 +56,6 @@ public class RecetaLogica {
         receta.agregarDetalle(detalle);
         actualizar(receta);
     }
-
-    // =========================
-    // Helpers internos
-    // =========================
 
     private void validarReceta(Receta r) throws Exception {
         if (r == null) throw new Exception("La receta no puede ser nula.");
@@ -80,16 +71,13 @@ public class RecetaLogica {
         Receta receta = buscarPorId(recetaId);
         if (receta == null) throw new Exception("Receta no encontrada.");
 
-        // Regla: Para pasar a EN_PROCESO, debe estar dentro de los 3 días posteriores a la fecha de confección
+
         if (nuevoEstado == EstadoReceta.EN_PROCESO) {
             LocalDate fechaConfeccion = receta.getFecha();
             LocalDate hoy = LocalDate.now();
 
-            // Calcular la diferencia en días. Si hoy es antes de la fecha de confección, será negativo.
             long diff = ChronoUnit.DAYS.between(fechaConfeccion, hoy);
 
-            // Permitir el cambio si 'hoy' está entre la fecha de confección y 3 días después (inclusive)
-            // Es decir, diff debe ser >= 0 y <= 3
             if (diff < 0 || diff > 3) {
                 throw new Exception("No se puede poner en PROCESO: el estado solo puede cambiarse dentro de los 3 días posteriores a la fecha de confección.");
             }
@@ -98,14 +86,13 @@ public class RecetaLogica {
         EstadoReceta anterior = receta.getEstado();
         receta.cambiarEstado(nuevoEstado);
 
-        // Si no cambió, la transición fue inválida (saltos no permitidos, etc.)
         if (receta.getEstado() == anterior) {
             throw new Exception("Transición de estado inválida: " + anterior + " → " + nuevoEstado);
         }
 
         actualizar(receta);
     }
-    //Clase
+
     public Receta actualizar(Receta receta) throws Exception {
         validarReceta(receta);
 
@@ -114,9 +101,8 @@ public class RecetaLogica {
             var actual = data.getRecetas().get(i);
 
             if (actual.getId().equalsIgnoreCase(receta.getId())) {
-                // Reemplazar el registro en XML
-                data.getRecetas().set(i, RecetaMapper.toXML(receta));
 
+                data.getRecetas().set(i, RecetaMapper.toXML(receta));
                 datos.save(data);
                 return receta;
             }
@@ -146,12 +132,4 @@ public class RecetaLogica {
                 .filter(r -> r.getMedico().getId().equalsIgnoreCase(medicoId))
                 .collect(Collectors.toList());
     }
-
-//    public Receta create(Receta nuevo) throws JAXBException {
-//        RecetaConector data= datos.load();
-//        RecetaEntidad receta = RecetaMapper.toXML(nuevo);
-//        data.getRecetas().add(receta);
-//        datos.save(data);
-//        return RecetaMapper.fromXML(receta);
-//    }
 }

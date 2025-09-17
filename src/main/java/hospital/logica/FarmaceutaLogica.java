@@ -34,7 +34,7 @@ public class FarmaceutaLogica {
                 .anyMatch(f -> f.getId().equalsIgnoreCase(farmaceuta.getId()));
         if (existe) throw new Exception("Ya existe un farmaceuta con id: " + farmaceuta.getId());
 
-        // Regla: clave = id al agregar
+        //clave = id al agregar
         farmaceuta.setClave(farmaceuta.getId());
 
         con.getFarmaceutas().add(FarmaceutaMapper.toXML(farmaceuta));
@@ -58,7 +58,6 @@ public class FarmaceutaLogica {
                 .orElseThrow(() -> new Exception("No existe farmaceuta con id: " + farmaceuta.getId()));
 
         actual.setNombre(farmaceuta.getNombre());
-        // La clave no se cambia aquí, solo desde el módulo de login/cambio clave.
 
         ordenarPorNombre(con);
         datos.save(con);
@@ -82,7 +81,6 @@ public class FarmaceutaLogica {
         ));
     }
 
-    //Clase
     public Farmaceuta actualizar(Farmaceuta actualizado) throws Exception {
         validarModificacion(actualizado);
 
@@ -128,10 +126,8 @@ public class FarmaceutaLogica {
 
     public void generarReporte(String rutaReporte) {
         try {
-            // Obtener todos los pacietnes
             List<Farmaceuta> lista = listar();
 
-            // Mapearlos a entidades XML
             FarmaceutaConector conector = new  FarmaceutaConector();
             for ( Farmaceuta m : lista) {
                 conector.getFarmaceutas().add(FarmaceutaMapper.toXML(m));
