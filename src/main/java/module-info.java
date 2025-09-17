@@ -6,14 +6,11 @@ module ProyectoProgramacion3 {
     requires javafx.base;
     requires javafx.graphics;
 
-    // JavaFX
     opens hospital.view to javafx.fxml;
     opens hospital.view.busqueda to javafx.fxml;
     opens hospital.controller to javafx.fxml;
     opens hospital.view.registro to javafx.fxml;
 
-
-    // JAXB
     opens hospital.datos.conector to jakarta.xml.bind;
     opens hospital.datos.entidades to jakarta.xml.bind, org.glassfish.jaxb.runtime;
     opens hospital.model to jakarta.xml.bind;
