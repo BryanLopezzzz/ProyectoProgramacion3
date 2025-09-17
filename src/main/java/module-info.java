@@ -7,10 +7,10 @@ module ProyectoProgramacion3 {
     requires javafx.graphics;
 
     // JavaFX
+    opens hospital.viewController to javafx.fxml;
+    opens hospital.viewController.busqueda to javafx.fxml;
     opens hospital.controller to javafx.fxml;
-    opens hospital.controller.busqueda to javafx.fxml;
-    opens hospital.Intermediaria to javafx.fxml;
-    opens hospital.controller.registro to javafx.fxml;
+    opens hospital.viewController.registro to javafx.fxml;
 
 
     // JAXB
@@ -22,8 +22,8 @@ module ProyectoProgramacion3 {
     opens icons to javafx.fxml, javafx.graphics;
 
     exports hospital;
-    exports hospital.Intermediaria;
-    exports hospital.model;
     exports hospital.controller;
-    exports hospital.controller.busqueda;
+    exports hospital.model;
+    exports hospital.viewController;
+    exports hospital.viewController.busqueda;
 }

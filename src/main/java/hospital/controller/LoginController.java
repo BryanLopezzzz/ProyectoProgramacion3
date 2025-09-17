@@ -1,88 +1,65 @@
 package hospital.controller;
 
-import hospital.Intermediaria.LoginIntermediaria;
 import hospital.logica.Sesion;
 import hospital.model.Usuario;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import hospital.logica.UsuarioManager;
 
 public class LoginController {
-    @FXML
-    private TextField txtUsuario;
-    @FXML
-    private PasswordField txtClave;
-    @FXML
-    private TextField txtClaveVisible;
-    @FXML
-    private Button btnVerClave;
-    @FXML
-    private javafx.scene.image.ImageView imgVerClave;
-    @FXML
-    private Button btnEntrar;
+    private final UsuarioManager usuarioManager;
 
-    private final LoginIntermediaria loginIntermediaria = new LoginIntermediaria();
-    private boolean claveVisible = false;
-
-    @FXML
-    private void login() {
-        String id = txtUsuario.getText();
-        String clave = claveVisible ? txtClaveVisible.getText() : txtClave.getText();
-
-        if (id == null || id.trim().isEmpty()) {
-            Alerta.error("Error","El ID de usuario es obligatorio.");
-            return;
-        }
-
-        if (clave == null || clave.trim().isEmpty()) {
-            Alerta.error("Error","El clave es obligatorio.");
-            return;
-        }
-
-        try {
-            Usuario usuario = loginIntermediaria.login(id, clave);
-            Sesion.setUsuario(usuario);
-
-            // cargar la vista principal(esto puede cambiar si el menu correcto no es ese)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
-            Scene scene = new Scene(loader.load());
-
-            // mandar el usuario al dashboard
-            DashboardController dashboardController = loader.getController();
-            dashboardController.setLoginController(loginIntermediaria);
-
-            Stage stage = new Stage();
-            stage.setTitle("Menú Principal");
-            stage.setScene(scene);
-            stage.show();
-
-            // cerrar la ventana de login
-            Stage loginStage = (Stage) btnEntrar.getScene().getWindow();
-            loginStage.close();
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
-        }
+    public LoginController() {
+        this.usuarioManager = new UsuarioManager();
     }
 
-    @FXML
-    private void toggleVisibilidadClave() {
-        claveVisible = !claveVisible;
+    // ==== LOGIN ====
+    public Usuario login(String id, String clave) throws Exception {
+        Usuario u = usuarioManager.login(id, clave);
+        Sesion.setUsuario(u);
+        return u;
+    }
 
-        if (claveVisible) {
-            txtClaveVisible.setText(txtClave.getText());
-            txtClaveVisible.setVisible(true);
-            txtClave.setVisible(false);
-            imgVerClave.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream("/icons/eye-off.png")));
-        } else {
-            txtClave.setText(txtClaveVisible.getText());
-            txtClave.setVisible(true);
-            txtClaveVisible.setVisible(false);
-            imgVerClave.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream("/icons/eye.png")));
+
+    // ==== LOGOUT ====
+    public void logout() {
+        Sesion.setUsuario(null);
+    }
+
+    // ==== CAMBIO DE CLAVE ====
+    public void cambiarClave(String actual, String nueva) throws Exception {
+        Usuario usuarioActual = Sesion.getUsuario();
+        if (usuarioActual == null) {
+            throw new Exception("No hay un usuario autenticado.");
         }
+
+        if (!usuarioActual.getClave().equals(actual)) {
+            throw new Exception("Clave actual incorrecta.");
+        }
+        usuarioActual.setClave(nueva);
+
+        // actualizar segun el tipo de dato
+        UsuarioManager.TipoUsuario tipo = new UsuarioManager().determinarTipoUsuario(usuarioActual.getId());
+        switch (tipo) {
+            case ADMINISTRADOR:
+                new hospital.logica.AdministradorLogica().actualizar((hospital.model.Administrador) usuarioActual);
+                break;
+            case MEDICO:
+                new hospital.logica.MedicoLogica().actualizar((hospital.model.Medico) usuarioActual);
+                break;
+            case FARMACEUTA:
+                new hospital.logica.FarmaceutaLogica().actualizar((hospital.model.Farmaceuta) usuarioActual);
+                break;
+            default:
+                throw new Exception("Tipo de usuario desconocido, no se puede guardar la clave.");
+        }
+        Sesion.setUsuario(usuarioActual);
+    }
+
+    // ==== Estado de sesión ====
+    public Usuario getUsuarioActual() {
+        return UsuarioManager.getUsuarioActual();
+    }
+
+    public boolean isLoggedIn() {
+        return UsuarioManager.getUsuarioActual() != null;
     }
 }
