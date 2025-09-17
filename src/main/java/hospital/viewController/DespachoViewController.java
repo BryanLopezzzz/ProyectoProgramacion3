@@ -1,9 +1,8 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.RecetaController;
-import hospital.view.busqueda.BuscarPacientePreescripcionView;
+import hospital.viewController.busqueda.BuscarPacientePreescripcionView;
 import javafx.collections.FXCollections;
-import hospital.logica.Sesion;
 import hospital.model.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class DespachoView {
+public class DespachoViewController {
     @FXML
     private TextField txtBuscar;
 
@@ -103,7 +102,7 @@ public class DespachoView {
     @FXML
     private void BuscarPaciente(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarPacientePrescripcion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/buscarPacientePrescripcion.fxml"));
             Parent root = loader.load();
 
             BuscarPacientePreescripcionView buscarView = loader.getController();
@@ -153,9 +152,9 @@ public class DespachoView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/verRecetaDespacho.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/verRecetaDespacho.fxml"));
             Parent root = loader.load();
-            VerRecetaDespachoView controller = loader.getController();
+            VerRecetaDespachoViewController controller = loader.getController();
             controller.setReceta(seleccionada);
 
             Stage stage = new Stage();
@@ -176,9 +175,9 @@ public class DespachoView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/editarEstadoReceta.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/editarEstadoReceta.fxml"));
             Parent root = loader.load();
-            EditarDetalleRecetaView controller = loader.getController();
+            EditarDetalleRecetaViewController controller = loader.getController();
             controller.setReceta(seleccionada);
 
             Stage stage = new Stage();
@@ -206,7 +205,7 @@ public class DespachoView {
     @FXML
     private void Volver(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

@@ -1,8 +1,9 @@
-package hospital.view.busqueda;
+package hospital.viewController.busqueda;
 
 import hospital.controller.PacienteController;
 import hospital.model.Administrador;
 import hospital.model.Paciente;
+import hospital.viewController.EditarPacienteViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,7 +101,7 @@ public class BuscarPacienteView {
     @FXML
     public void AgregarPaciente(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/agregarPaciente.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/agregarPaciente.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) btnAgregarPaciente.getScene().getWindow();
@@ -151,10 +152,10 @@ public class BuscarPacienteView {
         }
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/editarPaciente.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/editarPaciente.fxml"));
             Parent root = fxmlLoader.load();
 
-            hospital.view.EditarPacienteView editarController = fxmlLoader.getController();
+            EditarPacienteViewController editarController = fxmlLoader.getController();
             editarController.cargarPaciente(seleccionado);
 
             Stage stage = (Stage) btnEditarPaciente.getScene().getWindow();
@@ -217,7 +218,7 @@ public class BuscarPacienteView {
     @FXML
     private void Volver(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

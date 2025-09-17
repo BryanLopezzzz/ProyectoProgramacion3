@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.RecetaController;
 import hospital.logica.Sesion;
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-public class EditarDetalleRecetaView {
+public class EditarDetalleRecetaViewController {
 
     @FXML
     private ComboBox<EstadoReceta> btnFiltro;

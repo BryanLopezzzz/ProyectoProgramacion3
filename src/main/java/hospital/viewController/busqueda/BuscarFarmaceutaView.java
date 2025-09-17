@@ -1,9 +1,9 @@
-package hospital.view.busqueda;
+package hospital.viewController.busqueda;
 
 import hospital.controller.FarmaceutaController;
 import hospital.model.Administrador;
 import hospital.model.Farmaceuta;
-import hospital.model.Paciente;
+import hospital.viewController.EditarFarmaceutaViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -91,7 +91,7 @@ public class BuscarFarmaceutaView {
     @FXML
     public void AgregarFarmaceuta(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/agregarFarmaceuta.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/agregarFarmaceuta.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) btnAgregarFarmaceuta.getScene().getWindow();
@@ -138,10 +138,10 @@ public class BuscarFarmaceutaView {
         }
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/editarFarmaceuta.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/editarFarmaceuta.fxml"));
             Parent root = fxmlLoader.load();
 
-            hospital.view.EditarFarmaceutaView editarController = fxmlLoader.getController();
+            EditarFarmaceutaViewController editarController = fxmlLoader.getController();
             editarController.cargarFarmaceuta(seleccionado);
 
             Stage stage = (Stage) btnEditar.getScene().getWindow();
@@ -210,7 +210,7 @@ public class BuscarFarmaceutaView {
     @FXML
     private void Volver(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

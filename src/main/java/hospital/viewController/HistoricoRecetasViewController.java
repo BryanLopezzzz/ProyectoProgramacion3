@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.HistoricoRecetasController;
 import hospital.logica.Sesion;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HistoricoRecetasView {
+public class HistoricoRecetasViewController {
 
     @FXML
     private TableView<Receta> tblRecetas;
@@ -91,12 +91,12 @@ public class HistoricoRecetasView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/verRecetaDespacho.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/verRecetaDespacho.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("Detalle de la Receta");
 
-            VerRecetaDespachoView detalleController = loader.getController();
+            VerRecetaDespachoViewController detalleController = loader.getController();
             detalleController.setReceta(seleccionada);
 
             stage.show();
@@ -119,7 +119,7 @@ public class HistoricoRecetasView {
     @FXML
     private void Volver(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(scene);

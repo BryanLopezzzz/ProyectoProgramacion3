@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.MedicamentoController;
 import hospital.model.Administrador;
@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class DetalleRecetaView {
+public class DetalleRecetaViewController {
 
     @FXML private TextArea txtIndicaciones;
     @FXML private TextField txtCantidad;

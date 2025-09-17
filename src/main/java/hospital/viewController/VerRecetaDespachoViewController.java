@@ -1,15 +1,12 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.model.Receta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class VerRecetaDespachoView {
+public class VerRecetaDespachoViewController {
 
     @FXML
     private Label lblPacienteId;

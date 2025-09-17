@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.DashboardController;
 import hospital.controller.LoginController;
@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.time.YearMonth;
 
-public class DashboardView {
+public class DashboardViewController {
     @FXML
     private Label lblUsuario;
 
@@ -214,7 +214,7 @@ public class DashboardView {
     @FXML
     public void irAMedicos() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/medicosAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/medicosAdmin.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnMedicos.getScene().getWindow();
             stage.setScene(scene);
@@ -229,7 +229,7 @@ public class DashboardView {
     @FXML
     public void irAFarmaceutas() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/farmaceutasAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/farmaceutasAdmin.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnFarmaceutas.getScene().getWindow();
             stage.setScene(scene);
@@ -282,10 +282,10 @@ public class DashboardView {
                 return;
             }
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/prescribirReceta.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/prescribirReceta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            PreescribirRecetaView controller = fxmlLoader.getController();
+            PreescribirRecetaViewController controller = fxmlLoader.getController();
 
             Medico medico = new Medico();
             medico.setId(usuarioActual.getId());
@@ -306,7 +306,7 @@ public class DashboardView {
     @FXML
     public void irADespacho() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/despachoFarmaceuta.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/despachoFarmaceuta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnDespachoReceta.getScene().getWindow();
             stage.setScene(scene);
@@ -321,7 +321,7 @@ public class DashboardView {
     @FXML
     public void irAHistoricoRecetas() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/historicoRecetas.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/historicoRecetas.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnHistoricoRecetas.getScene().getWindow();
             stage.setScene(scene);
@@ -336,7 +336,7 @@ public class DashboardView {
     @FXML
     public void irAAcercaDe() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/acercaDe1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/acercaDe1.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnAcercaDe.getScene().getWindow();
             stage.setScene(scene);
@@ -351,10 +351,10 @@ public class DashboardView {
     @FXML
     public void irACambiarClave() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/cambiarContraseña.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/cambiarContraseña.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            CambioClaveView cambioClaveView = fxmlLoader.getController();
+            CambioClaveViewController cambioClaveView = fxmlLoader.getController();
             cambioClaveView.setUsuario(Sesion.getUsuario());
             cambioClaveView.setLoginController(loginController);
 
@@ -374,7 +374,7 @@ public class DashboardView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/login.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) btnLogout.getScene().getWindow();
             stage.setScene(scene);

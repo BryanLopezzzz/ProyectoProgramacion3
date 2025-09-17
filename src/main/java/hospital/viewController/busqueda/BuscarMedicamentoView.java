@@ -1,9 +1,9 @@
-package hospital.view.busqueda;
+package hospital.viewController.busqueda;
 
 import hospital.controller.MedicamentoController;
 import hospital.model.Administrador;
 import hospital.model.Medicamento;
-import hospital.view.EditarMedicamentoView;
+import hospital.viewController.EditarMedicamentoViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -114,7 +113,7 @@ public class BuscarMedicamentoView implements Initializable {
     @FXML
     private void AgregarMedicamento() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/AgregarMedicamento.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/AgregarMedicamento.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) btnAgregarMedicamento.getScene().getWindow();
@@ -159,10 +158,10 @@ public class BuscarMedicamentoView implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/editarMedicamento.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/editarMedicamento.fxml"));
             Parent root = loader.load();
 
-            EditarMedicamentoView editarController = loader.getController();
+            EditarMedicamentoViewController editarController = loader.getController();
             editarController.setMedicamento(seleccionado);
 
             Stage stage = (Stage) btnEditarMedicamento.getScene().getWindow();
@@ -177,7 +176,7 @@ public class BuscarMedicamentoView implements Initializable {
     @FXML
     private void Volver() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

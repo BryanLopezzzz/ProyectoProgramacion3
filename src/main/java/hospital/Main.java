@@ -4,7 +4,6 @@ import hospital.logica.AdministradorLogica;
 import hospital.model.Administrador;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -21,7 +20,7 @@ public class Main extends Application {
             adminLogica.agregar(superAdmin);
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/login.fxml"));
         Scene scene = new Scene(loader.load());
         primaryStage.setTitle("Login Hospital");
         primaryStage.setScene(scene);

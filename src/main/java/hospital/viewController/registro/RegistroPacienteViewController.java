@@ -1,4 +1,4 @@
-package hospital.view.registro;
+package hospital.viewController.registro;
 
 import hospital.controller.PacienteController;
 import hospital.model.Administrador;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
-public class RegistroPacienteView {
+public class RegistroPacienteViewController {
     @FXML private TextField txtIdentificacion;
     @FXML private TextField txtNombre;
     @FXML private TextField txtTelefono;
@@ -112,7 +112,7 @@ public class RegistroPacienteView {
 
     private void volverABusqueda() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/pacientesAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/pacientesAdmin.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

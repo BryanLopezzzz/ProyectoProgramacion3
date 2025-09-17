@@ -1,4 +1,4 @@
-package hospital.view.busqueda;
+package hospital.viewController.busqueda;
 
 import hospital.controller.PacienteController;
 import hospital.model.Administrador;

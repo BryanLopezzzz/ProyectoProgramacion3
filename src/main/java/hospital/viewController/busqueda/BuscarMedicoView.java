@@ -1,9 +1,9 @@
-package hospital.view.busqueda;
+package hospital.viewController.busqueda;
 
 import hospital.controller.MedicoController;
 import hospital.model.Administrador;
 import hospital.model.Medico;
-import hospital.view.EditarMedicoView;
+import hospital.viewController.EditarMedicoViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -90,7 +90,7 @@ public class BuscarMedicoView {
     @FXML
     public void AgregarMedico(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/agregarMedico.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/agregarMedico.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) btnAgregarMedico.getScene().getWindow();
@@ -139,10 +139,10 @@ public class BuscarMedicoView {
         }
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/editarMedico.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/editarMedico.fxml"));
             Parent root = fxmlLoader.load();
 
-            EditarMedicoView editarController = fxmlLoader.getController();
+            EditarMedicoViewController editarController = fxmlLoader.getController();
 
             editarController.inicializarConMedico(seleccionado);
 
@@ -213,7 +213,7 @@ public class BuscarMedicoView {
     @FXML
     private void Volver(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

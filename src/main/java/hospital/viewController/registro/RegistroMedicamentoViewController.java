@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController.registro;
 
 import hospital.controller.MedicamentoController;
 import hospital.model.Administrador;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditarMedicamentoView implements Initializable {
+public class RegistroMedicamentoViewController implements Initializable {
 
     @FXML
     private TextField txtCodigo;
@@ -28,79 +28,67 @@ public class EditarMedicamentoView implements Initializable {
     private TextField txtPresentacion;
 
     @FXML
-    private Button btnGuardarMedicamento;
+    private Button btnGuardar;
 
     @FXML
     private Button btnVolver;
 
     private final MedicamentoController medicamentoController;
     private final Administrador administrador;
-    private Medicamento medicamentoOriginal;
 
-    public EditarMedicamentoView() {
+    public RegistroMedicamentoViewController() {
         this.medicamentoController = new MedicamentoController();
         this.administrador = new Administrador();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        txtCodigo.setEditable(false);
-        txtCodigo.setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #b3b3b3; -fx-border-radius: 4;");
-    }
-
-
-    public void setMedicamento(Medicamento medicamento) {
-        if (medicamento != null) {
-            this.medicamentoOriginal = medicamento;
-            txtCodigo.setText(medicamento.getCodigo());
-            txtNombre.setText(medicamento.getNombre());
-            txtPresentacion.setText(medicamento.getPresentacion());
-        }
     }
 
     @FXML
-    private void Guardar() {
+    private void guardar() {
+        String codigo = txtCodigo.getText();
         String nombre = txtNombre.getText();
         String presentacion = txtPresentacion.getText();
 
+        if (codigo == null || codigo.trim().isEmpty()) {
+            mostrarError("El código es obligatorio.");
+            return;
+        }
         if (nombre == null || nombre.trim().isEmpty()) {
             mostrarError("El nombre es obligatorio.");
             return;
         }
-
         if (presentacion == null || presentacion.trim().isEmpty()) {
             mostrarError("La presentación es obligatoria.");
             return;
         }
 
-        if (medicamentoOriginal == null) {
-            mostrarError("Error: No se ha establecido el medicamento a editar.");
-            return;
-        }
-
         try {
-            Medicamento medicamentoEditado = new Medicamento(
-                    medicamentoOriginal.getCodigo(), // El código no cambia
+            Medicamento medicamento = new Medicamento(
+                    codigo.trim(),
                     nombre.trim(),
                     presentacion.trim()
             );
 
-            medicamentoController.modificar(administrador, medicamentoEditado);
+            medicamentoController.agregar(administrador, medicamento);
 
-            mostrarInformacion("Medicamento actualizado correctamente.");
+            mostrarInfo("Medicamento guardado exitosamente.\n" +
+                    "Medicamento: " + medicamento.getNombre() + "\n" +
+                    "Codigo: " + medicamento.getCodigo() + "\n" +
+                    "Presentacion: " + medicamento.getPresentacion());
 
-            Stage stage = (Stage) btnGuardarMedicamento.getScene().getWindow();
-            Volver();
+            volverABusqueda();
 
         } catch (Exception e) {
-            mostrarError("Error al actualizar medicamento: " + e.getMessage());
+            mostrarError("Error al agregar medicamento: " + e.getMessage());
         }
     }
 
     @FXML
-    private void Volver() {
+    private void volverABusqueda() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/MedicamentosAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/MedicamentosAdmin.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -119,12 +107,12 @@ public class EditarMedicamentoView implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
-    private void mostrarInformacion(String mensaje) {
+    private void mostrarInfo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
+        alert.setTitle("Registro Exitoso");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
 }

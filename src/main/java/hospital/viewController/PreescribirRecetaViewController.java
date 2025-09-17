@@ -1,9 +1,9 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.RecetaController;
 import hospital.model.*;
-import hospital.view.busqueda.BuscarPacientePreescripcionView;
-import hospital.view.busqueda.BuscarMedicamentoPreescripcionView;
+import hospital.viewController.busqueda.BuscarPacientePreescripcionView;
+import hospital.viewController.busqueda.BuscarMedicamentoPreescripcionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
-public class PreescribirRecetaView {
+public class PreescribirRecetaViewController {
 
     @FXML private TextField txtFechaConfeccion;
     @FXML private TextField txtBuscarPaciente;
@@ -112,7 +112,7 @@ public class PreescribirRecetaView {
     @FXML
     private void BuscarPaciente(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarPacientePrescripcion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/buscarPacientePrescripcion.fxml"));
             Parent root = loader.load();
 
             BuscarPacientePreescripcionView buscarView = loader.getController();
@@ -151,7 +151,7 @@ public class PreescribirRecetaView {
                 crearRecetaTemporal();
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/buscarMedicamentoPrescripcion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/buscarMedicamentoPrescripcion.fxml"));
             Parent root = loader.load();
             BuscarMedicamentoPreescripcionView buscarView = loader.getController();
 
@@ -183,9 +183,9 @@ public class PreescribirRecetaView {
                 }
             }
 
-            FXMLLoader detalleLoader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            FXMLLoader detalleLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/detalleReceta.fxml"));
             Parent detalleRoot = detalleLoader.load();
-            DetalleRecetaView detalleView = detalleLoader.getController();
+            DetalleRecetaViewController detalleView = detalleLoader.getController();
 
             detalleView.setContext(medico, recetaActual.getId(), seleccionado.getCodigo());
 
@@ -245,10 +245,10 @@ public class PreescribirRecetaView {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/detalleReceta.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/detalleReceta.fxml"));
             Parent root = loader.load();
 
-            DetalleRecetaView detalleView = loader.getController();
+            DetalleRecetaViewController detalleView = loader.getController();
 
             String recetaId = recetaActual != null ? recetaActual.getId() : generarIdReceta();
             String medicamentoId = null;
@@ -336,7 +336,7 @@ public class PreescribirRecetaView {
     private void Volver(ActionEvent event) {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.setTitle("Dashboard");

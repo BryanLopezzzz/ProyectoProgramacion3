@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import javafx.scene.control.Alert;
 public class Alerta {

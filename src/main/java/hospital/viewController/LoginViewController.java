@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.LoginController;
 import hospital.logica.Sesion;
@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class LoginView {
+public class LoginViewController {
     @FXML
     private TextField txtUsuario;
     @FXML
@@ -46,12 +46,12 @@ public class LoginView {
             Sesion.setUsuario(usuario);
 
             //cargar la vista principal(esto puede cambiar si el menu correcto no es
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Scene scene = new Scene(loader.load());
 
             //mandar el usuario al dashboard
-            DashboardView dashboardView = loader.getController();
-            dashboardView.setLoginController(loginController);
+            DashboardViewController dashboardViewController = loader.getController();
+            dashboardViewController.setLoginController(loginController);
 
             Stage stage = new Stage();
             stage.setTitle("Menú Principal");

@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class FarmaceutasAdminView {
+public class FarmaceutasAdminViewController {
     @FXML
     private Button btnVolver;
     @FXML
@@ -59,7 +59,7 @@ public class FarmaceutasAdminView {
     @FXML
     public void Volver () {
         try {
-            FXMLLoader FXMLLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader FXMLLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Parent root = FXMLLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

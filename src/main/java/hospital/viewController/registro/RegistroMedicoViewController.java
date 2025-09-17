@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController.registro;
 
 import hospital.controller.MedicoController;
 import hospital.model.Administrador;
@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditarMedicoView {
+public class RegistroMedicoViewController {
 
     @FXML
     private TextField txtIdentificacion;
@@ -32,26 +32,9 @@ public class EditarMedicoView {
 
     private final MedicoController medicoController = new MedicoController();
     private final Administrador admin = new Administrador();
-    private Medico medicoActual;
 
     @FXML
     public void initialize() {
-        txtIdentificacion.setEditable(false);
-        txtIdentificacion.setStyle("-fx-background-color: #f0f0f0;");
-    }
-
-    public void inicializarConMedico(Medico medico) {
-        if (medico == null) {
-            mostrarError("No se pudo cargar la información del médico.");
-            return;
-        }
-
-        this.medicoActual = medico;
-
-        //cargar los datos en los campos
-        txtIdentificacion.setText(medico.getId());
-        txtNombre.setText(medico.getNombre());
-        txtEspecialidad.setText(medico.getEspecialidad());
     }
 
     @FXML
@@ -60,24 +43,24 @@ public class EditarMedicoView {
             if (!validarCampos()) {
                 return;
             }
-            Medico medicoModificado = new Medico();
-            medicoModificado.setId(txtIdentificacion.getText().trim());
-            medicoModificado.setNombre(txtNombre.getText().trim());
-            medicoModificado.setEspecialidad(txtEspecialidad.getText().trim());
 
-            //si el médico original tenía clave la mantiene
-            if (medicoActual.getClave() != null) {
-                medicoModificado.setClave(medicoActual.getClave());
-            }
+            Medico nuevoMedico = new Medico();
+            nuevoMedico.setId(txtIdentificacion.getText().trim());
+            nuevoMedico.setNombre(txtNombre.getText().trim());
+            nuevoMedico.setEspecialidad(txtEspecialidad.getText().trim());
 
-            medicoController.modificar(admin, medicoModificado);
 
-            mostrarInfo("Médico modificado exitosamente.");
+            medicoController.agregar(admin, nuevoMedico);
 
+            mostrarInfo("Médico registrado exitosamente.\nID: " + nuevoMedico.getId() +
+                    "\nNombre: " + nuevoMedico.getNombre() +
+                    "\nEspecialidad: " + nuevoMedico.getEspecialidad());
+
+            limpiarCampos();
             volverABusqueda();
 
         } catch (Exception e) {
-            mostrarError("Error al guardar médico: " + e.getMessage());
+            mostrarError("Error al registrar médico: " + e.getMessage());
         }
     }
 
@@ -89,16 +72,26 @@ public class EditarMedicoView {
     private boolean validarCampos() {
         StringBuilder errores = new StringBuilder();
 
-        if (txtIdentificacion.getText() == null || txtIdentificacion.getText().trim().isEmpty()) {
+        String id = txtIdentificacion.getText();
+        String nombre = txtNombre.getText();
+        String especialidad = txtEspecialidad.getText();
+
+        if (id == null || id.trim().isEmpty()) {
             errores.append("- El ID es obligatorio.\n");
+        } else if (id.trim().length() < 2) {
+            errores.append("- El ID debe tener al menos 2 caracteres.\n");
         }
 
-        if (txtNombre.getText() == null || txtNombre.getText().trim().isEmpty()) {
+        if (nombre == null || nombre.trim().isEmpty()) {
             errores.append("- El nombre es obligatorio.\n");
+        } else if (nombre.trim().length() < 2) {
+            errores.append("- El nombre debe tener al menos 2 caracteres.\n");
         }
 
-        if (txtEspecialidad.getText() == null || txtEspecialidad.getText().trim().isEmpty()) {
+        if (especialidad == null || especialidad.trim().isEmpty()) {
             errores.append("- La especialidad es obligatoria.\n");
+        } else if (especialidad.trim().length() < 3) {
+            errores.append("- La especialidad debe tener al menos 3 caracteres.\n");
         }
 
         if (errores.length() > 0) {
@@ -109,9 +102,17 @@ public class EditarMedicoView {
         return true;
     }
 
+    private void limpiarCampos() {
+        txtIdentificacion.clear();
+        txtNombre.clear();
+        txtEspecialidad.clear();
+
+        txtIdentificacion.requestFocus();
+    }
+
     private void volverABusqueda() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/medicosAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/MedicosAdmin.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) btnVolver.getScene().getWindow();
@@ -135,7 +136,7 @@ public class EditarMedicoView {
 
     private void mostrarInfo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
+        alert.setTitle("Registro Exitoso");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();

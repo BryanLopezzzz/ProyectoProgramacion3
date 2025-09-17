@@ -1,4 +1,4 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.PacienteController;
 import hospital.model.Administrador;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class EditarPacienteView {
+public class EditarPacienteViewController {
 
     @FXML
     private TextField txtIdentificacion;
@@ -125,7 +125,7 @@ public class EditarPacienteView {
 
     private void volverABusqueda() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/pacientesAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/pacientesAdmin.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(new Scene(root));

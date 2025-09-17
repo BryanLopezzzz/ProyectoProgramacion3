@@ -1,7 +1,6 @@
-package hospital.view;
+package hospital.viewController;
 
 import hospital.controller.LoginController;
-import hospital.logica.Sesion;
 import hospital.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +10,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CambioClaveView {
+public class CambioClaveViewController {
 
     @FXML
     private PasswordField txtContrasenaAnterior;
@@ -129,11 +127,11 @@ public class CambioClaveView {
     @FXML
     private void Volver() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            DashboardView dashboardView = fxmlLoader.getController();
-            dashboardView.setLoginController(this.loginController);
+            DashboardViewController dashboardViewController = fxmlLoader.getController();
+            dashboardViewController.setLoginController(this.loginController);
 
             Stage stage = (Stage) btnVolver.getScene().getWindow();
             stage.setScene(scene);

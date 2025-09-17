@@ -1,4 +1,4 @@
-package hospital.view.registro;
+package hospital.viewController.registro;
 
 import hospital.controller.FarmaceutaController;
 import hospital.model.Administrador;
@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class RegistroFarmaceutaView {
+public class RegistroFarmaceutaViewController {
 
     @FXML
     private TextField txtIdentificacion;
@@ -110,7 +110,7 @@ public class RegistroFarmaceutaView {
 
     private void volverABusqueda() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/view/farmaceutasAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hospital/viewController/farmaceutasAdmin.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) btnVolver.getScene().getWindow();

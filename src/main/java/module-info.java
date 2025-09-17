@@ -6,10 +6,10 @@ module ProyectoProgramacion3 {
     requires javafx.base;
     requires javafx.graphics;
 
-    opens hospital.view to javafx.fxml;
-    opens hospital.view.busqueda to javafx.fxml;
+    opens hospital.viewController to javafx.fxml;
+    opens hospital.viewController.busqueda to javafx.fxml;
     opens hospital.controller to javafx.fxml;
-    opens hospital.view.registro to javafx.fxml;
+    opens hospital.viewController.registro to javafx.fxml;
 
     opens hospital.datos.conector to jakarta.xml.bind;
     opens hospital.datos.entidades to jakarta.xml.bind, org.glassfish.jaxb.runtime;
@@ -21,6 +21,6 @@ module ProyectoProgramacion3 {
     exports hospital;
     exports hospital.controller;
     exports hospital.model;
-    exports hospital.view;
-    exports hospital.view.busqueda;
+    exports hospital.viewController;
+    exports hospital.viewController.busqueda;
 }
