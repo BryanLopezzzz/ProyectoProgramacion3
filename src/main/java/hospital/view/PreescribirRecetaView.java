@@ -324,6 +324,9 @@ public class PreescribirRecetaView {
 
             mostrarInformacion("Éxito", "Receta preescrita correctamente con ID: " + receta.getId());
 
+            // Limpiar formulario para la siguiente receta
+            limpiarFormulario();
+
         } catch (Exception e) {
             mostrarError("Error al preescribir", e.getMessage());
         }
